@@ -1,4 +1,5 @@
 import { Skill } from "../models/skill";
+import React, { useEffect, useState } from "react";
 
 /**
  * Get data from url
@@ -42,7 +43,7 @@ export function highlightSearchTerm(text: string, searchTerm: string) {
  * Get rupees format for a number
  * @param {number} number - Number to format
  */
-function getRupeesFormat(number: number) {
+export function getRupeesFormat(number: number) {
     return new Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
@@ -54,7 +55,7 @@ function getRupeesFormat(number: number) {
  * Convert date object to dd/mm/yyyy
  * @param {Date} date - Date object
  */
-function convertFromDate(date: Date) {
+export function convertFromDate(date: Date) {
     const dateObj = new Date(date);
     const day = dateObj.getDate();
     const month = dateObj.getMonth() + 1;
@@ -66,26 +67,15 @@ function convertFromDate(date: Date) {
  * Convert date string to date object
  * @param {string} dateString - Date string in dd/mm/yyyy format
  */
-function convertToDate(dateString: string) {
+export function convertToDate(dateString: string) {
     const dateParts = dateString.split("/").map((part) => parseInt(part));
     return new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
 }
 
-/**
- * Transform skills list to span elements
- */
-function transformSkills(skills: Skill[]) {
-    return skills
-        .map(
-            (skill) =>
-                `<span class="chip" data-id="${skill.skillId}">${skill.skill}</span>`
-        )
-        .join("");
-}
 
 /**
  * Transform skills list to span elements
  */
-function skillsToString(skills: Skill[]) {
+export function skillsToString(skills: Skill[]) {
     return skills.map((skill) => skill.skill).join(", ");
 }

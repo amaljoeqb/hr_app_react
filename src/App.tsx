@@ -8,6 +8,7 @@ import './css/normalize.css'
 import './css/popup.css'
 import './css/style.css'
 import './css/table.css'
+import EmployeeTable from './components/table/EmployeeTable';
 
 function App() {
   return (
@@ -62,98 +63,7 @@ function App() {
           </div>
         </div>
         <div className="table-container">
-          <table className="emp-table">
-            <colgroup>
-              <col style={{ width: "5%" }} />
-              <col style={{ width: "20%" }} />
-              <col style={{ width: "15%" }} />
-              <col style={{ width: "15%" }} />
-              <col style={{ width: "40%" }} />
-              <col style={{ width: "5%" }} />
-            </colgroup>
-            <thead>
-              <tr className="header-row">
-                <th className="check-cell">
-                  <div className="checkbox-container">
-                    <input type="checkbox" className="all-check" />
-                  </div>
-                </th>
-                <th>
-                  <div className="header-container">
-                    <h3 className="column-title" data-key="employeeId">
-                      <button >ID</button>
-                      <span className="sort-icon">
-                        <span className="material-symbols-outlined up">
-                          keyboard_arrow_up
-                        </span>
-                        <span className="material-symbols-outlined down">
-                          keyboard_arrow_down
-                        </span>
-                      </span>
-                    </h3>
-                  </div>
-                </th>
-
-                <th>
-                  <div className="header-container">
-                    <h3 className="column-title" data-key="name">
-                      <button >Name</button>
-                      <span className="sort-icon">
-                        <span className="material-symbols-outlined up">
-                          keyboard_arrow_up
-                        </span>
-                        <span className="material-symbols-outlined down">
-                          keyboard_arrow_down
-                        </span>
-                      </span>
-                    </h3>
-                  </div>
-                </th>
-
-                <th>
-                  <div className="header-container">
-                    <h3 className="column-title" data-key="designation">
-                      <button >Designation</button>
-                      <span className="sort-icon">
-                        <span className="material-symbols-outlined up">
-                          keyboard_arrow_up
-                        </span>
-                        <span className="material-symbols-outlined down">
-                          keyboard_arrow_down
-                        </span>
-                      </span>
-                    </h3>
-                  </div>
-                </th>
-
-                <th>
-                  <div className="header-container">
-                    <h3 className="column-title" data-key="department">
-                      <button >Department</button>
-                      <span className="sort-icon">
-                        <span className="material-symbols-outlined up">
-                          keyboard_arrow_up
-                        </span>
-                        <span className="material-symbols-outlined down">
-                          keyboard_arrow_down
-                        </span>
-                      </span>
-                    </h3>
-                  </div>
-                </th>
-
-                <th>
-                  <div className="header-container">
-                    <h3 className="column-title no-click" data-key="skills">
-                      Skills
-                    </h3>
-                  </div>
-                </th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+          <EmployeeTable />
         </div>
         <nav className="pagination-container">
           <div className="pagination">
