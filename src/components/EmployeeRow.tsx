@@ -1,6 +1,6 @@
 import { Employee } from "../models/employee";
 import { highlightSearchTerm, skillsToString } from "../services/helpers";
-import { Chip } from "./Chip.style";
+import { Chip } from "../components/Chip.style";
 
 
 export default function EmployeeRow({ employee, searchTerm }: { employee: Employee, searchTerm: string }) {
@@ -20,7 +20,7 @@ export default function EmployeeRow({ employee, searchTerm }: { employee: Employ
         <td>{highlightSearchTerm(employee.designation, searchTerm)}</td>
         <td>{highlightSearchTerm(employee.department.department, searchTerm)}</td>
         <td className="skills-cell">
-            {employee.skills.map(skill => <Chip>{skill.skill}</Chip>)}
+            {employee.skills.map(skill => <Chip key={skill.skillId}>{skill.skill}</Chip>)}
             <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
 
         </td>

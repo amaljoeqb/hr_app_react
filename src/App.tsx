@@ -1,4 +1,3 @@
-import React from 'react';
 import './css/buttons.css'
 import './css/form.css'
 import './css/input.css'
@@ -6,7 +5,7 @@ import './css/normalize.css'
 import './css/popup.css'
 import './css/style.css'
 import './css/table.css'
-import EmployeeTable from "./views/EmployeeTable.1";
+import EmployeeTable from "./views/EmployeeTable";
 import { HoverButton } from './components/HoverButton.style';
 
 function App() {
