@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Employee } from "../models/employee";
 import { getData, highlightSearchTerm, skillsToString } from "../services/helpers";
 import { Chip } from "../components/Chip.style";
-import EmployeeRow from "../components/EmployeeRow";
+
 
 export default function EmployeeTable() {
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -14,11 +14,10 @@ export default function EmployeeTable() {
     }, []);
 
     const getEmployees = async () => {
-        console.log("getEmployees");
         const data = await getData("data.json");
         setEmployees(data.employees);
         setLoading(false);
-    }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -44,7 +43,7 @@ export default function EmployeeTable() {
                     <th>
                         <div className="header-container">
                             <h3 className="column-title" data-key="employeeId">
-                                <button >ID</button>
+                                <button>ID</button>
                                 <span className="sort-icon">
                                     <span className="material-symbols-outlined up">
                                         keyboard_arrow_up
@@ -60,7 +59,7 @@ export default function EmployeeTable() {
                     <th>
                         <div className="header-container">
                             <h3 className="column-title" data-key="name">
-                                <button >Name</button>
+                                <button>Name</button>
                                 <span className="sort-icon">
                                     <span className="material-symbols-outlined up">
                                         keyboard_arrow_up
@@ -76,7 +75,7 @@ export default function EmployeeTable() {
                     <th>
                         <div className="header-container">
                             <h3 className="column-title" data-key="designation">
-                                <button >Designation</button>
+                                <button>Designation</button>
                                 <span className="sort-icon">
                                     <span className="material-symbols-outlined up">
                                         keyboard_arrow_up
@@ -92,7 +91,7 @@ export default function EmployeeTable() {
                     <th>
                         <div className="header-container">
                             <h3 className="column-title" data-key="department">
-                                <button >Department</button>
+                                <button>Department</button>
                                 <span className="sort-icon">
                                     <span className="material-symbols-outlined up">
                                         keyboard_arrow_up
@@ -116,11 +115,50 @@ export default function EmployeeTable() {
                 </tr>
             </thead>
             <tbody>
-                {
+                {employees.map((employee) => (
+                    <tr key={employee.employeeId} className="emp-row">
+                        <td className="check-cell">
+                            <div className="checkbox-container">
+                                <input type="checkbox" className="row-check" />
+                            </div>
+                        </td>
+                        <td>{highlightSearchTerm(employee.employeeId.toString(), searchTerm)}</td>
+                        <td>
+                            <div className="name-container">
+                                <button className="name">{highlightSearchTerm(employee.name, searchTerm)}</button>
+                                <p className="email">{employee.email}</p>
+                            </div>
+                        </td>
+                        <td>{highlightSearchTerm(employee.designation, searchTerm)}</td>
+                        <td>{highlightSearchTerm(employee.department.department, searchTerm)}</td>
+                        <td className="skills-cell">
+                            {employee.skills.map((skill) => (
+                                <Chip>{skill.skill}</Chip>
+                            ))}
+                            <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
 
-                    employees.map((employee) => (
-                        <EmployeeRow key={employee.employeeId} employee={employee} searchTerm={searchTerm} />
-                    ))}
+                        </td>
+                        <td className="overflow">
+                            <div className="action-container">
+                                <button className="action-btn">
+                                    <span className="material-symbols-outlined"> more_horiz </span>
+                                </button>
+                                <div className="action-menu">
+                                    <ul>
+                                        <li>
+                                            <button className="edit-btn"> Edit </button>
+                                        </li>
+                                        <li>
+                                            <button className="delete-btn">
+                                                Delete
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );

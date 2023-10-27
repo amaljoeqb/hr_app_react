@@ -1,26 +1,5 @@
 import styled from "styled-components";
 
-export const FillButton = styled.button`
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-    
-    &:hover {
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-        background-color: transparent;
-    }
-    `;
-
 export const HoverButton = styled.button`
     background-color: white;
     border: none;

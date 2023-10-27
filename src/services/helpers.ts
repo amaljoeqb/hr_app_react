@@ -1,5 +1,4 @@
 import { Skill } from "../models/skill";
-import React, { useEffect, useState } from "react";
 
 /**
  * Get data from url

@@ -6,8 +6,8 @@ import './css/normalize.css'
 import './css/popup.css'
 import './css/style.css'
 import './css/table.css'
-import EmployeeTable from './views/EmployeeTable';
-import { HoverButton } from './components/buttons.style';
+import EmployeeTable from "./views/EmployeeTable.1";
+import { HoverButton } from './components/HoverButton.style';
 
 function App() {
   return (
@@ -56,7 +56,7 @@ function App() {
               </div>
             </div>
             <HoverButton>
-            <span className="material-symbols-outlined"> add_circle </span>
+              <span className="material-symbols-outlined"> add_circle </span>
               <p>Create</p>
             </HoverButton>
           </div>
