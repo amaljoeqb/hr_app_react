@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Employee } from "../../models/employee";
-import { getData, highlightSearchTerm, skillsToString } from "../../services/helpers";
+import { Employee } from "../models/employee";
+import { getData, highlightSearchTerm, skillsToString } from "../services/helpers";
 
 export default function EmployeeTable() {
     const [employees, setEmployees] = useState<Employee[]>([]);

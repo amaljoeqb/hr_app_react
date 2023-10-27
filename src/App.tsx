@@ -6,7 +6,8 @@ import './css/normalize.css'
 import './css/popup.css'
 import './css/style.css'
 import './css/table.css'
-import EmployeeTable from './components/table/EmployeeTable';
+import EmployeeTable from './views/EmployeeTable';
+import { HoverButton } from './components/buttons.style';
 
 function App() {
   return (
@@ -54,10 +55,10 @@ function App() {
                 </div>
               </div>
             </div>
-            <button className="add-btn hover-btn">
-              <span className="material-symbols-outlined"> add_circle </span>
+            <HoverButton>
+            <span className="material-symbols-outlined"> add_circle </span>
               <p>Create</p>
-            </button>
+            </HoverButton>
           </div>
         </div>
         <div className="table-container">
