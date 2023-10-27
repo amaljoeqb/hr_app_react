@@ -1,3 +1,4 @@
+import { Employee } from "../models/employee";
 import { Skill } from "../models/skill";
 
 /**
@@ -78,3 +79,23 @@ export function convertToDate(dateString: string) {
 export function skillsToString(skills: Skill[]) {
     return skills.map((skill) => skill.skill).join(", ");
 }
+
+/**
+ * Fuction to search employees array based on a search term
+ * @param {array} employees - Array of employees
+ * @param {string} searchTerm - Term to search for
+ */
+export function searchEmployees(employees: Employee[], searchTerm: string) {
+    try {
+      const lowerCaseValue = searchTerm.toLowerCase();
+      return Object.values(employees).filter((employee) =>
+        Object.values(employee).some(
+          (value) =>
+            (typeof value === "string" || typeof value === "number") &&
+            value.toString().toLowerCase().includes(lowerCaseValue)
+        )
+      );
+    } catch (e) {
+      return [];
+    }
+  }
