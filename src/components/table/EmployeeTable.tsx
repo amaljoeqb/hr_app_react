@@ -132,9 +132,9 @@ export default function EmployeeTable() {
                             <td>{highlightSearchTerm(employee.designation, searchTerm)}</td>
                             <td>{highlightSearchTerm(employee.department.department, searchTerm)}</td>
                             <td className="skills-cell">
-                                {employee.skills.map((skill) => (<div>
+                                {employee.skills.map((skill) => (
                                     <span className="chip" > {skill.skill} </span>
-                                </div>))}
+                                ))}
                                 <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
 
                             </td>

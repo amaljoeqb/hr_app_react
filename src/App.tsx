@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-import './App.css';
 import './css/buttons.css'
 import './css/form.css'
 import './css/input.css'
