@@ -11,7 +11,7 @@ export default function EmployeeTable({
 }: {
   employees: Employee[];
   searchTerm: string;
-  skillsFilter: string[];
+  skillsFilter: number[];
   pageNumber: number;
 }) {
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);

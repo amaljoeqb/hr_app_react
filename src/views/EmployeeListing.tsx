@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import EmployeeTable from "../views/EmployeeTable";
 import { HoverButton } from "../components/HoverButton.style";
+import SkillsFilter from "../components/SkillsFilter";
 import { Employee } from "../models/employee";
 import { getData } from "../services/helpers";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const [skillsFilter, setSkillsFilter] = useState<string[]>([]);
+  const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
 
   const getEmployees = async () => {
-    console.log("getEmployees");
     const data = await getData("data.json");
     setEmployees(data.employees);
     setLoading(false);
@@ -36,34 +36,13 @@ export function EmployeeListing() {
         </div>
         <div className="next-section">
           <div className="filters-section">
-            <div id="skills-filter" className="filter-btn-container">
-              <button className="filter-btn hover-btn">
-                <span className="material-symbols-outlined"> tune </span>
-                <p>Skills</p>
-                <ul className="selected-items"></ul>
-              </button>
-              <div className="filter-dropdown">
-                <form className="filter-form">
-                  <span className="material-symbols-outlined search-icon">
-                    search
-                  </span>
-                  <input
-                    className="filter-search"
-                    type="text"
-                    id="skill-filter"
-                    name="skill-filter"
-                    placeholder="Search Skills"
-                    autoComplete="off"
-                  />
-                </form>
-                <hr />
-                <ul className="filtered-items"></ul>
-                <hr />
-                <button className="clear-filter">
-                  <p>Clear Filters</p>
-                </button>
-              </div>
-            </div>
+            <SkillsFilter
+              selectedSkills={selectedSkills}
+              onChange={() => {
+                setSelectedSkills(selectedSkills);
+                setPage(1);
+              }}
+            />
           </div>
           <HoverButton>
             <span className="material-symbols-outlined"> add_circle </span>
@@ -76,7 +55,7 @@ export function EmployeeListing() {
           pageNumber={page}
           employees={employees}
           searchTerm={searchTerm}
-          skillsFilter={skillsFilter}
+          skillsFilter={selectedSkills}
         />
       </div>
       <nav className="pagination-container">
@@ -133,3 +112,5 @@ function SearchInput({ onChange }: { onChange?: (text: string) => void }) {
     />
   );
 }
+
+
