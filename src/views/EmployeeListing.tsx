@@ -4,22 +4,25 @@ import { HoverButton } from "../components/HoverButton.style";
 import SkillsFilter from "../components/SkillsFilter";
 import { Employee } from "../models/employee";
 import { getData } from "../services/helpers";
+import { Skill } from "../models/skill";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const getEmployees = async () => {
+  const loadData = async () => {
     const data = await getData("data.json");
     setEmployees(data.employees);
+    setSkills(data.skills);
     setLoading(false);
   };
 
   useEffect(() => {
-    getEmployees();
+    loadData();
   }, []);
 
   return (
@@ -37,6 +40,8 @@ export function EmployeeListing() {
         <div className="next-section">
           <div className="filters-section">
             <SkillsFilter
+              skills={skills}
+              employees={employees}
               selectedSkills={selectedSkills}
               onChange={() => {
                 setSelectedSkills(selectedSkills);

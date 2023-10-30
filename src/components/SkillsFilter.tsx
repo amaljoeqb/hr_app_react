@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { getData } from "../services/helpers";
 import { Skill } from "../models/skill";
+import { Employee } from "../models/employee";
 
 export default function SkillsFilter({
+  skills,
+  employees,
   selectedSkills,
   onChange,
 }: {
+  skills: Skill[];
+  employees: Employee[];
   selectedSkills: number[];
   onChange?: (text: string[]) => void;
 }) {
   const [isActive, setIsActive] = useState(false);
+  const [options, setOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+
+  }, [employees, skills, selectedSkills]);
+
   return (
     <div
       id="skills-filter"
