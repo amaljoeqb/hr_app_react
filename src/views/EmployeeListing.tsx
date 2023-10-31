@@ -43,8 +43,8 @@ export function EmployeeListing() {
               skills={skills}
               employees={employees}
               selectedSkills={selectedSkills}
-              onChange={() => {
-                setSelectedSkills(selectedSkills);
+              onChange={(skills) => {
+                setSelectedSkills(skills);
                 setPage(1);
               }}
             />
@@ -117,5 +117,3 @@ function SearchInput({ onChange }: { onChange?: (text: string) => void }) {
     />
   );
 }
-
-
