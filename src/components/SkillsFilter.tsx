@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../services/helpers";
 import { Skill } from "../models/skill";
 import { Employee } from "../models/employee";
+import ClickAwayListener from "./ClickAwayListener";
 
 type SkillOption = Skill & { count: number; checked: boolean };
 
@@ -67,43 +68,47 @@ export default function SkillsFilter({
         <p>Skills</p>
         <ul className="selected-items"></ul>
       </button>
-      <div className="filter-dropdown">
-        <form className="filter-form">
-          <span className="material-symbols-outlined search-icon">search</span>
-          <input
-            className="filter-search"
-            type="text"
-            id="skill-filter"
-            name="skill-filter"
-            placeholder="Search Skills"
-            autoComplete="off"
-          />
-        </form>
-        <hr />
-        <ul className="filtered-items">
-          {options.map((option) => {
-            return (
-              <li
-                key={option.skillId}
-                className="filtered-item"
-                onClick={() => onClickSkillOption(option.skillId)}
-              >
-                <input
-                  className="check"
-                  type="checkbox"
-                  checked={option.checked}
-                />
-                <p className="name">{option.skill}</p>
-                <p className="count">{option.count}</p>
-              </li>
-            );
-          })}
-        </ul>
-        <hr />
-        <button className="clear-filter">
-          <p>Clear Filters</p>
-        </button>
-      </div>
+      <ClickAwayListener onClickOutside={() => setIsActive(false)}>
+        <div className="filter-dropdown">
+          <form className="filter-form">
+            <span className="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input
+              className="filter-search"
+              type="text"
+              id="skill-filter"
+              name="skill-filter"
+              placeholder="Search Skills"
+              autoComplete="off"
+            />
+          </form>
+          <hr />
+          <ul className="filtered-items">
+            {options.map((option) => {
+              return (
+                <li
+                  key={option.skillId}
+                  className="filtered-item"
+                  onClick={() => onClickSkillOption(option.skillId)}
+                >
+                  <input
+                    className="check"
+                    type="checkbox"
+                    checked={option.checked}
+                  />
+                  <p className="name">{option.skill}</p>
+                  <p className="count">{option.count}</p>
+                </li>
+              );
+            })}
+          </ul>
+          <hr />
+          <button className="clear-filter">
+            <p>Clear Filters</p>
+          </button>
+        </div>
+      </ClickAwayListener>
     </div>
   );
 }
