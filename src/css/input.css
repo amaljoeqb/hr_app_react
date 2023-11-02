@@ -22,6 +22,14 @@
 }
 
 .filter-form {
+  right: 0;
+  top: 100%;
+  justify-content: space-between;
+  row-gap: 16px;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -38,6 +46,8 @@ input.filter-search {
   padding: 12px;
   width: 100%;
   font-size: 14px;
+  background: none;
+  box-shadow: none;
 }
 
 .filter-dropdown hr {

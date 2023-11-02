@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import EmployeeTable from "../views/EmployeeTable";
+import EmployeeTable from "../components/EmployeeTable";
 import { HoverButton } from "../components/HoverButton.style";
 import SkillsFilter from "../components/SkillsFilter";
 import { Employee } from "../models/employee";

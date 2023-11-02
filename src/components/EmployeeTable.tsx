@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Employee } from "../models/employee";
 import { searchEmployees } from "../services/helpers";
-import EmployeeRow from "../components/EmployeeRow";
+import EmployeeRow from "./EmployeeRow";
 
 export default function EmployeeTable({
   employees,
