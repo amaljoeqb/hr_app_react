@@ -1,4 +1,8 @@
-export default function EmployeeForm() {
+import TextInput from "./inputs/TextInput";
+import { Employee } from "../models/employee";
+import NumberInput from "./inputs/NumberInput";
+
+export default function EmployeeForm({ employee }: { employee: Employee }) {
   return (
     <div className="popup emp-popup show-popup">
       <section className="popup-content">
@@ -21,16 +25,14 @@ export default function EmployeeForm() {
         </div>
         <form id="emp-form">
           <div className="row">
-            <div className="field">
-              <label htmlFor="employee-id">Employee ID</label>
-              <input
-                type="number"
-                name="employee-id"
-                id="employee-id"
-                required={true}
-                disabled={true}
-              />
-            </div>
+            <NumberInput
+              label="Employee ID"
+              name="employee-id"
+              onChange={(text) => {}}
+              value={employee.employeeId}
+              required={true}
+              disabled={true}
+            />
             <div id="name-field" className="field">
               <label htmlFor="name">Name</label>
               <input type="text" name="name" id="name" required={true} />

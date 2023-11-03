@@ -5,22 +5,21 @@ import "./css/popup.css";
 import "./css/style.css";
 import "./css/table.css";
 import "./css/input.css";
-import {RouterProvider, createBrowserRouter} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { EmployeeListing } from "./views/EmployeeListing";
-import EmployeeForm from "./views/EmployeeForm";
+import EmployeeForm from "./components/EmployeeForm";
 import ErrorPage from "./views/ErrorPage";
+import EmployeePage from "./views/EmployeePage";
 
-const router = createBrowserRouter(
-  [
-    {path: "/", element: <EmployeeListing />, errorElement: <ErrorPage />},
-    {path: "/employee/:employeeId", element: <EmployeeForm />},
-  ]
-);
+const router = createBrowserRouter([
+  { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
+  { path: "/employee/:employeeId", element: <EmployeePage /> },
+]);
 
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }
