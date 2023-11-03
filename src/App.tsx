@@ -8,10 +8,11 @@ import "./css/input.css";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import { EmployeeListing } from "./views/EmployeeListing";
 import EmployeeForm from "./views/EmployeeForm";
+import ErrorPage from "./views/ErrorPage";
 
 const router = createBrowserRouter(
   [
-    {path: "/", element: <EmployeeListing />},
+    {path: "/", element: <EmployeeListing />, errorElement: <ErrorPage />},
     {path: "/employee/:employeeId", element: <EmployeeForm />},
   ]
 );
