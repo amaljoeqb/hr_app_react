@@ -3,7 +3,7 @@ import EmployeeTable from "../components/listing/EmployeeTable";
 import { HoverButton } from "../components/common/HoverButton.style";
 import SkillsFilter from "../components/listing/SkillsFilter";
 import { Employee } from "../models/employee";
-import { getData } from "../services/helpers";
+import { getData, searchEmployees } from "../services/helpers";
 import { Skill } from "../models/skill";
 import PaginationControl from "../components/listing/PaginationControl";
 import SearchInput from "../components/listing/SearchInput";
@@ -15,6 +15,11 @@ export function EmployeeListing() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
+  const [sort, setSort] = useState<{ key: string; order: "asc" | "desc" }>({
+    key: "employeeId",
+    order: "asc",
+  });
 
   const loadData = async () => {
     const data = await getData("data.json");
@@ -22,6 +27,12 @@ export function EmployeeListing() {
     setSkills(data.skills);
     setLoading(false);
   };
+
+  useEffect(() => {
+    let filtered = searchEmployees(employees, searchTerm);
+    filtered = filtered.slice(page * 10 - 10, page * 10);
+    setFilteredEmployees(filtered);
+  }, [searchTerm, selectedSkills, employees, page]);
 
   useEffect(() => {
     loadData();
@@ -59,10 +70,12 @@ export function EmployeeListing() {
       </div>
       <div className="table-container">
         <EmployeeTable
-          pageNumber={page}
           employees={employees}
           searchTerm={searchTerm}
-          skillsFilter={selectedSkills}
+          sort={sort}
+          onChangeSort={(sort) => {
+            setSort(sort);
+          }}
         />
       </div>
       <PaginationControl

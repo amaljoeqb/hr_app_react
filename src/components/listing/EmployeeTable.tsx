@@ -6,21 +6,39 @@ import EmployeeRow from "./EmployeeRow";
 export default function EmployeeTable({
   employees,
   searchTerm,
-  skillsFilter,
-  pageNumber,
+  sort,
+  onChangeSort,
 }: {
   employees: Employee[];
   searchTerm: string;
-  skillsFilter: number[];
-  pageNumber: number;
+  sort: {
+    key: string;
+    order: "asc" | "desc";
+  };
+  onChangeSort: (sort: { key: string; order: "asc" | "desc" }) => void;
 }) {
-  const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
+  function getTitleClassName(key: string) {
+    if (sort.key === key) {
+      return `column-title ${sort.order}`;
+    }
+    return "column-title";
+  }
 
-  useEffect(() => {
-    let filtered = searchEmployees(employees, searchTerm);
-    filtered = filtered.slice(pageNumber * 10 - 10, pageNumber * 10);
-    setFilteredEmployees(filtered);
-  }, [searchTerm, skillsFilter, employees, pageNumber]);
+  function onClickTitle(key: string) {
+    return () => {
+      if (sort.key === key) {
+        onChangeSort({
+          key,
+          order: sort.order === "asc" ? "desc" : "asc",
+        });
+      } else {
+        onChangeSort({
+          key,
+          order: "asc",
+        });
+      }
+    };
+  }
 
   return (
     <table className="emp-table">
@@ -41,8 +59,8 @@ export default function EmployeeTable({
           </th>
           <th>
             <div className="header-container">
-              <h3 className="column-title" data-key="employeeId">
-                <button>ID</button>
+              <h3 className={getTitleClassName("employeeId")} data-key="employeeId">
+                <button onClick={onClickTitle("employeeId")}>ID</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
                     keyboard_arrow_up
@@ -57,7 +75,7 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className="column-title" data-key="name">
+              <h3 className={getTitleClassName("name")} data-key="name">
                 <button>Name</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
@@ -73,7 +91,7 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className="column-title" data-key="designation">
+              <h3 className={getTitleClassName("designation")} data-key="designation">
                 <button>Designation</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
@@ -89,7 +107,7 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className="column-title" data-key="department">
+              <h3 className={getTitleClassName("department")} data-key="department">
                 <button>Department</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
@@ -114,7 +132,7 @@ export default function EmployeeTable({
         </tr>
       </thead>
       <tbody>
-        {filteredEmployees.map((employee) => (
+        {employees.map((employee) => (
           <EmployeeRow
             key={employee.employeeId}
             employee={employee}
