@@ -2,6 +2,7 @@ import { Employee } from "../models/employee";
 import { highlightSearchTerm, skillsToString } from "../services/helpers";
 import { Chip } from "../components/Chip.style";
 import HighlightedSpan from "../components/HighlightedSpan";
+import { Link } from "react-router-dom";
 
 export default function EmployeeRow({
   employee,
@@ -22,9 +23,9 @@ export default function EmployeeRow({
       </td>
       <td>
         <div className="name-container">
-          <button className="name">
+          <Link to={`employee/${employee.employeeId}`} className="name">
             <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
-          </button>
+          </Link>
           <p className="email">{employee.email}</p>
         </div>
       </td>
