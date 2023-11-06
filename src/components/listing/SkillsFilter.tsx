@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getData } from "../services/helpers";
-import { Skill } from "../models/skill";
-import { Employee } from "../models/employee";
-import ClickAwayListener from "./ClickAwayListener";
+import { getData } from "../../services/helpers";
+import { Skill } from "../../models/skill";
+import { Employee } from "../../models/employee";
+import ClickAwayListener from "../ClickAwayListener";
 
 type SkillOption = Skill & { count: number; checked: boolean };
 
@@ -52,23 +52,23 @@ export default function SkillsFilter({
   }, [employees, skills, selectedSkills]);
 
   return (
-    <div
-      id="skills-filter"
-      className={
-        isActive ? "filter-btn-container active" : "filter-btn-container"
-      }
-    >
-      <button
-        className="filter-btn hover-btn"
-        onClick={() => {
-          setIsActive(!isActive);
-        }}
+    <ClickAwayListener onClickOutside={() => setIsActive(false)}>
+      <div
+        id="skills-filter"
+        className={
+          isActive ? "filter-btn-container active" : "filter-btn-container"
+        }
       >
-        <span className="material-symbols-outlined"> tune </span>
-        <p>Skills</p>
-        <ul className="selected-items"></ul>
-      </button>
-      <ClickAwayListener onClickOutside={() => setIsActive(false)}>
+        <button
+          className="filter-btn hover-btn"
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
+        >
+          <span className="material-symbols-outlined"> tune </span>
+          <p>Skills</p>
+          <ul className="selected-items"></ul>
+        </button>
         <div className="filter-dropdown">
           <form className="filter-form">
             <span className="material-symbols-outlined search-icon">
@@ -108,7 +108,7 @@ export default function SkillsFilter({
             <p>Clear Filters</p>
           </button>
         </div>
-      </ClickAwayListener>
-    </div>
+      </div>
+    </ClickAwayListener>
   );
 }

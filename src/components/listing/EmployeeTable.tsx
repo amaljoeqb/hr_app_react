@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Employee } from "../models/employee";
-import { searchEmployees } from "../services/helpers";
+import { Employee } from "../../models/employee";
+import { searchEmployees } from "../../services/helpers";
 import EmployeeRow from "./EmployeeRow";
 
 export default function EmployeeTable({
@@ -20,7 +20,7 @@ export default function EmployeeTable({
     let filtered = searchEmployees(employees, searchTerm);
     filtered = filtered.slice(pageNumber * 10 - 10, pageNumber * 10);
     setFilteredEmployees(filtered);
-  }, [searchTerm, skillsFilter, employees]);
+  }, [searchTerm, skillsFilter, employees, pageNumber]);
 
   return (
     <table className="emp-table">

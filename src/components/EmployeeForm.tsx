@@ -1,6 +1,6 @@
-import TextInput from "./inputs/TextInput";
+import TextInput from "./form/TextInput";
 import { Employee } from "../models/employee";
-import NumberInput from "./inputs/NumberInput";
+import NumberInput from "./form/NumberInput";
 
 export default function EmployeeForm({ employee }: { employee: Employee }) {
   return (
