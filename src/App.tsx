@@ -7,7 +7,7 @@ import "./css/table.css";
 import "./css/input.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { EmployeeListing } from "./views/EmployeeListing";
-import EmployeeForm from "./components/EmployeeForm";
+import EmployeeForm from "./components/form/EmployeeForm";
 import ErrorPage from "./views/ErrorPage";
 import EmployeePage from "./views/EmployeePage";
 

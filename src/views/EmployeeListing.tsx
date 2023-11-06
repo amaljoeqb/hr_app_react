@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import EmployeeTable from "../components/listing/EmployeeTable";
-import { HoverButton } from "../components/HoverButton.style";
+import { HoverButton } from "../components/common/HoverButton.style";
 import SkillsFilter from "../components/listing/SkillsFilter";
 import { Employee } from "../models/employee";
 import { getData } from "../services/helpers";

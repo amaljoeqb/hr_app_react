@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../../services/helpers";
 import { Skill } from "../../models/skill";
 import { Employee } from "../../models/employee";
-import ClickAwayListener from "../ClickAwayListener";
+import ClickAwayListener from "../common/ClickAwayListener";
 
 type SkillOption = Skill & { count: number; checked: boolean };
 
