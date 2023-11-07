@@ -30,7 +30,6 @@ export function EmployeeListing() {
 
   useEffect(() => {
     let filtered = searchEmployees(employees, searchTerm);
-    filtered = filtered.slice(page * 10 - 10, page * 10);
     if (selectedSkills.length > 0) {
       filtered = filtered.filter((employee) => {
         return employee.skills.find((skill) => {
@@ -52,7 +51,8 @@ export function EmployeeListing() {
       sort.order === "asc"
     );
     setFilteredEmployees(filtered);
-  }, [searchTerm, selectedSkills, employees, page, sort]);
+    setPage(1);
+  }, [searchTerm, selectedSkills, employees, sort]);
 
   useEffect(() => {
     loadData();
@@ -93,7 +93,7 @@ export function EmployeeListing() {
       </div>
       <div className="table-container">
         <EmployeeTable
-          employees={filteredEmployees}
+          employees={filteredEmployees.slice(page * 10 - 10, page * 10)}
           searchTerm={searchTerm}
           sort={sort}
           onChangeSort={(sort) => {
@@ -104,7 +104,7 @@ export function EmployeeListing() {
       </div>
       <PaginationControl
         current={page}
-        total={Math.ceil(employees.length / 10)}
+        total={Math.ceil(filteredEmployees.length / 10)}
         onChange={(page) => {
           setPage(page);
         }}

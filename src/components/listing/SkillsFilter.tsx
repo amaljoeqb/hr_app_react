@@ -40,7 +40,7 @@ export default function SkillsFilter({
           skill: skill.skill,
           count: employees.filter((employee) => {
             return employee.skills.find((skillItem) => {
-              return skillItem.skillId == skill.skillId;
+              return skillItem.skillId === skill.skillId;
             });
           }).length,
           checked: selectedSkills.includes(skill.skillId),
@@ -55,9 +55,7 @@ export default function SkillsFilter({
     <ClickAwayListener onClickOutside={() => setIsActive(false)}>
       <div
         id="skills-filter"
-        className={
-          isActive ? "filter-btn-container active" : "filter-btn-container"
-        }
+        className={`filter-btn-container ${isActive ? "active" : ""}`}
       >
         <button
           className="filter-btn hover-btn"
@@ -67,7 +65,23 @@ export default function SkillsFilter({
         >
           <span className="material-symbols-outlined"> tune </span>
           <p>Skills</p>
-          <ul className="selected-items"></ul>
+          <ul className="selected-items">
+            {selectedSkills.map((skillId) => {
+              const skill = skills.find((skill) => skill.skillId == skillId);
+              return (
+                <li
+                  key={skillId}
+                  className="selected-item"
+                  onClick={() => onClickSkillOption(skillId)}
+                >
+                  <p className="name">{skill?.skill}</p>
+                  <span className="material-symbols-outlined close-icon">
+                    close
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </button>
         <div className="filter-dropdown">
           <form className="filter-form">
