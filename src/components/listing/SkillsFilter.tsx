@@ -72,7 +72,10 @@ export default function SkillsFilter({
                 <li
                   key={skillId}
                   className="selected-item"
-                  onClick={() => onClickSkillOption(skillId)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClickSkillOption(skillId);
+                  }}
                 >
                   <p className="name">{skill?.skill}</p>
                   <span className="material-symbols-outlined close-icon">
