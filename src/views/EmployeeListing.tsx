@@ -70,7 +70,7 @@ export function EmployeeListing() {
       </div>
       <div className="table-container">
         <EmployeeTable
-          employees={employees}
+          employees={filteredEmployees}
           searchTerm={searchTerm}
           sort={sort}
           onChangeSort={(sort) => {

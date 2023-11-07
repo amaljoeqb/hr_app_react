@@ -25,19 +25,17 @@ export default function EmployeeTable({
   }
 
   function onClickTitle(key: string) {
-    return () => {
-      if (sort.key === key) {
-        onChangeSort({
-          key,
-          order: sort.order === "asc" ? "desc" : "asc",
-        });
-      } else {
-        onChangeSort({
-          key,
-          order: "asc",
-        });
-      }
-    };
+    if (sort.key === key) {
+      onChangeSort({
+        key,
+        order: sort.order === "asc" ? "desc" : "asc",
+      });
+    } else {
+      onChangeSort({
+        key,
+        order: "asc",
+      });
+    }
   }
 
   return (
@@ -59,8 +57,17 @@ export default function EmployeeTable({
           </th>
           <th>
             <div className="header-container">
-              <h3 className={getTitleClassName("employeeId")} data-key="employeeId">
-                <button onClick={onClickTitle("employeeId")}>ID</button>
+              <h3
+                className={getTitleClassName("employeeId")}
+                data-key="employeeId"
+              >
+                <button
+                  onClick={() => {
+                    onClickTitle("employeeId");
+                  }}
+                >
+                  ID
+                </button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
                     keyboard_arrow_up
@@ -91,7 +98,10 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className={getTitleClassName("designation")} data-key="designation">
+              <h3
+                className={getTitleClassName("designation")}
+                data-key="designation"
+              >
                 <button>Designation</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
@@ -107,7 +117,10 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className={getTitleClassName("department")} data-key="department">
+              <h3
+                className={getTitleClassName("department")}
+                data-key="department"
+              >
                 <button>Department</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
