@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Employee } from "../../models/employee";
-import { searchEmployees } from "../../services/helpers";
 import EmployeeRow from "./EmployeeRow";
 
 export default function EmployeeTable({
@@ -25,6 +23,7 @@ export default function EmployeeTable({
   }
 
   function onClickTitle(key: string) {
+    console.log("onClickTitle", key);
     if (sort.key === key) {
       onChangeSort({
         key,
@@ -60,14 +59,9 @@ export default function EmployeeTable({
               <h3
                 className={getTitleClassName("employeeId")}
                 data-key="employeeId"
+                onClick={() => onClickTitle("employeeId")}
               >
-                <button
-                  onClick={() => {
-                    onClickTitle("employeeId");
-                  }}
-                >
-                  ID
-                </button>
+                <button>ID</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
                     keyboard_arrow_up
@@ -82,7 +76,11 @@ export default function EmployeeTable({
 
           <th>
             <div className="header-container">
-              <h3 className={getTitleClassName("name")} data-key="name">
+              <h3
+                className={getTitleClassName("name")}
+                data-key="name"
+                onClick={() => onClickTitle("name")}
+              >
                 <button>Name</button>
                 <span className="sort-icon">
                   <span className="material-symbols-outlined up">
@@ -101,6 +99,7 @@ export default function EmployeeTable({
               <h3
                 className={getTitleClassName("designation")}
                 data-key="designation"
+                onClick={() => onClickTitle("designation")}
               >
                 <button>Designation</button>
                 <span className="sort-icon">
@@ -120,6 +119,7 @@ export default function EmployeeTable({
               <h3
                 className={getTitleClassName("department")}
                 data-key="department"
+                onClick={() => onClickTitle("department")}
               >
                 <button>Department</button>
                 <span className="sort-icon">

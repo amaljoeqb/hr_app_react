@@ -99,3 +99,59 @@ export function searchEmployees(employees: Employee[], searchTerm: string) {
       return [];
     }
   }
+
+/**
+ * Function to sort employees array based on an attribute
+ * @param {Employee[]} employees - Array of employees
+ * @param {keyof Employee} key - Name of the attribute to sort
+ * @param {boolean} asc - Order to sort the column (ascending/descending)
+ */
+export function sortEmployees(employees: Employee[], key: keyof Employee, asc: boolean = true): Employee[] {
+    const numericalSort = (a: Employee, b: Employee) => {
+        if (a[key] < b[key]) {
+            return asc ? -1 : 1;
+        }
+        if (a[key] > b[key]) {
+            return asc ? 1 : -1;
+        }
+        return 0;
+        };
+
+    const alphaNumericSort = (a: Employee, b: Employee) => {
+        const aString = a[key].toString().toLowerCase();
+        const bString = b[key].toString().toLowerCase();
+        if (aString < bString) {
+            return asc ? -1 : 1;
+        }
+        if (aString > bString) {
+            return asc ? 1 : -1;
+        }
+        return 0;
+    }
+
+    const departmentSort = (a: Employee, b: Employee) => {
+        const aString = a.department.department.toString().toLowerCase();
+        const bString = b.department.department.toString().toLowerCase();
+        if (aString < bString) {
+            return asc ? -1 : 1;
+        }
+        if (aString > bString) {
+            return asc ? 1 : -1;
+        }
+        return 0;
+    }
+  
+    switch (key) {
+      case "employeeId":
+      case "salary":
+        return employees.sort(numericalSort);
+      case "name":
+      case "email":
+      case "designation":
+        return employees.sort(alphaNumericSort);
+      case "department":
+        return employees.sort(departmentSort);
+      default:
+        return employees;
+    }
+  }

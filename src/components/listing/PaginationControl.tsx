@@ -7,8 +7,7 @@ export default function PaginationControl({
   total: number;
   onChange: (page: number) => void;
 }) {
-  const pages = [...Array(total)].map((_, i) => i + 1);
-  console.log(pages);
+  const pages = Array.from({ length: total }, (_, i) => i + 1);
   return (
     <nav className="pagination-container">
       <div className="pagination">
@@ -32,7 +31,7 @@ export default function PaginationControl({
         </button>
         <ul className="page-numbers">
           {pages.map((page) => (
-            <li>
+            <li key={page}>
               <button
                 id="page-1"
                 data-num="1"

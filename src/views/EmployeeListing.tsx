@@ -3,7 +3,7 @@ import EmployeeTable from "../components/listing/EmployeeTable";
 import { HoverButton } from "../components/common/HoverButton.style";
 import SkillsFilter from "../components/listing/SkillsFilter";
 import { Employee } from "../models/employee";
-import { getData, searchEmployees } from "../services/helpers";
+import { getData, searchEmployees, sortEmployees } from "../services/helpers";
 import { Skill } from "../models/skill";
 import PaginationControl from "../components/listing/PaginationControl";
 import SearchInput from "../components/listing/SearchInput";
@@ -31,12 +31,36 @@ export function EmployeeListing() {
   useEffect(() => {
     let filtered = searchEmployees(employees, searchTerm);
     filtered = filtered.slice(page * 10 - 10, page * 10);
+    if (selectedSkills.length > 0) {
+      filtered = filtered.filter((employee) => {
+        return employee.skills.find((skill) => {
+          return selectedSkills.includes(skill.skillId);
+        });
+      });
+    }
+    filtered =
+      selectedSkills.length === 0
+        ? filtered
+        : filtered.filter((employee) => {
+            return employee.skills.find((skill) => {
+              return selectedSkills.includes(skill.skillId);
+            });
+          });
+    filtered = sortEmployees(
+      filtered,
+      sort.key as keyof Employee,
+      sort.order === "asc"
+    );
     setFilteredEmployees(filtered);
-  }, [searchTerm, selectedSkills, employees, page]);
+  }, [searchTerm, selectedSkills, employees, page, sort]);
 
   useEffect(() => {
     loadData();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className="card">
@@ -46,7 +70,6 @@ export function EmployeeListing() {
           <SearchInput
             onChange={(text) => {
               setSearchTerm(text);
-              setPage(1);
             }}
           />
         </div>
@@ -75,6 +98,7 @@ export function EmployeeListing() {
           sort={sort}
           onChangeSort={(sort) => {
             setSort(sort);
+            console.log(sort);
           }}
         />
       </div>

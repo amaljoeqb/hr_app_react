@@ -96,6 +96,7 @@ export default function SkillsFilter({
                     className="check"
                     type="checkbox"
                     checked={option.checked}
+                    readOnly={true}
                   />
                   <p className="name">{option.skill}</p>
                   <p className="count">{option.count}</p>
