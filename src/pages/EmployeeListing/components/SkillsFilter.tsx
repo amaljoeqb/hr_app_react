@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { getData } from "../../../services/helpers";
-import { Skill } from "../../../models/skill";
-import { Employee } from "../../../models/employee";
+import { Skill, Employee } from "../../../models";
 import ClickAwayListener from "../../../components/eventListeners/ClickAwayListener";
 
 type SkillOption = Skill & { count: number; checked: boolean };
@@ -49,7 +47,7 @@ export default function SkillsFilter({
       .filter((option) => option.count > 0)
       .sort((a, b) => b.count - a.count);
     setOptions(options);
-  }, [employees, skills, selectedSkills]);
+  }, [employees, skills, selectedSkills, searchTerm]);
 
   return (
     <ClickAwayListener onClickOutside={() => setIsActive(false)}>
@@ -67,7 +65,7 @@ export default function SkillsFilter({
           <p>Skills</p>
           <ul className="selected-items">
             {selectedSkills.map((skillId) => {
-              const skill = skills.find((skill) => skill.skillId == skillId);
+              const skill = skills.find((skill) => skill.skillId === skillId);
               return (
                 <li
                   key={skillId}
@@ -98,6 +96,9 @@ export default function SkillsFilter({
               name="skill-filter"
               placeholder="Search Skills"
               autoComplete="off"
+              onInput={(e) => {
+                setSearchTerm(e.currentTarget.value.toLowerCase());
+              }}
             />
           </form>
           <hr />

@@ -1,7 +1,6 @@
-import { Department } from "./department";
-import { Skill } from "./skill";
+import { Department, Skill } from "./";
 
-export interface Employee {
+export default interface Employee {
     employeeId: number;
     name: string;
     email: string;

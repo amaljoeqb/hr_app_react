@@ -1,5 +1,4 @@
-import { Employee } from "../models/employee";
-import { Skill } from "../models/skill";
+import { Employee, Skill } from "../models";
 
 /**
  * Get data from url

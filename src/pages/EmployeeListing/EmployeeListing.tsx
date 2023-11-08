@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
 import SkillsFilter from "./components/SkillsFilter";
-import { Employee } from "../../models/employee";
+import { Employee, Skill } from "../../models";
 import {
   getData,
   searchEmployees,
   sortEmployees,
 } from "../../services/helpers";
-import { Skill } from "../../models/skill";
 import PaginationControl from "./components/PaginationControl";
 import SearchInput from "./components/SearchInput";
 

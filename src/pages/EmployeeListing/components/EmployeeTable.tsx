@@ -1,4 +1,4 @@
-import { Employee } from "../../../models/employee";
+import { Employee } from "../../../models";
 import EmployeeRow from "./EmployeeRow";
 
 export default function EmployeeTable({

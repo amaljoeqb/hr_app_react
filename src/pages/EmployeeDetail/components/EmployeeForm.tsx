@@ -1,5 +1,5 @@
 import TextInput from "../../../components/inputs/TextInput";
-import { Employee } from "../../../models/employee";
+import { Employee } from "../../../models";
 import NumberInput from "../../../components/inputs/NumberInput";
 
 export default function EmployeeForm({ employee }: { employee: Employee }) {
