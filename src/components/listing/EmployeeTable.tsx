@@ -49,11 +49,6 @@ export default function EmployeeTable({
       </colgroup>
       <thead>
         <tr className="header-row">
-          <th className="check-cell">
-            <div className="checkbox-container">
-              <input type="checkbox" className="all-check" />
-            </div>
-          </th>
           <th>
             <div className="header-container">
               <h3
