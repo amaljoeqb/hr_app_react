@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getData } from "../../services/helpers";
-import { Skill } from "../../models/skill";
-import { Employee } from "../../models/employee";
-import ClickAwayListener from "../common/ClickAwayListener";
+import { getData } from "../../../services/helpers";
+import { Skill } from "../../../models/skill";
+import { Employee } from "../../../models/employee";
+import ClickAwayListener from "../../../components/eventListeners/ClickAwayListener";
 
 type SkillOption = Skill & { count: number; checked: boolean };
 

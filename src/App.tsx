@@ -6,10 +6,10 @@ import "./css/style.css";
 import "./css/table.css";
 import "./css/input.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { EmployeeListing } from "./views/EmployeeListing";
-import EmployeeForm from "./components/form/EmployeeForm";
-import ErrorPage from "./views/ErrorPage";
-import EmployeePage from "./views/EmployeePage";
+import { EmployeeListing } from "./pages/EmployeeListing/EmployeeListing";
+import EmployeeForm from "./pages/EmployeeDetail/components/EmployeeForm";
+import ErrorPage from "./pages/Error/ErrorScreen";
+import EmployeePage from "./pages/EmployeeDetail/EmployeeDetail";
 
 const router = createBrowserRouter([
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },

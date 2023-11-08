@@ -1,7 +1,7 @@
-import { Employee } from "../../models/employee";
-import { highlightSearchTerm, skillsToString } from "../../services/helpers";
-import { Chip } from "../common/Chip.style";
-import HighlightedSpan from "../common/HighlightedSpan";
+import { Employee } from "../../../models/employee";
+import { highlightSearchTerm, skillsToString } from "../../../services/helpers";
+import { Chip } from "../../../components/ui/Chip.style";
+import HighlightedSpan from "../../../components/ui/HighlightedSpan";
 import { Link } from "react-router-dom";
 
 export default function EmployeeRow({

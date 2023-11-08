@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import EmployeeTable from "../components/listing/EmployeeTable";
-import { HoverButton } from "../components/common/HoverButton.style";
-import SkillsFilter from "../components/listing/SkillsFilter";
-import { Employee } from "../models/employee";
-import { getData, searchEmployees, sortEmployees } from "../services/helpers";
-import { Skill } from "../models/skill";
-import PaginationControl from "../components/listing/PaginationControl";
-import SearchInput from "../components/listing/SearchInput";
+import EmployeeTable from "./components/EmployeeTable";
+import { HoverButton } from "../../components";
+import SkillsFilter from "./components/SkillsFilter";
+import { Employee } from "../../models/employee";
+import {
+  getData,
+  searchEmployees,
+  sortEmployees,
+} from "../../services/helpers";
+import { Skill } from "../../models/skill";
+import PaginationControl from "./components/PaginationControl";
+import SearchInput from "./components/SearchInput";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
