@@ -1,6 +1,6 @@
 import { Employee } from "../../../models";
 import { skillsToString } from "../../../services/helpers";
-import { Chip } from "../../../components/ui/Chip.style";
+import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
 import { Link } from "react-router-dom";
 

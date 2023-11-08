@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HoverButton = styled.button`
+export const StyledHoverButton = styled.button`
     background-color: white;
     border: none;
     outline: 1px solid #ddd;
