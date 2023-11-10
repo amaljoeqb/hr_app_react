@@ -10,24 +10,25 @@ import {
 } from "../../services/helpers";
 import PaginationControl from "./components/PaginationControl";
 import SearchInput from "./components/SearchInput";
+import { useAppContext } from "../../store/app.context";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
   const [sort, setSort] = useState<{ key: string; order: "asc" | "desc" }>({
     key: "employeeId",
     order: "asc",
   });
+  const appContext = useAppContext();
+  const { employees, skills } = appContext.state;
 
   const loadData = async () => {
     const data = await getData("data.json");
-    setEmployees(data.employees);
-    setSkills(data.skills);
+    appContext.dispatch({ type: "SET_EMPLOYEES", payload: data.employees });
+    appContext.dispatch({ type: "SET_SKILLS", payload: data.skills });
     setLoading(false);
   };
 
@@ -59,7 +60,7 @@ export function EmployeeListing() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  });
 
   if (loading) {
     return <div>Loading...</div>;

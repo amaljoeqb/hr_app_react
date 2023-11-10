@@ -10,6 +10,7 @@ import { EmployeeListing } from "./pages/EmployeeListing/EmployeeListing";
 import EmployeeForm from "./pages/EmployeeDetail/components/EmployeeForm";
 import ErrorPage from "./pages/Error/ErrorScreen";
 import EmployeePage from "./pages/EmployeeDetail/EmployeeDetail";
+import { AppProvider } from "./store/app.context";
 
 const router = createBrowserRouter([
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <AppProvider>
+        <RouterProvider router={router} />
+      </AppProvider>
     </div>
   );
 }
