@@ -1,6 +1,7 @@
 import { useField } from "formik";
 import Select from "react-select";
 import MultiValue from "react-select/dist/declarations/src/components/MultiValue";
+import SingleValue from "react-select/dist/declarations/src/components/SingleValue";
 
 // select using formik and react-select
 export default function SelectInput({
@@ -20,7 +21,6 @@ export default function SelectInput({
   options: { value: any; label: string }[];
 }) {
   const [{ onChange: fieldOnChange, ...field }, meta] = useField(props.name);
-  console.log(field);
   return (
     <div id={`${props.name}-field`} className="field">
       <label htmlFor={props.name}>{label}</label>
@@ -39,12 +39,21 @@ export default function SelectInput({
             color: "red",
           }),
         }}
-        value={options.find((option) => option.value[id] === field.value[id])}
+        value={
+          field.value instanceof Array
+            ? options.filter((option) =>
+                field.value.map((v: any) => v[id]).includes(option.value[id])
+              )
+            : options.find((option) => option.value[id] === field.value[id])
+        }
         onChange={(option) => {
           fieldOnChange({
             target: {
               name: props.name,
-              value: option,
+              value:
+                option instanceof Array
+                  ? option.map((item) => item.value)
+                  : option?.value,
             },
           });
         }}
