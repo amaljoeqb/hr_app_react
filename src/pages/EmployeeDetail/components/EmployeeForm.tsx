@@ -1,8 +1,9 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
 import * as Yup from "yup";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
+import { useAppContext } from "../../../store/app.context";
 
 export default function EmployeeForm({
   employee,
@@ -13,11 +14,17 @@ export default function EmployeeForm({
   skills: Skill[];
   departments: Department[];
 }) {
+  const appContext = useAppContext();
+
   return (
     <Formik
       initialValues={employee}
       onSubmit={(values, actions) => {
-        console.log({ values, actions });
+        console.log(values, actions);
+        appContext.dispatch({
+          type: "UPDATE_EMPLOYEE",
+          payload: values,
+        });
       }}
       validationSchema={Yup.object({
         name: Yup.string().required("Required"),
@@ -32,7 +39,7 @@ export default function EmployeeForm({
         skills: Yup.array().required("Required"),
       })}
     >
-      <form id="emp-form">
+      <Form id="emp-form">
         <div className="row">
           <TextInput
             label="Employee ID"
@@ -111,7 +118,7 @@ export default function EmployeeForm({
             </button>
           </div>
         </div>
-      </form>
+      </Form>
     </Formik>
   );
 }
