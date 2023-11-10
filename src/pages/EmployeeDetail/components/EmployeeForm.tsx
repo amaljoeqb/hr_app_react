@@ -27,7 +27,7 @@ export default function EmployeeForm({
           type: "UPDATE_EMPLOYEE",
           payload: values,
         });
-        actions.setSubmitting(false);\
+        actions.setSubmitting(false);
         navigate("/");
       }}
       validationSchema={Yup.object({
