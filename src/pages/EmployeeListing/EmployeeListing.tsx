@@ -16,7 +16,6 @@ export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
-  const [loading, setLoading] = useState(true);
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
   const [sort, setSort] = useState<{ key: string; order: "asc" | "desc" }>({
     key: "employeeId",
@@ -24,13 +23,6 @@ export function EmployeeListing() {
   });
   const appContext = useAppContext();
   const { employees, skills } = appContext.state;
-
-  const loadData = async () => {
-    const data = await getData("data.json");
-    appContext.dispatch({ type: "SET_EMPLOYEES", payload: data.employees });
-    appContext.dispatch({ type: "SET_SKILLS", payload: data.skills });
-    setLoading(false);
-  };
 
   useEffect(() => {
     let filtered = searchEmployees(employees, searchTerm);
@@ -57,14 +49,6 @@ export function EmployeeListing() {
     setFilteredEmployees(filtered);
     setPage(1);
   }, [searchTerm, selectedSkills, employees, sort]);
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <main className="card">

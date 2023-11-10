@@ -10,7 +10,9 @@ import { EmployeeListing } from "./pages/EmployeeListing/EmployeeListing";
 import EmployeeForm from "./pages/EmployeeDetail/components/EmployeeForm";
 import ErrorPage from "./pages/Error/ErrorScreen";
 import EmployeePage from "./pages/EmployeeDetail/EmployeeDetail";
-import { AppProvider } from "./store/app.context";
+import { AppProvider, useAppContext } from "./store/app.context";
+import { getData } from "./services/helpers";
+import { useState, useEffect } from "react";
 
 const router = createBrowserRouter([
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
@@ -18,11 +20,27 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const appContext = useAppContext();
+
+  const loadData = async () => {
+    const data = await getData("data.json");
+    appContext.dispatch({ type: "SET_EMPLOYEES", payload: data.employees });
+    appContext.dispatch({ type: "SET_SKILLS", payload: data.skills });
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading1...</div>;
+  }
+
   return (
     <div className="App">
-      <AppProvider>
-        <RouterProvider router={router} />
-      </AppProvider>
+      <RouterProvider router={router} />
     </div>
   );
 }
