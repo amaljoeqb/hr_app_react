@@ -1,6 +1,5 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Employee } from "../../../models";
-import NumberInput from "../../../components/inputs/NumberInput";
 import * as Yup from "yup";
 import { Formik } from "formik";
 
