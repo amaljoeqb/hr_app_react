@@ -109,18 +109,13 @@ export default function EmployeeForm({
             }))}
           />
         </div>
-        <input
-          id="save-button"
-          className="hover-btn primary submit"
-          type="submit"
-        />
-        {/* <div className="flip-container">
+        <div className="flip-container">
           <div className="front">
             <input
               id="save-button"
               className="hover-btn primary submit"
               type="submit"
-              defaultValue="Save"
+              value="Save"
               onClick={(e) => {
                 e.preventDefault();
                 console.log(e);
@@ -132,7 +127,7 @@ export default function EmployeeForm({
               Edit
             </button>
           </div>
-        </div> */}
+        </div>
       </Form>
     </Formik>
   );
