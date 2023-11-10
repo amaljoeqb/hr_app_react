@@ -1,5 +1,10 @@
+import { useField } from "formik";
+import Select from "react-select";
+
+// select using formik and react-select
 export default function SelectInput({
   label,
+  name,
   options,
   ...props
 }: {
@@ -11,26 +16,29 @@ export default function SelectInput({
   type?: string;
   options: { value: any; label: string }[];
 }) {
+  const [field, meta, helpers] = useField(name);
+
+  const handleChange = (selectedOption: any) => {
+    helpers.setValue(selectedOption);
+  };
+
+  const handleBlur = () => {
+    helpers.setTouched(true);
+  };
+
+  console.log(field);
   return (
-    <div id="department-field" className="field dropdown">
-      <label htmlFor="department">Department</label>
-      <div className="input-container">
-        <input
-          type="text"
-          name="department"
-          id="department"
-          className="dropdown-input"
-          autoComplete="off"
-          required={true}
-        />
-        <span className="material-symbols-outlined suffix-icon">
-          keyboard_arrow_down
-        </span>
-      </div>
-      <div className="dropdown-content department">
-        <ul id="department-options" className="dropdown-list" />
-      </div>
-      <p className="error-msg" />
+    <div id={`${name}-field`} className="field">
+      <label htmlFor={name}>{label}</label>
+      <Select
+        {...field}
+        {...props}
+        options={options}
+        value={field.value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      {meta.touched && meta.error ? <p className="error-msg" /> : null}
     </div>
   );
 }
