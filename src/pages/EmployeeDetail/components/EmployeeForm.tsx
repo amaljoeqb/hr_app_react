@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
 import { useAppContext } from "../../../store/app.context";
+import { useNavigate } from "react-router-dom";
 
 export default function EmployeeForm({
   employee,
@@ -14,16 +15,20 @@ export default function EmployeeForm({
   skills: Skill[];
   departments: Department[];
 }) {
+  const navigate = useNavigate();
   const appContext = useAppContext();
 
   return (
     <Formik
       initialValues={employee}
       onSubmit={(values, actions) => {
+        console.log(values);
         appContext.dispatch({
           type: "UPDATE_EMPLOYEE",
           payload: values,
         });
+        actions.setSubmitting(false);\
+        navigate("/");
       }}
       validationSchema={Yup.object({
         employeeId: Yup.number().required("Required"),
