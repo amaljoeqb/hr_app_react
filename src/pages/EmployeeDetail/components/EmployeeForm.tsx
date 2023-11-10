@@ -65,6 +65,7 @@ export default function EmployeeForm({
           <SelectInput
             label="Department"
             name="department"
+            id="departmentId"
             required={true}
             options={departments.map((department) => ({
               value: department,
