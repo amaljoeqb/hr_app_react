@@ -60,7 +60,7 @@ export function EmployeeListing() {
 
   useEffect(() => {
     loadData();
-  });
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;

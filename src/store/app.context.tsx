@@ -30,6 +30,27 @@ const appReducer = (
       return { ...state, employees: action.payload };
     case "SET_SKILLS":
       return { ...state, skills: action.payload };
+    case "ADD_EMPLOYEE":
+      return { ...state, employees: [...state.employees, action.payload] };
+    case "UPDATE_EMPLOYEE":
+      return {
+        ...state,
+        employees: state.employees.map((employee) => {
+          if (employee.employeeId === action.payload.employeeId) {
+            return action.payload;
+          }
+          return employee;
+        }),
+      };
+    case "DELETE_EMPLOYEE":
+      return {
+        ...state,
+        employees: state.employees.filter(
+          (employee) => employee.employeeId !== action.payload
+        ),
+      };
+    case "ADD_SKILL":
+      return { ...state, skills: [...state.skills, action.payload] };
     default:
       return state;
   }
