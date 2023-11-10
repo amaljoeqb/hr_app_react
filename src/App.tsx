@@ -27,6 +27,7 @@ function App() {
     const data = await getData("data.json");
     appContext.dispatch({ type: "SET_EMPLOYEES", payload: data.employees });
     appContext.dispatch({ type: "SET_SKILLS", payload: data.skills });
+    appContext.dispatch({ type: "SET_DEPARTMENTS", payload: data.departments });
     setLoading(false);
   };
 

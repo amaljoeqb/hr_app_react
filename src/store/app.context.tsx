@@ -1,9 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
-import { Employee, Skill } from "../models";
+import { Department, Employee, Skill } from "../models";
 
 export interface AppState {
   employees: Employee[];
   skills: Skill[];
+  departments: Department[];
 }
 
 export interface AppContextType {
@@ -15,6 +16,7 @@ export interface AppContextType {
 const initialState: AppState = {
   employees: [],
   skills: [],
+  departments: [],
 };
 
 // Reducer function to manage state changes
@@ -30,6 +32,8 @@ const appReducer = (
       return { ...state, employees: action.payload };
     case "SET_SKILLS":
       return { ...state, skills: action.payload };
+    case "SET_DEPARTMENTS":
+      return { ...state, departments: action.payload };
     case "ADD_EMPLOYEE":
       return { ...state, employees: [...state.employees, action.payload] };
     case "UPDATE_EMPLOYEE":

@@ -1,9 +1,18 @@
 import TextInput from "../../../components/inputs/TextInput";
-import { Employee } from "../../../models";
+import { Department, Employee, Skill } from "../../../models";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { SelectInput } from "../../../components";
 
-export default function EmployeeForm({ employee }: { employee: Employee }) {
+export default function EmployeeForm({
+  employee,
+  skills,
+  departments,
+}: {
+  employee: Employee;
+  skills: Skill[];
+  departments: Department[];
+}) {
   return (
     <Formik
       initialValues={employee}
@@ -53,26 +62,15 @@ export default function EmployeeForm({ employee }: { employee: Employee }) {
             />
             <p className="error-msg" />
           </div>
-          <div id="department-field" className="field dropdown">
-            <label htmlFor="department">Department</label>
-            <div className="input-container">
-              <input
-                type="text"
-                name="department"
-                id="department"
-                className="dropdown-input"
-                autoComplete="off"
-                required={true}
-              />
-              <span className="material-symbols-outlined suffix-icon">
-                keyboard_arrow_down
-              </span>
-            </div>
-            <div className="dropdown-content department">
-              <ul id="department-options" className="dropdown-list" />
-            </div>
-            <p className="error-msg" />
-          </div>
+          <SelectInput
+            label="Department"
+            name="department"
+            required={true}
+            options={departments.map((department) => ({
+              value: department,
+              label: department.department,
+            }))}
+          />
         </div>
         <div className="row">
           <TextInput

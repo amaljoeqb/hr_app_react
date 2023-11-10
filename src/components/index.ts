@@ -3,3 +3,4 @@ export { default as ClickAwayListener } from './eventListeners/ClickAwayListener
 export { default as TextInput } from './inputs/TextInput';
 export { default as Chip } from './ui/Chip';
 export { default as HighlightedSpan } from './ui/HighlightedSpan';
+export {default as SelectInput} from './inputs/SelectInput';

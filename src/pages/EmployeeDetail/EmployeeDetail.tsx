@@ -6,7 +6,7 @@ import { Employee } from "../../models";
 export default function EmployeePage() {
   const employeeId = Number(useParams<{ employeeId: string }>().employeeId);
   const appContext = useAppContext();
-  const { employees, skills } = appContext.state;
+  const { employees, skills, departments } = appContext.state;
   return (
     <div className="popup emp-popup show-popup">
       <section className="popup-content">
@@ -33,6 +33,8 @@ export default function EmployeePage() {
               (employee) => employee.employeeId === employeeId
             ) as Employee
           }
+          skills={skills}
+          departments={departments}
         />
       </section>
     </div>
