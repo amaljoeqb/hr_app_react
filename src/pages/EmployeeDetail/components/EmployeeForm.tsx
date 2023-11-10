@@ -52,16 +52,12 @@ export default function EmployeeForm({
           />
         </div>
         <div className="row">
-          <div id="designation-field" className="field">
-            <label htmlFor="designation">Designation</label>
-            <input
-              type="text"
-              name="designation"
-              id="designation"
-              required={true}
-            />
-            <p className="error-msg" />
-          </div>
+          <TextInput
+            label="Designation"
+            name="designation"
+            type="text"
+            required={true}
+          />
           <SelectInput
             label="Department"
             name="department"
@@ -88,25 +84,17 @@ export default function EmployeeForm({
           />
         </div>
         <div className="row">
-          <div id="skills-field" className="field">
-            <label htmlFor="skills">Skills</label>
-            <div className="skills-input-container">
-              <span id="skills" className="skills-list">
-                {" "}
-              </span>
-              <input
-                type="text"
-                name="skills"
-                id="skill-input"
-                className="skill-input"
-                autoComplete="off"
-              />
-              <div className="dropdown-content skills-dropdown">
-                <ul id="skills-options" className="dropdown-list" />
-              </div>
-            </div>
-            <p className="error-msg" />
-          </div>
+          <SelectInput
+            label="Skills"
+            name="skills"
+            id="skillId"
+            required={true}
+            isMulti={true}
+            options={skills.map((skill) => ({
+              value: skill,
+              label: skill.skill,
+            }))}
+          />
         </div>
         <div className="flip-container">
           <div className="front">

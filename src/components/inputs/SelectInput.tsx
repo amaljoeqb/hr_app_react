@@ -1,10 +1,10 @@
 import { useField } from "formik";
 import Select from "react-select";
+import MultiValue from "react-select/dist/declarations/src/components/MultiValue";
 
 // select using formik and react-select
 export default function SelectInput({
   label,
-  name,
   options,
   id,
   ...props
@@ -13,16 +13,17 @@ export default function SelectInput({
   name: string;
   id: string;
   required?: boolean;
+  isMulti?: boolean;
   placeholder?: string;
   disabled?: boolean;
   type?: string;
   options: { value: any; label: string }[];
 }) {
-  const [{ onChange: fieldOnChange, ...field }, meta] = useField(name);
+  const [{ onChange: fieldOnChange, ...field }, meta] = useField(props.name);
   console.log(field);
   return (
-    <div id={`${name}-field`} className="field">
-      <label htmlFor={name}>{label}</label>
+    <div id={`${props.name}-field`} className="field">
+      <label htmlFor={props.name}>{label}</label>
       <Select
         {...field}
         {...props}
@@ -40,7 +41,12 @@ export default function SelectInput({
         }}
         value={options.find((option) => option.value[id] === field.value[id])}
         onChange={(option) => {
-          fieldOnChange({ target: { name, value: option?.value } });
+          fieldOnChange({
+            target: {
+              name: props.name,
+              value: option,
+            },
+          });
         }}
       />
       {meta.touched && meta.error ? <p className="error-msg" /> : null}
