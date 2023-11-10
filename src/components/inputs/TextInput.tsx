@@ -1,31 +1,22 @@
+import { useField } from "formik";
+
 export default function TextInput({
   label,
-  name,
-  value,
-  onChange,
-  required,
-  disabled,
+  ...props
 }: {
   label: string;
   name: string;
-  value: string;
-  onChange: (value: string) => void;
   required?: boolean;
+  placeholder?: string;
   disabled?: boolean;
+  type?: string;
 }) {
+  const [field, meta] = useField(props.name as string);
   return (
-    <div id={`${name}-field`} className="field">
-      <label htmlFor={name}>{label}</label>
-      <input
-        type="text"
-        name={name}
-        id={name}
-        value={value}
-        required={required ?? false}
-        disabled={disabled ?? false}
-        onInput={(event) => onChange((event.target as HTMLInputElement).value)}
-      />
-      <p className="error-msg" />
+    <div id={`${props.name}-field`} className="field">
+      <label htmlFor={props.name}>{label}</label>
+      <input type="text" {...field} {...props} />
+      {meta.touched && meta.error ? <p className="error-msg" /> : null}
     </div>
   );
 }
