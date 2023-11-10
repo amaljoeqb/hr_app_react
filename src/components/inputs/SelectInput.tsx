@@ -16,17 +16,7 @@ export default function SelectInput({
   type?: string;
   options: { value: any; label: string }[];
 }) {
-  const [field, meta, helpers] = useField(name);
-
-  const handleChange = (selectedOption: any) => {
-    helpers.setValue(selectedOption);
-  };
-
-  const handleBlur = () => {
-    helpers.setTouched(true);
-  };
-
-  console.log(field);
+  const [field, meta] = useField(name);
   return (
     <div id={`${name}-field`} className="field">
       <label htmlFor={name}>{label}</label>
@@ -34,9 +24,10 @@ export default function SelectInput({
         {...field}
         {...props}
         options={options}
-        value={field.value}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        value={options.find((option) => option.value === field.value)}
+        onChange={(option) => {
+          field.onChange({ target: { name, value: option?.value } });
+        }}
       />
       {meta.touched && meta.error ? <p className="error-msg" /> : null}
     </div>
