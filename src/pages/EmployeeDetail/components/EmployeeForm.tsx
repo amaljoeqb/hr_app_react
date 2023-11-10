@@ -20,21 +20,21 @@ export default function EmployeeForm({
     <Formik
       initialValues={employee}
       onSubmit={(values, actions) => {
-        console.log(values, actions);
         appContext.dispatch({
           type: "UPDATE_EMPLOYEE",
           payload: values,
         });
       }}
       validationSchema={Yup.object({
+        employeeId: Yup.number().required("Required"),
         name: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email address").required("Required"),
         salary: Yup.number()
           .min(0, "Salary can't be negative")
           .required("Required"),
         designation: Yup.string().required("Required"),
-        department: Yup.string().required("Required"),
-        dob: Yup.date().required("Required"),
+        department: Yup.object().required("Required"),
+        dateOfBirth: Yup.date().required("Required"),
         joiningDate: Yup.date().required("Required"),
         skills: Yup.array().required("Required"),
       })}
@@ -46,6 +46,7 @@ export default function EmployeeForm({
             name="employeeId"
             type="number"
             required={true}
+            disabled={true}
           />
           <TextInput label="Name" name="name" required={true} />
         </div>
@@ -103,13 +104,22 @@ export default function EmployeeForm({
             }))}
           />
         </div>
-        <div className="flip-container">
+        <input
+          id="save-button"
+          className="hover-btn primary submit"
+          type="submit"
+        />
+        {/* <div className="flip-container">
           <div className="front">
             <input
               id="save-button"
               className="hover-btn primary submit"
               type="submit"
               defaultValue="Save"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log(e);
+              }}
             />
           </div>
           <div className="back">
@@ -117,7 +127,7 @@ export default function EmployeeForm({
               Edit
             </button>
           </div>
-        </div>
+        </div> */}
       </Form>
     </Formik>
   );

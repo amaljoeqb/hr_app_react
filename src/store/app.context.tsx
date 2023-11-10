@@ -28,35 +28,54 @@ const appReducer = (
   }
 ) => {
   switch (action.type) {
-    case "SET_EMPLOYEES":
+    case "SET_EMPLOYEES": {
+      localStorage.setItem("employees", JSON.stringify(action.payload));
       return { ...state, employees: action.payload };
-    case "SET_SKILLS":
+    }
+    case "SET_SKILLS": {
+      localStorage.setItem("skills", JSON.stringify(action.payload));
       return { ...state, skills: action.payload };
-    case "SET_DEPARTMENTS":
+    }
+    case "SET_DEPARTMENTS": {
+      localStorage.setItem("departments", JSON.stringify(action.payload));
       return { ...state, departments: action.payload };
-    case "ADD_EMPLOYEE":
-      return { ...state, employees: [...state.employees, action.payload] };
-    case "UPDATE_EMPLOYEE":
+    }
+    case "ADD_EMPLOYEE": {
+      const employees = [...state.employees, action.payload];
+      localStorage.setItem("employees", JSON.stringify(employees));
+      return { ...state, employees };
+    }
+    case "UPDATE_EMPLOYEE": {
+      const employees = state.employees.map((employee) => {
+        if (employee.employeeId === action.payload.employeeId) {
+          return action.payload;
+        }
+        return employee;
+      });
+      localStorage.setItem("employees", JSON.stringify(employees));
       return {
         ...state,
-        employees: state.employees.map((employee) => {
-          if (employee.employeeId === action.payload.employeeId) {
-            return action.payload;
-          }
-          return employee;
-        }),
+        employees,
       };
-    case "DELETE_EMPLOYEE":
+    }
+    case "DELETE_EMPLOYEE": {
+      const employees = state.employees.filter(
+        (employee) => employee.employeeId !== action.payload
+      );
+      localStorage.setItem("employees", JSON.stringify(employees));
       return {
         ...state,
-        employees: state.employees.filter(
-          (employee) => employee.employeeId !== action.payload
-        ),
+        employees,
       };
-    case "ADD_SKILL":
-      return { ...state, skills: [...state.skills, action.payload] };
-    default:
+    }
+    case "ADD_SKILL": {
+      const skills = [...state.skills, action.payload];
+      localStorage.setItem("skills", JSON.stringify(skills));
+      return { ...state, skills };
+    }
+    default: {
       return state;
+    }
   }
 };
 
