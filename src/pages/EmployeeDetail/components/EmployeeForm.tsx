@@ -116,10 +116,6 @@ export default function EmployeeForm({
               className="hover-btn primary submit"
               type="submit"
               value="Save"
-              onClick={(e) => {
-                e.preventDefault();
-                console.log(e);
-              }}
             />
           </div>
           <div className="back">

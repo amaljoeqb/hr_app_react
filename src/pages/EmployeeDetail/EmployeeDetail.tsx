@@ -25,7 +25,6 @@ export default function EmployeePage() {
             </div>
             <span className="heading-text">Employee</span>
           </h2>
-          <span className="material-symbols-outlined close-popup"> close </span>
         </div>
         <EmployeeForm
           employee={
