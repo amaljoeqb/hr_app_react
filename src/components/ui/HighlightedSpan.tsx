@@ -6,10 +6,7 @@ export interface HighlightedSpanProps {
 export default function HighlightedSpan({
   text,
   searchTerm,
-}: {
-  text: string | number;
-  searchTerm: string;
-}) {
+}: HighlightedSpanProps) {
   if (typeof text !== "string" && typeof text !== "number") {
     return <span>{text}</span>;
   }
