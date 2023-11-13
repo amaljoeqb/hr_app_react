@@ -8,6 +8,7 @@ import PaginationControl from "./components/PaginationControl";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
+import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,55 +50,58 @@ export function EmployeeListing() {
   }, [searchTerm, selectedSkills, employees, sort]);
 
   return (
-    <main className="card">
-      <h1>Employees</h1>
-      <div className="emp-listing-header">
-        <div className="start-section">
-          <SearchInput
-            onChange={(text) => {
-              setSearchTerm(text);
-            }}
-          />
-        </div>
-        <div className="next-section">
-          <div className="filters-section">
-            <SkillsFilter
-              skills={skills}
-              employees={employees}
-              selectedSkills={selectedSkills}
-              onChange={(skills) => {
-                setSelectedSkills(skills);
-                setPage(1);
+    <>
+      <main className="card">
+        <h1>Employees</h1>
+        <div className="emp-listing-header">
+          <div className="start-section">
+            <SearchInput
+              onChange={(text) => {
+                setSearchTerm(text);
               }}
             />
           </div>
-          <HoverButton
-            onClick={() => {
-              navigate("/employee");
-            }}
-          >
-            <span className="material-symbols-outlined"> add_circle </span>
-            <p>Create</p>
-          </HoverButton>
+          <div className="next-section">
+            <div className="filters-section">
+              <SkillsFilter
+                skills={skills}
+                employees={employees}
+                selectedSkills={selectedSkills}
+                onChange={(skills) => {
+                  setSelectedSkills(skills);
+                  setPage(1);
+                }}
+              />
+            </div>
+            <HoverButton
+              onClick={() => {
+                navigate("/employee");
+              }}
+            >
+              <span className="material-symbols-outlined"> add_circle </span>
+              <p>Create</p>
+            </HoverButton>
+          </div>
         </div>
-      </div>
-      <div className="table-container">
-        <EmployeeTable
-          employees={filteredEmployees.slice(page * 10 - 10, page * 10)}
-          searchTerm={searchTerm}
-          sort={sort}
-          onChangeSort={(sort) => {
-            setSort(sort);
+        <div className="table-container">
+          <EmployeeTable
+            employees={filteredEmployees.slice(page * 10 - 10, page * 10)}
+            searchTerm={searchTerm}
+            sort={sort}
+            onChangeSort={(sort) => {
+              setSort(sort);
+            }}
+          />
+        </div>
+        <PaginationControl
+          current={page}
+          total={Math.ceil(filteredEmployees.length / 10)}
+          onChange={(page) => {
+            setPage(page);
           }}
         />
-      </div>
-      <PaginationControl
-        current={page}
-        total={Math.ceil(filteredEmployees.length / 10)}
-        onChange={(page) => {
-          setPage(page);
-        }}
-      />
-    </main>
+      </main>
+      {/* <EmployeeDeletePopup employeeId={1} onClose={() => {}} /> */}
+    </>
   );
 }

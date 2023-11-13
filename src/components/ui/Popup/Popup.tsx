@@ -9,7 +9,7 @@ export interface PopupPropsType {
 
 export default function Popup(props: PopupPropsType) {
   return (
-    <div className="popup confirmation-popup">
+    <div className="popup confirmation-popup show-popup">
       <section className="popup-content">
         <div className="popup-header">
           <h2>{props.title}</h2>

@@ -1,3 +1,4 @@
+import { Table } from "../../../components";
 import { Employee } from "../../../models";
 import EmployeeRow from "./EmployeeRow";
 
@@ -17,138 +18,38 @@ export default function EmployeeTable({
   sort,
   onChangeSort,
 }: EmployeeTableProps) {
-  function getTitleClassName(key: string) {
-    if (sort.key === key) {
-      return `column-title ${sort.order}`;
-    }
-    return "column-title";
-  }
-
-  function onClickTitle(key: string) {
-    if (sort.key === key) {
-      onChangeSort({
-        key,
-        order: sort.order === "asc" ? "desc" : "asc",
-      });
-    } else {
-      onChangeSort({
-        key,
-        order: "asc",
-      });
-    }
-  }
-
   return (
-    <table className="emp-table">
-      <colgroup>
-        <col style={{ width: "5%" }} />
-        <col style={{ width: "20%" }} />
-        <col style={{ width: "15%" }} />
-        <col style={{ width: "15%" }} />
-        <col style={{ width: "40%" }} />
-        <col style={{ width: "5%" }} />
-      </colgroup>
-      <thead>
-        <tr className="header-row">
-          <th>
-            <div className="header-container">
-              <h3
-                className={getTitleClassName("employeeId")}
-                data-key="employeeId"
-                onClick={() => onClickTitle("employeeId")}
-              >
-                <button>ID</button>
-                <span className="sort-icon">
-                  <span className="material-symbols-outlined up">
-                    keyboard_arrow_up
-                  </span>
-                  <span className="material-symbols-outlined down">
-                    keyboard_arrow_down
-                  </span>
-                </span>
-              </h3>
-            </div>
-          </th>
-
-          <th>
-            <div className="header-container">
-              <h3
-                className={getTitleClassName("name")}
-                data-key="name"
-                onClick={() => onClickTitle("name")}
-              >
-                <button>Name</button>
-                <span className="sort-icon">
-                  <span className="material-symbols-outlined up">
-                    keyboard_arrow_up
-                  </span>
-                  <span className="material-symbols-outlined down">
-                    keyboard_arrow_down
-                  </span>
-                </span>
-              </h3>
-            </div>
-          </th>
-
-          <th>
-            <div className="header-container">
-              <h3
-                className={getTitleClassName("designation")}
-                data-key="designation"
-                onClick={() => onClickTitle("designation")}
-              >
-                <button>Designation</button>
-                <span className="sort-icon">
-                  <span className="material-symbols-outlined up">
-                    keyboard_arrow_up
-                  </span>
-                  <span className="material-symbols-outlined down">
-                    keyboard_arrow_down
-                  </span>
-                </span>
-              </h3>
-            </div>
-          </th>
-
-          <th>
-            <div className="header-container">
-              <h3
-                className={getTitleClassName("department")}
-                data-key="department"
-                onClick={() => onClickTitle("department")}
-              >
-                <button>Department</button>
-                <span className="sort-icon">
-                  <span className="material-symbols-outlined up">
-                    keyboard_arrow_up
-                  </span>
-                  <span className="material-symbols-outlined down">
-                    keyboard_arrow_down
-                  </span>
-                </span>
-              </h3>
-            </div>
-          </th>
-
-          <th>
-            <div className="header-container">
-              <h3 className="column-title no-click" data-key="skills">
-                Skills
-              </h3>
-            </div>
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {employees.map((employee) => (
-          <EmployeeRow
-            key={employee.employeeId}
-            employee={employee}
-            searchTerm={searchTerm}
-          />
-        ))}
-      </tbody>
-    </table>
+    <Table
+      columns={[
+        { flex: 1, key: "employeeId", title: "ID", sortable: true },
+        { flex: 3, key: "name", title: "Name", sortable: true },
+        { flex: 2, key: "designation", title: "Designation", sortable: true },
+        { flex: 2, key: "department", title: "Department", sortable: true },
+        { flex: 3, key: "skills", title: "Skills", sortable: false },
+        { flex: 1, key: "actions", title: "", sortable: false },
+      ]}
+      sort={sort}
+      onClickColumnTitle={(key) => {
+        if (sort.key === key) {
+          onChangeSort({
+            key,
+            order: sort.order === "asc" ? "desc" : "asc",
+          });
+        } else {
+          onChangeSort({
+            key,
+            order: "asc",
+          });
+        }
+      }}
+    >
+      {employees.map((employee) => (
+        <EmployeeRow
+          key={employee.employeeId}
+          employee={employee}
+          searchTerm={searchTerm}
+        />
+      ))}
+    </Table>
   );
 }

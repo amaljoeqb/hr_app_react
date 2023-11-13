@@ -10,6 +10,7 @@ import { useAppContext } from "./store/app.context";
 import { useState, useEffect } from "react";
 import data from "./data.json";
 import { routes } from "./config";
+import EmployeeDeletePopup from "./pages/EmployeeListing/components/EmployeeDeletePopup";
 
 const router = createBrowserRouter(routes);
 
