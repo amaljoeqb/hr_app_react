@@ -46,7 +46,7 @@ export default function Table({
         <tr className="header-row">
           {columns.map((column) => {
             return (
-              <th>
+              <th key={column.key}>
                 <div className="header-container">
                   <h3
                     className={getTitleClassName(column.key)}
