@@ -1,10 +1,10 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
-import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
 import { useAppContext } from "../../../store/app.context";
 import { useNavigate } from "react-router-dom";
+import { employeeSchema } from "../../../config";
 
 export interface EmployeeFormProps {
   employee: Employee;
@@ -32,19 +32,7 @@ export default function EmployeeForm({
         actions.setSubmitting(false);
         navigate("/");
       }}
-      validationSchema={Yup.object({
-        employeeId: Yup.number().required("Required"),
-        name: Yup.string().required("Required"),
-        email: Yup.string().email("Invalid email address").required("Required"),
-        salary: Yup.number()
-          .min(0, "Salary can't be negative")
-          .required("Required"),
-        designation: Yup.string().required("Required"),
-        department: Yup.object().required("Required"),
-        dateOfBirth: Yup.date().required("Required"),
-        joiningDate: Yup.date().required("Required"),
-        skills: Yup.array().required("Required"),
-      })}
+      validationSchema={employeeSchema}
     >
       <Form id="emp-form">
         <div className="row">
