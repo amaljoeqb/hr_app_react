@@ -1,32 +1,34 @@
 import React from "react";
 
-export interface Column {
-  key: string;
+export type ColumnKey<T> = keyof T | "actions";
+
+export interface Column<T> {
+  key: ColumnKey<T>;
   title: string;
   flex: number;
   sortable: boolean;
 }
 
-export interface TableProps {
-  columns: Column[];
+export interface TableProps<T> {
+  columns: Column<T>[];
   sort?: {
     key: string;
     order: "asc" | "desc";
   };
-  onClickColumnTitle?: (key: string) => void;
+  onClickSort?: (key: keyof T) => void;
 }
 
-export default function Table({
+export default function Table<T>({
   columns,
   sort,
-  onClickColumnTitle,
+  onClickSort,
   children,
-}: React.PropsWithChildren<TableProps>) {
+}: React.PropsWithChildren<TableProps<T>>) {
   const totalFlex = columns.reduce((total, column) => {
     return total + column.flex;
   }, 0);
 
-  function getTitleClassName(key: string, sortable: boolean) {
+  function getTitleClassName(key: ColumnKey<T>, sortable: boolean) {
     if (!sortable) {
       return "column-title no-click";
     }
@@ -49,14 +51,18 @@ export default function Table({
         <tr className="header-row">
           {columns.map((column) => {
             return (
-              <th key={column.key}>
+              <th key={column.key.toString()}>
                 <div className="header-container">
                   <h3
                     className={getTitleClassName(column.key, column.sortable)}
                     data-key={column.key}
                     onClick={() => {
-                      if (onClickColumnTitle) {
-                        onClickColumnTitle(column.key);
+                      if (
+                        column.sortable &&
+                        onClickSort &&
+                        column.key !== "actions"
+                      ) {
+                        onClickSort(column.key as keyof T);
                       }
                     }}
                   >

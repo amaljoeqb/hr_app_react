@@ -6,10 +6,10 @@ export interface EmployeeTableProps {
   employees: Employee[];
   searchTerm: string;
   sort: {
-    key: string;
+    key: keyof Employee;
     order: "asc" | "desc";
   };
-  onChangeSort: (sort: { key: string; order: "asc" | "desc" }) => void;
+  onChangeSort: (sort: { key: keyof Employee; order: "asc" | "desc" }) => void;
 }
 
 export default function EmployeeTable({
@@ -19,7 +19,7 @@ export default function EmployeeTable({
   onChangeSort,
 }: EmployeeTableProps) {
   return (
-    <Table
+    <Table<Employee>
       columns={[
         { flex: 1, key: "employeeId", title: "ID", sortable: true },
         { flex: 3, key: "name", title: "Name", sortable: true },
@@ -29,7 +29,7 @@ export default function EmployeeTable({
         { flex: 1, key: "actions", title: "", sortable: false },
       ]}
       sort={sort}
-      onClickColumnTitle={(key) => {
+      onClickSort={(key) => {
         if (sort.key === key) {
           onChangeSort({
             key,
