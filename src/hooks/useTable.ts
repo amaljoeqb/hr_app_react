@@ -34,7 +34,7 @@ export default function useTable<T>(props: TableProps<T>) {
     );
     setDisplayData(filtered);
     setPage(1);
-  }, [searchTerm, selectedSkills, data, sort, searchFunction, sortFunction]);
+  }, [searchTerm, selectedSkills, data, sort]);
 
   return {
     searchTerm,
