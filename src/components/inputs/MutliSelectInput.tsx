@@ -32,6 +32,7 @@ export default function MultiSelectInput({
       <Select
         {...field}
         {...props}
+        menuPlacement={"auto"}
         isMulti={true}
         options={options}
         value={getValue()}

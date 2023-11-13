@@ -30,6 +30,7 @@ export default function SelectInput({
       <Select
         {...field}
         {...props}
+        menuPlacement={"auto"}
         isMulti={false}
         options={options}
         value={getValue()}
