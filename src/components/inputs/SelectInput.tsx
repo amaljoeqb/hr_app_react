@@ -1,7 +1,5 @@
 import { useField } from "formik";
 import Select from "react-select";
-import MultiValue from "react-select/dist/declarations/src/components/MultiValue";
-import SingleValue from "react-select/dist/declarations/src/components/SingleValue";
 
 // select using formik and react-select
 export default function SelectInput({
