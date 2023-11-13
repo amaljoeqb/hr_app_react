@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import Select from "react-select";
 
-export interface SelectInputProps {
+export interface MultiSelectInputProps {
   label: string;
   name: string;
   required?: boolean;
@@ -11,18 +11,20 @@ export interface SelectInputProps {
   id: string;
 }
 
-export default function SelectInput({
+export default function MultiSelectInput({
   label,
   options,
   id,
   ...props
-}: SelectInputProps) {
+}: MultiSelectInputProps) {
   const [{ onChange: fieldOnChange, ...field }, meta] = useField(props.name);
 
   function getValue() {
     return field.value
-      ? options.find((option) => option.value[id] === field.value[id])
-      : undefined;
+      ? options.filter((option) =>
+          field.value.map((v: any) => v[id]).includes(option.value[id])
+        )
+      : [];
   }
   return (
     <div id={`${props.name}-field`} className="field">
@@ -30,14 +32,14 @@ export default function SelectInput({
       <Select
         {...field}
         {...props}
-        isMulti={false}
+        isMulti={true}
         options={options}
         value={getValue()}
         onChange={(option) => {
           fieldOnChange({
             target: {
               name: props.name,
-              value: option?.value,
+              value: option.map((item) => item.value),
             },
           });
         }}

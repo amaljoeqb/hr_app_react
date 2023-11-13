@@ -4,9 +4,18 @@ import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
 
 export default function EmployeeDetail() {
-  const employeeId = Number(useParams<{ employeeId: string }>().employeeId);
+  const employeeIdParam = useParams<{ employeeId: string }>().employeeId;
   const appContext = useAppContext();
   const { employees, skills, departments } = appContext.state;
+  let employee: Employee | undefined = undefined;
+
+  if (employeeIdParam) {
+    const employeeId = parseInt(employeeIdParam);
+    employee = employees.find(
+      (employee) => employee.employeeId === employeeId
+    ) as Employee;
+  }
+
   return (
     <div className="popup emp-popup show-popup">
       <section className="popup-content">
@@ -27,11 +36,7 @@ export default function EmployeeDetail() {
           </h2>
         </div>
         <EmployeeForm
-          employee={
-            employees.find(
-              (employee) => employee.employeeId === employeeId
-            ) as Employee
-          }
+          employee={employee}
           skills={skills}
           departments={departments}
         />

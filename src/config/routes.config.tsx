@@ -6,6 +6,7 @@ import ErrorPage from "../pages/Error/ErrorScreen";
 const routesConfig: RouteObject[] = [
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
   { path: "/employee/:employeeId", element: <EmployeeDetail /> },
+  { path: "/employee/", element: <EmployeeDetail /> },
 ];
 
 export default routesConfig;

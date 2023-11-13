@@ -5,9 +5,10 @@ import { SelectInput } from "../../../components";
 import { useAppContext } from "../../../store/app.context";
 import { useNavigate } from "react-router-dom";
 import { employeeSchema } from "../../../config";
+import MultiSelectInput from "../../../components/inputs/MutliSelectInput";
 
 export interface EmployeeFormProps {
-  employee: Employee;
+  employee: Employee | undefined;
   skills: Skill[];
   departments: Department[];
 }
@@ -22,7 +23,7 @@ export default function EmployeeForm({
 
   return (
     <Formik
-      initialValues={employee}
+      initialValues={employee ?? {}}
       onSubmit={(values, actions) => {
         appContext.dispatch({
           type: "UPDATE_EMPLOYEE",
@@ -86,12 +87,11 @@ export default function EmployeeForm({
           />
         </div>
         <div className="row">
-          <SelectInput
+          <MultiSelectInput
             label="Skills"
             name="skills"
             id="skillId"
             required={true}
-            isMulti={true}
             options={skills.map((skill) => ({
               value: skill,
               label: skill.skill,
