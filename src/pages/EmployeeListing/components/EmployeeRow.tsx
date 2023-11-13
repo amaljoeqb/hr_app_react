@@ -2,24 +2,20 @@ import { Employee } from "../../../models";
 import { skillsToString } from "../../../services/helpers";
 import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmployeeActionMenu from "./EmployeeActionMenu";
 
 export interface EmployeeRowProps {
   employee: Employee;
   searchTerm: string;
-  onClickEdit: () => void;
-  onClickDelete: () => void;
-  onClickView: () => void;
 }
 
 export default function EmployeeRow({
   employee,
   searchTerm,
-  onClickEdit,
-  onClickDelete,
-  onClickView,
 }: EmployeeRowProps) {
+  const navigate = useNavigate();
+
   return (
     <tr key={employee.employeeId} className="emp-row">
       <td className="check-cell">
@@ -32,7 +28,12 @@ export default function EmployeeRow({
       </td>
       <td>
         <div className="name-container">
-          <div className="name" onClick={onClickView}>
+          <div
+            className="name"
+            onClick={() => {
+              navigate(`/employee/${employee.employeeId}`);
+            }}
+          >
             <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
           </div>
           <p className="email">{employee.email}</p>
@@ -54,7 +55,14 @@ export default function EmployeeRow({
         <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
       </td>
       <td className="overflow">
-        <EmployeeActionMenu onDelete={onClickDelete} onEdit={onClickEdit} />
+        <EmployeeActionMenu
+          onDelete={() => {
+            navigate(`/employee/${employee.employeeId}`);
+          }}
+          onEdit={() => {
+            navigate(`/employee/${employee.employeeId}`);
+          }}
+        />
       </td>
     </tr>
   );

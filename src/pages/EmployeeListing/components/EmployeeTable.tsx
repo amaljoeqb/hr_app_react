@@ -146,9 +146,6 @@ export default function EmployeeTable({
             key={employee.employeeId}
             employee={employee}
             searchTerm={searchTerm}
-            onClickEdit={() => {}}
-            onClickDelete={() => {}}
-            onClickView={() => {}}
           />
         ))}
       </tbody>

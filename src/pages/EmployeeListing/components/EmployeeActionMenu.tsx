@@ -27,10 +27,14 @@ export default function EmployeeActionMenu(props: EmployeeActionMenuProps) {
         <div className="action-menu">
           <ul>
             <li>
-              <button className="edit-btn">Edit</button>
+              <button className="edit-btn" onClick={props.onEdit}>
+                Edit
+              </button>
             </li>
             <li>
-              <button className="delete-btn">Delete</button>
+              <button className="delete-btn" onClick={props.onDelete}>
+                Delete
+              </button>
             </li>
           </ul>
         </div>
