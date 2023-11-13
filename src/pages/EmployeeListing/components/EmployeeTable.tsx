@@ -25,7 +25,6 @@ export default function EmployeeTable({
   }
 
   function onClickTitle(key: string) {
-    console.log("onClickTitle", key);
     if (sort.key === key) {
       onChangeSort({
         key,

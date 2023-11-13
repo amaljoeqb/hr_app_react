@@ -24,7 +24,6 @@ export default function EmployeeForm({
     <Formik
       initialValues={employee}
       onSubmit={(values, actions) => {
-        console.log(values);
         appContext.dispatch({
           type: "UPDATE_EMPLOYEE",
           payload: values,

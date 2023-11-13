@@ -33,7 +33,6 @@ export function highlightSearchTerm(text: string, searchTerm: string) {
             textString.slice(endIndex);
         return highlightedText;
     } catch (e) {
-        console.log(e);
         return text;
     }
 }

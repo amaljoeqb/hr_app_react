@@ -85,7 +85,6 @@ export function EmployeeListing() {
           sort={sort}
           onChangeSort={(sort) => {
             setSort(sort);
-            console.log(sort);
           }}
         />
       </div>
