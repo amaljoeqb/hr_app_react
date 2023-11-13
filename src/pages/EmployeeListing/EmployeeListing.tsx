@@ -3,13 +3,11 @@ import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
 import SkillsFilter from "./components/SkillsFilter";
 import { Employee } from "../../models";
-import {
-  searchEmployees,
-  sortEmployees,
-} from "../../services/helpers";
+import { searchEmployees, sortEmployees } from "../../services/helpers";
 import PaginationControl from "./components/PaginationControl";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
+import { useNavigate } from "react-router-dom";
 
 export function EmployeeListing() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,6 +20,7 @@ export function EmployeeListing() {
   });
   const appContext = useAppContext();
   const { employees, skills } = appContext.state;
+  const navigate = useNavigate();
 
   useEffect(() => {
     let filtered = searchEmployees(employees, searchTerm);
@@ -72,7 +71,11 @@ export function EmployeeListing() {
               }}
             />
           </div>
-          <HoverButton>
+          <HoverButton
+            onClick={() => {
+              navigate("/employee");
+            }}
+          >
             <span className="material-symbols-outlined"> add_circle </span>
             <p>Create</p>
           </HoverButton>
