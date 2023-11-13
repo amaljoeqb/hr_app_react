@@ -3,15 +3,22 @@ import { skillsToString } from "../../../services/helpers";
 import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
 import { Link } from "react-router-dom";
+import EmployeeActionMenu from "./EmployeeActionMenu";
 
 export interface EmployeeRowProps {
   employee: Employee;
   searchTerm: string;
+  onClickEdit: () => void;
+  onClickDelete: () => void;
+  onClickView: () => void;
 }
 
 export default function EmployeeRow({
   employee,
   searchTerm,
+  onClickEdit,
+  onClickDelete,
+  onClickView,
 }: EmployeeRowProps) {
   return (
     <tr key={employee.employeeId} className="emp-row">
@@ -25,9 +32,9 @@ export default function EmployeeRow({
       </td>
       <td>
         <div className="name-container">
-          <Link to={`employee/${employee.employeeId}`} className="name">
+          <div className="name" onClick={onClickView}>
             <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
-          </Link>
+          </div>
           <p className="email">{employee.email}</p>
         </div>
       </td>
@@ -47,21 +54,7 @@ export default function EmployeeRow({
         <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
       </td>
       <td className="overflow">
-        <div className="action-container">
-          <button className="action-btn">
-            <span className="material-symbols-outlined"> more_horiz </span>
-          </button>
-          <div className="action-menu">
-            <ul>
-              <li>
-                <button className="edit-btn"> Edit </button>
-              </li>
-              <li>
-                <button className="delete-btn">Delete</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <EmployeeActionMenu onDelete={onClickDelete} onEdit={onClickEdit} />
       </td>
     </tr>
   );
