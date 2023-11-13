@@ -30,10 +30,17 @@ export default function EmployeeForm({
         }
       }
       onSubmit={(values, actions) => {
-        appContext.dispatch({
-          type: "UPDATE_EMPLOYEE",
-          payload: values,
-        });
+        if (employee) {
+          appContext.dispatch({
+            type: "UPDATE_EMPLOYEE",
+            payload: values,
+          });
+        } else {
+          appContext.dispatch({
+            type: "ADD_EMPLOYEE",
+            payload: values,
+          });
+        }
         actions.setSubmitting(false);
         navigate("/");
       }}
