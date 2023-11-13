@@ -1,16 +1,18 @@
 import { useField } from "formik";
 
-export default function TextInput({
-  label,
-  ...props
-}: {
+export interface TextInputProps {
   label: string;
   name: string;
   required?: boolean;
   placeholder?: string;
   disabled?: boolean;
   type?: string;
-}) {
+}
+
+export default function TextInput({
+  label,
+  ...props
+}: TextInputProps) {
   const [field, meta] = useField(props.name);
   return (
     <div id={`${props.name}-field`} className="field">
