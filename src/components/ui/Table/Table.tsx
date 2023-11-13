@@ -4,7 +4,7 @@ export interface Column {
   key: string;
   title: string;
   flex: number;
-  sortable?: boolean;
+  sortable: boolean;
 }
 
 export interface TableProps {
@@ -26,7 +26,10 @@ export default function Table({
     return total + column.flex;
   }, 0);
 
-  function getTitleClassName(key: string) {
+  function getTitleClassName(key: string, sortable: boolean) {
+    if (!sortable) {
+      return "column-title no-click";
+    }
     if (sort?.key === key) {
       return `column-title ${sort.order}`;
     }
@@ -49,7 +52,7 @@ export default function Table({
               <th key={column.key}>
                 <div className="header-container">
                   <h3
-                    className={getTitleClassName(column.key)}
+                    className={getTitleClassName(column.key, column.sortable)}
                     data-key={column.key}
                     onClick={() => {
                       if (onClickColumnTitle) {
