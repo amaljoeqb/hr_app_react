@@ -6,6 +6,7 @@ import { useAppContext } from "../../../store/app.context";
 import { useNavigate } from "react-router-dom";
 import { employeeSchema } from "../../../config";
 import MultiSelectInput from "../../../components/inputs/MutliSelectInput";
+import { getNextEmployeeId } from "../../../services/helpers";
 
 export interface EmployeeFormProps {
   employee: Employee | undefined;
@@ -23,7 +24,11 @@ export default function EmployeeForm({
 
   return (
     <Formik
-      initialValues={employee ?? {}}
+      initialValues={
+        employee ?? {
+          employeeId: getNextEmployeeId(appContext.state.employees),
+        }
+      }
       onSubmit={(values, actions) => {
         appContext.dispatch({
           type: "UPDATE_EMPLOYEE",
