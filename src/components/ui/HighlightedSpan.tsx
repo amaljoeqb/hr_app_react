@@ -1,3 +1,7 @@
+export interface HighlightedSpanProps {
+  text: string | number;
+  searchTerm: string;
+}
 
 export default function HighlightedSpan({
   text,

@@ -26,17 +26,6 @@ export default function SelectInput({
         {...field}
         {...props}
         options={options}
-        styles={{
-          control: (provided, state) => ({
-            ...provided,
-            border: state.isFocused
-              ? "1px solid #000"
-              : "1px solid var(--light-grey)",
-            boxShadow: "var(--light-shadow)",
-            borderRadius: "8px",
-            color: "red",
-          }),
-        }}
         value={
           field.value instanceof Array
             ? options.filter((option) =>
