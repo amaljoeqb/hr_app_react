@@ -3,7 +3,7 @@ import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
 
-export default function EmployeePage() {
+export default function EmployeeDetail() {
   const employeeId = Number(useParams<{ employeeId: string }>().employeeId);
   const appContext = useAppContext();
   const { employees, skills, departments } = appContext.state;

@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
 import SkillsFilter from "./components/SkillsFilter";
-import { Employee, Skill } from "../../models";
+import { Employee } from "../../models";
 import {
-  getData,
   searchEmployees,
   sortEmployees,
 } from "../../services/helpers";

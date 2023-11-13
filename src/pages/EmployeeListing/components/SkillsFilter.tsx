@@ -4,17 +4,19 @@ import ClickAwayListener from "../../../components/eventListeners/ClickAwayListe
 
 type SkillOption = Skill & { count: number; checked: boolean };
 
+export interface SkillsFilterProps {
+  skills: Skill[];
+  employees: Employee[];
+  selectedSkills: number[];
+  onChange?: (text: number[]) => void;
+}
+
 export default function SkillsFilter({
   skills,
   employees,
   selectedSkills,
   onChange,
-}: {
-  skills: Skill[];
-  employees: Employee[];
-  selectedSkills: number[];
-  onChange?: (text: number[]) => void;
-}) {
+}: SkillsFilterProps) {
   const [isActive, setIsActive] = useState(false);
   const [options, setOptions] = useState<SkillOption[]>([]);
   const [searchTerm, setSearchTerm] = useState("");

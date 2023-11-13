@@ -6,15 +6,17 @@ import { SelectInput } from "../../../components";
 import { useAppContext } from "../../../store/app.context";
 import { useNavigate } from "react-router-dom";
 
+export interface EmployeeFormProps {
+  employee: Employee;
+  skills: Skill[];
+  departments: Department[];
+}
+
 export default function EmployeeForm({
   employee,
   skills,
   departments,
-}: {
-  employee: Employee;
-  skills: Skill[];
-  departments: Department[];
-}) {
+}: EmployeeFormProps) {
   const navigate = useNavigate();
   const appContext = useAppContext();
 

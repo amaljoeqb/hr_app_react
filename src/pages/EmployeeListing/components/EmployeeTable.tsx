@@ -1,12 +1,7 @@
 import { Employee } from "../../../models";
 import EmployeeRow from "./EmployeeRow";
 
-export default function EmployeeTable({
-  employees,
-  searchTerm,
-  sort,
-  onChangeSort,
-}: {
+export interface EmployeeTableProps {
   employees: Employee[];
   searchTerm: string;
   sort: {
@@ -14,7 +9,14 @@ export default function EmployeeTable({
     order: "asc" | "desc";
   };
   onChangeSort: (sort: { key: string; order: "asc" | "desc" }) => void;
-}) {
+}
+
+export default function EmployeeTable({
+  employees,
+  searchTerm,
+  sort,
+  onChangeSort,
+}: EmployeeTableProps) {
   function getTitleClassName(key: string) {
     if (sort.key === key) {
       return `column-title ${sort.order}`;

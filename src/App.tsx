@@ -9,7 +9,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { EmployeeListing } from "./pages/EmployeeListing/EmployeeListing";
 import EmployeeForm from "./pages/EmployeeDetail/components/EmployeeForm";
 import ErrorPage from "./pages/Error/ErrorScreen";
-import EmployeePage from "./pages/EmployeeDetail/EmployeeDetail";
+import EmployeeDetail from "./pages/EmployeeDetail/EmployeeDetail";
 import { AppProvider, useAppContext } from "./store/app.context";
 import { getData } from "./services/helpers";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ import data from "./data.json";
 
 const router = createBrowserRouter([
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
-  { path: "/employee/:employeeId", element: <EmployeePage /> },
+  { path: "/employee/:employeeId", element: <EmployeeDetail /> },
 ]);
 
 function App() {

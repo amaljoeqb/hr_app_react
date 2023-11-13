@@ -1,12 +1,14 @@
+export interface PaginationControlProps {
+  current: number;
+  total: number;
+  onChange: (page: number) => void;
+}
+
 export default function PaginationControl({
   current,
   total,
   onChange,
-}: {
-  current: number;
-  total: number;
-  onChange: (page: number) => void;
-}) {
+}: PaginationControlProps) {
   const pages = Array.from({ length: total }, (_, i) => i + 1);
   return (
     <nav className="pagination-container">
@@ -36,9 +38,7 @@ export default function PaginationControl({
                 id="page-1"
                 data-num="1"
                 className={
-                  current === page
-                    ? "page-number hover-btn active"
-                    : "page-number hover-btn"
+                  `page-number hover-btn ${page === current ? "active" : ""}}`
                 }
                 onClick={() => onChange(page)}
               >
