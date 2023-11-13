@@ -10,6 +10,7 @@ export default function PaginationControl({
   onChange,
 }: PaginationControlProps) {
   const pages = Array.from({ length: total }, (_, i) => i + 1);
+  console.log({ pages, current });
   return (
     <nav className="pagination-container">
       <div className="pagination">
@@ -37,9 +38,9 @@ export default function PaginationControl({
               <button
                 id="page-1"
                 data-num="1"
-                className={
-                  `page-number hover-btn ${page === current ? "active" : ""}}`
-                }
+                className={`page-number hover-btn ${
+                  page === current ? "active" : ""
+                }`}
                 onClick={() => onChange(page)}
               >
                 {page}
