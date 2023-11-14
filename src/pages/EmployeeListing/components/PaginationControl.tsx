@@ -10,7 +10,6 @@ export default function PaginationControl({
   onChange,
 }: PaginationControlProps) {
   const pages = Array.from({ length: total }, (_, i) => i + 1);
-  console.log({ pages, current });
   return (
     <nav className="pagination-container">
       <div className="pagination">

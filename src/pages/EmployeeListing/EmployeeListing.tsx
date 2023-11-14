@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
-import SkillsFilter from "./components/SkillsFilter";
-import { Employee } from "../../models";
-import { searchEmployees, sortEmployees } from "../../services/helpers";
 import PaginationControl from "./components/PaginationControl";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
-import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
-import useTable from "../../hooks/useTable";
 import useEmployeeTable from "./hooks/useEmployeeTable";
+import SkillsFilter from "./components/SkillsFilter";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -27,6 +22,7 @@ export function EmployeeListing() {
     setSort,
     page,
     setPage,
+    filteredData,
   } = table;
 
   return (
@@ -43,7 +39,7 @@ export function EmployeeListing() {
           </div>
           <div className="next-section">
             <div className="filters-section">
-              {/* <SkillsFilter
+              <SkillsFilter
                 skills={skills}
                 employees={employees}
                 selectedSkills={selectedSkills}
@@ -51,7 +47,7 @@ export function EmployeeListing() {
                   setSelectedSkills(skills);
                   setPage(1);
                 }}
-              /> */}
+              />
             </div>
             <HoverButton
               onClick={() => {
@@ -65,7 +61,7 @@ export function EmployeeListing() {
         </div>
         <div className="table-container">
           <EmployeeTable
-            employees={displayData.slice(page * 10 - 10, page * 10)}
+            employees={displayData}
             searchTerm={searchTerm}
             sort={sort}
             onChangeSort={(sort) => {
@@ -75,7 +71,7 @@ export function EmployeeListing() {
         </div>
         <PaginationControl
           current={page}
-          total={Math.ceil(displayData.length / 10)}
+          total={Math.ceil(filteredData.length / 10)}
           onChange={(page) => {
             setPage(page);
           }}

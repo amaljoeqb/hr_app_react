@@ -43,7 +43,10 @@ export default function Table<T>({
       <colgroup>
         {columns.map((column) => {
           return (
-            <col style={{ width: `${(column.flex / totalFlex) * 100}%` }} />
+            <col
+              key={column.key.toString()}
+              style={{ width: `${(column.flex / totalFlex) * 100}%` }}
+            />
           );
         })}
       </colgroup>
