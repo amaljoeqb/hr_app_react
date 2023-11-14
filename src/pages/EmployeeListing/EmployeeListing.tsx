@@ -11,7 +11,6 @@ export function EmployeeListing() {
   const appContext = useAppContext();
   const { employees, skills } = appContext.state;
   const navigate = useNavigate();
-  const table = useEmployeeTable(employees);
   const {
     displayData,
     selectedSkills,
@@ -23,7 +22,7 @@ export function EmployeeListing() {
     page,
     setPage,
     filteredData,
-  } = table;
+  } = useEmployeeTable(employees);
 
   return (
     <>
