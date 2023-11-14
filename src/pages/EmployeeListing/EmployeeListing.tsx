@@ -8,7 +8,7 @@ import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useQuery } from "../../hooks";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -28,9 +28,7 @@ export function EmployeeListing() {
   } = useEmployeeTable(employees);
 
   const urlParams = useQuery();
-  const deleteEmployeeId = useMemo(() => {
-    return urlParams.get("delete");
-  }, [urlParams]);
+  const deleteEmployeeId = urlParams.get("delete");
 
   return (
     <>
