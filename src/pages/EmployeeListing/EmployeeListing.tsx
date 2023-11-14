@@ -6,6 +6,9 @@ import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
 import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
+import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
+import { useQuery } from "../../hooks";
+import { useMemo } from "react";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -23,6 +26,12 @@ export function EmployeeListing() {
     setPage,
     filteredData,
   } = useEmployeeTable(employees);
+
+  //get url params with router
+  const urlParams = useQuery();
+  const deleteEmployeeId = useMemo(() => {
+    return urlParams.get("delete");
+  }, [urlParams]);
 
   return (
     <>
@@ -76,7 +85,14 @@ export function EmployeeListing() {
           }}
         />
       </main>
-      {/* <EmployeeDeletePopup employeeId={1} onClose={() => {}} /> */}
+      {deleteEmployeeId && (
+        <EmployeeDeletePopup
+          employeeId={parseInt(deleteEmployeeId)}
+          onClose={() => {
+            navigate("/");
+          }}
+        />
+      )}
     </>
   );
 }

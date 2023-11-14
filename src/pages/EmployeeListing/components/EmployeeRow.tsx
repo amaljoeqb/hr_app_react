@@ -57,7 +57,7 @@ export default function EmployeeRow({
       <td className="overflow">
         <EmployeeActionMenu
           onDelete={() => {
-            navigate(`/employee/${employee.employeeId}`);
+            navigate(`/?delete=${employee.employeeId}`);
           }}
           onEdit={() => {
             navigate(`/employee/${employee.employeeId}`);
