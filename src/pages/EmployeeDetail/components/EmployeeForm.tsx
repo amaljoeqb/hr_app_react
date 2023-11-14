@@ -52,8 +52,8 @@ export default function EmployeeForm({
             label="Employee ID"
             name="employeeId"
             type="number"
-            required={true}
-            disabled={true}
+            required
+            disabled
           />
           <TextInput label="Name" name="name" required={true} />
         </div>
@@ -63,7 +63,7 @@ export default function EmployeeForm({
             type="number"
             label="Salary"
             name="salary"
-            required={true}
+            required
           />
         </div>
         <div className="row">
@@ -71,13 +71,13 @@ export default function EmployeeForm({
             label="Designation"
             name="designation"
             type="text"
-            required={true}
+            required
           />
           <SelectInput
             label="Department"
             name="department"
             id="departmentId"
-            required={true}
+            required
             options={departments.map((department) => ({
               value: department,
               label: department.department,
@@ -89,13 +89,13 @@ export default function EmployeeForm({
             label="Date of birth"
             name="dateOfBirth"
             type="date"
-            required={true}
+            required
           />
           <TextInput
             label="Date of Joining"
             name="joiningDate"
             type="date"
-            required={true}
+            required
           />
         </div>
         <div className="row">
@@ -103,7 +103,7 @@ export default function EmployeeForm({
             label="Skills"
             name="skills"
             id="skillId"
-            required={true}
+            required
             options={skills.map((skill) => ({
               value: skill,
               label: skill.skill,

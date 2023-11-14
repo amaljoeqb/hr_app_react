@@ -33,7 +33,7 @@ export default function MultiSelectInput({
         {...field}
         {...props}
         menuPlacement={"auto"}
-        isMulti={true}
+        isMulti
         options={options}
         value={getValue()}
         onChange={(option) => {
