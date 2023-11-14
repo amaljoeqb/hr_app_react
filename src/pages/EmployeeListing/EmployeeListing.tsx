@@ -27,7 +27,6 @@ export function EmployeeListing() {
     filteredData,
   } = useEmployeeTable(employees);
 
-  //get url params with router
   const urlParams = useQuery();
   const deleteEmployeeId = useMemo(() => {
     return urlParams.get("delete");
