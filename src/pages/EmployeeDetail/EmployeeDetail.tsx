@@ -13,7 +13,7 @@ export default function EmployeeDetail() {
     const employeeId = parseInt(employeeIdParam);
     employee = employees.find(
       (employee) => employee.employeeId === employeeId
-    ) as Employee;
+    );
   }
 
   return (

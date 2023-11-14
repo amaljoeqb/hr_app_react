@@ -62,7 +62,7 @@ export default function Table<T>({
                         onClickSort &&
                         column.key !== "actions"
                       ) {
-                        onClickSort(column.key as keyof T);
+                        onClickSort(column.key);
                       }
                     }}
                   >
