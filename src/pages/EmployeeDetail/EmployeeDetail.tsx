@@ -4,16 +4,13 @@ import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
 
 export default function EmployeeDetail() {
-  const employeeIdParam = useParams<{ employeeId: string }>().employeeId;
+  const employeeId = useParams<{ employeeId: string }>().employeeId;
   const appContext = useAppContext();
   const { employees, skills, departments } = appContext.state;
   let employee: Employee | undefined = undefined;
 
-  if (employeeIdParam) {
-    const employeeId = parseInt(employeeIdParam);
-    employee = employees.find(
-      (employee) => employee.employeeId === employeeId
-    );
+  if (employeeId) {
+    employee = employees.find((employee) => employee.employeeId == employeeId);
   }
 
   return (

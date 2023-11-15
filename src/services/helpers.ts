@@ -160,8 +160,10 @@ export function sortEmployees(
 /**
  * Function to get next employee ID
  * @param {Employee[]} employees - Array of employees
+ * @returns {string} - Next employee ID
  */
 export function getNextEmployeeId(employees: Employee[]) {
   const employeeIds = employees.map((employee) => employee.employeeId);
-  return Math.max(...employeeIds) + 1;
+  const maxId = Math.max(...employeeIds.map((id) => parseInt(id)));
+  return (maxId + 1).toString();
 }

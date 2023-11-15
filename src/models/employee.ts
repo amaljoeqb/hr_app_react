@@ -1,7 +1,7 @@
 import { Department, Skill } from "./";
 
 export default interface Employee {
-    employeeId: number;
+    employeeId: string;
     name: string;
     email: string;
     designation: string;

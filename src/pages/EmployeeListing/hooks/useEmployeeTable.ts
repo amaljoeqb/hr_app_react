@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
 
