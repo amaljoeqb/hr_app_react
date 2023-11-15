@@ -13,7 +13,6 @@ export default function EmployeeDeletePopup({
   const appContext = useAppContext();
 
   function onDelete() {
-    console.log("delete employee", employeeId);
     appContext.dispatch({
       type: "DELETE_EMPLOYEE",
       payload: employeeId,

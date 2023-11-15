@@ -32,7 +32,6 @@ export default function useTable<T>(props: TableProps<T>) {
   }, [searchTerm, data, sort, searchFunction, sortFunction, filterFunction]);
 
   useEffect(() => {
-    console.log("useEffect");
     const start = (page - 1) * 10;
     const end = start + 10;
     setDisplayData(filteredData.slice(start, end));
