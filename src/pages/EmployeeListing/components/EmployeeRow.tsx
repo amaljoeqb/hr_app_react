@@ -35,6 +35,7 @@ export default function EmployeeRow({
             }}
           >
             <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
+            <span className="material-symbols-outlined"> visibility </span>
           </div>
           <p className="email">{employee.email}</p>
         </div>
