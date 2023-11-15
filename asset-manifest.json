@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hr_app_react/static/css/main.a0846a45.css",
+    "main.js": "/hr_app_react/static/js/main.479a50a3.js",
+    "index.html": "/hr_app_react/index.html",
+    "main.a0846a45.css.map": "/hr_app_react/static/css/main.a0846a45.css.map",
+    "main.479a50a3.js.map": "/hr_app_react/static/js/main.479a50a3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a0846a45.css",
+    "static/js/main.479a50a3.js"
+  ]
+}
