@@ -7,8 +7,8 @@ type SkillOption = Skill & { count: number; checked: boolean };
 export interface SkillsFilterProps {
   skills: Skill[];
   employees: Employee[];
-  selectedSkills: number[];
-  onChange?: (text: number[]) => void;
+  selectedSkills: string[];
+  onChange?: (text: string[]) => void;
 }
 
 export default function SkillsFilter({
@@ -21,7 +21,7 @@ export default function SkillsFilter({
   const [options, setOptions] = useState<SkillOption[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  function onClickSkillOption(skillId: number) {
+  function onClickSkillOption(skillId: string) {
     if (selectedSkills.includes(skillId)) {
       onChange?.(selectedSkills.filter((id) => id !== skillId));
     } else {

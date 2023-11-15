@@ -3,7 +3,7 @@ import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
 
 export default function useEmployeeTable(employees: Employee[]) {
-  const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
   const searchFunction = searchEmployees;
   const sortFunction = sortEmployees;
@@ -32,7 +32,7 @@ export default function useEmployeeTable(employees: Employee[]) {
  * @param {Employee[]} employees - Array of employees
  * @param {number[]} selectedSkills - Array of selected skill ids
  */
-function filterEmployees(employees: Employee[], selectedSkills: number[]) {
+function filterEmployees(employees: Employee[], selectedSkills: string[]) {
   if (selectedSkills.length > 0) {
     return employees.filter((item) => {
       return item.skills.find((skill) => {

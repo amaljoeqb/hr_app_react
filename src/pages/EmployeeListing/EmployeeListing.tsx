@@ -8,7 +8,6 @@ import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useQuery } from "../../hooks";
-import { useCallback, useMemo } from "react";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
