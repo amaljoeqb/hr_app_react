@@ -31,7 +31,7 @@ export default function EmployeeForm({
   return (
     <Formik<Employee>
       initialValues={initialValues}
-      isInitialValid={isInitialValid}
+      validateOnMount={isInitialValid}
       onSubmit={onSubmit}
       validationSchema={employeeSchema}
     >

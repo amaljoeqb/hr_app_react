@@ -34,6 +34,9 @@ export default function SelectInput<T>({
           )
         : [];
     } else {
+      if (field.value === undefined) {
+        return undefined;
+      }
       return options.find(
         (option) => option.value[optionId] === field.value[optionId]
       );
