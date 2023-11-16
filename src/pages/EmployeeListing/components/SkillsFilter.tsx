@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Skill, Employee } from "../../../models";
 import ClickAwayListener from "../../../components/eventListeners/ClickAwayListener";
 import useSkillsFilter from "../hooks/useSkillsFilter";

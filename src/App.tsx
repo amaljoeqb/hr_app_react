@@ -6,10 +6,7 @@ import "./css/style.css";
 import "./css/table.css";
 import "./css/input.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useAppContext } from "./store/app.context";
-import { useState, useEffect } from "react";
 import { routes } from "./config";
-import EmployeeDeletePopup from "./pages/EmployeeListing/components/EmployeeDeletePopup";
 import useLoadData from "./hooks/useLoadData";
 
 const basename = process.env.NODE_ENV === "development" ? "/" : "/hr_app_react";
