@@ -1,12 +1,11 @@
-import { Department } from "./department";
-import { Skill } from "./skill";
+import { Department, Skill } from "./";
 
-export interface Employee {
-    employeeId: number;
+export default interface Employee {
+    employeeId: string;
     name: string;
     email: string;
     designation: string;
-    department: Department;
+    department?: Department;
     skills: Skill[];
     salary: number;
     joiningDate: string;

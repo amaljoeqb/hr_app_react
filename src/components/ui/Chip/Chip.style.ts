@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Chip = styled.div`
+export const StyledChip = styled.div`
     display: inline-flex;
     padding: 8px 8px;
     border-radius: 8px;

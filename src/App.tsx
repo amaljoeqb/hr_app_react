@@ -6,17 +6,22 @@ import "./css/style.css";
 import "./css/table.css";
 import "./css/input.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { EmployeeListing } from "./views/EmployeeListing";
-import EmployeeForm from "./components/EmployeeForm";
-import ErrorPage from "./views/ErrorPage";
-import EmployeePage from "./views/EmployeePage";
+import { routes } from "./config";
+import useLoadData from "./hooks/useLoadData";
 
-const router = createBrowserRouter([
-  { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
-  { path: "/employee/:employeeId", element: <EmployeePage /> },
-]);
+const basename = process.env.NODE_ENV === "development" ? "/" : "/hr_app_react";
+
+const router = createBrowserRouter(routes, {
+  basename,
+});
 
 function App() {
+  const loading = useLoadData();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="App">
       <RouterProvider router={router} />

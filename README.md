@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Human Resource Management App
+This is a simplified Human Resource Management App with a set of CRUD operations, skill management, employee listing, and various employee actions. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Deployment
+https://amaljoeqb.github.io/hr_app_react/
 
-## Available Scripts
+## Key Features and Functionalities
 
-In the project directory, you can run:
+### Employee CRUD Operations:
+#### Create Employees
+Users can add new employees to the system with their relevant details.
 
-### `npm start`
+#### Update Employee Details
+Ability to modify employee information, such as name, contact details, etc.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Remove Employees
+Users can delete employees from the system, with a confirmation step to prevent accidental deletions.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Skill Management:
+#### Associate Skills
+Employees can be associated with specific skills or competencies.
 
-### `npm test`
+#### Searchable Skill List
+Users can search and select skills from a list to assign them to employees.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Employee Listing:
+#### Tabular Employee List
+Display a tabular format listing of all employees.
 
-### `npm run build`
+#### Filtering
+Allow users to filter employees based on various attributes (e.g., name, department, etc.).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Sorting
+Enable sorting of the employee list based on different attributes (e.g., name, date of joining, etc.).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Skill-Based Filtering
+Users can filter employees based on their assigned skills.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Multiple Filters
+Ability to apply multiple filters simultaneously to refine search results.
 
-### `npm run eject`
+### Employee Actions:
+#### Modal Details
+Clicking on an employee row in the table opens a modal/dialog displaying detailed employee information.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Edit Employee Details
+Provide an option to edit employee details directly from the employee listing.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Delete Employee
+Include a delete option for each employee in the table, with a confirmation dialog to confirm deletion.

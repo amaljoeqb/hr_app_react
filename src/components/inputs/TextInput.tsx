@@ -1,31 +1,27 @@
-export default function TextInput({
-  label,
-  name,
-  value,
-  onChange,
-  required,
-  disabled,
-}: {
+import { useField } from "formik";
+import { InputError } from "../";
+
+export interface TextInputProps {
   label: string;
   name: string;
-  value: string;
-  onChange: (value: string) => void;
   required?: boolean;
+  placeholder?: string;
   disabled?: boolean;
-}) {
+  type?: string;
+}
+
+export default function TextInput({ label, ...props }: TextInputProps) {
+  const [field, meta] = useField(props.name);
+  if (props.name === "email") {
+    console.log(meta);
+  }
   return (
-    <div id={`${name}-field`} className="field">
-      <label htmlFor={name}>{label}</label>
-      <input
-        type="text"
-        name={name}
-        id={name}
-        value={value}
-        required={required ?? false}
-        disabled={disabled ?? false}
-        onInput={(event) => onChange((event.target as HTMLInputElement).value)}
+    <div id={`${props.name}-field`} className="field">
+      <label htmlFor={props.name}>{label}</label>
+      <input type="text" {...field} {...props} />
+      <InputError
+        message={meta.touched && meta.error ? meta.error : undefined}
       />
-      <p className="error-msg" />
     </div>
   );
 }

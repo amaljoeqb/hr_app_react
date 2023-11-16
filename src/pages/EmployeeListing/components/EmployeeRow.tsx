@@ -1,16 +1,21 @@
-import { Employee } from "../models/employee";
-import { highlightSearchTerm, skillsToString } from "../services/helpers";
-import { Chip } from "../components/Chip.style";
-import HighlightedSpan from "../components/HighlightedSpan";
-import { Link } from "react-router-dom";
+import { Employee } from "../../../models";
+import { skillsToString } from "../../../services/helpers";
+import { Chip } from "../../../components";
+import HighlightedSpan from "../../../components/ui/HighlightedSpan";
+import { Link, useNavigate } from "react-router-dom";
+import EmployeeActionMenu from "./EmployeeActionMenu";
+
+export interface EmployeeRowProps {
+  employee: Employee;
+  searchTerm: string;
+}
 
 export default function EmployeeRow({
   employee,
   searchTerm,
-}: {
-  employee: Employee;
-  searchTerm: string;
-}) {
+}: EmployeeRowProps) {
+  const navigate = useNavigate();
+
   return (
     <tr key={employee.employeeId} className="emp-row">
       <td className="check-cell">
@@ -23,9 +28,15 @@ export default function EmployeeRow({
       </td>
       <td>
         <div className="name-container">
-          <Link to={`employee/${employee.employeeId}`} className="name">
+          <div
+            className="name"
+            onClick={() => {
+              navigate(`/employee/${employee.employeeId}`);
+            }}
+          >
             <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
-          </Link>
+            <span className="material-symbols-outlined"> visibility </span>
+          </div>
           <p className="email">{employee.email}</p>
         </div>
       </td>
@@ -34,7 +45,7 @@ export default function EmployeeRow({
       </td>
       <td>
         <HighlightedSpan
-          text={employee.department.department}
+          text={employee.department?.department ?? ""}
           searchTerm={searchTerm}
         />
       </td>
@@ -45,21 +56,14 @@ export default function EmployeeRow({
         <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
       </td>
       <td className="overflow">
-        <div className="action-container">
-          <button className="action-btn">
-            <span className="material-symbols-outlined"> more_horiz </span>
-          </button>
-          <div className="action-menu">
-            <ul>
-              <li>
-                <button className="edit-btn"> Edit </button>
-              </li>
-              <li>
-                <button className="delete-btn">Delete</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <EmployeeActionMenu
+          onDelete={() => {
+            navigate(`/?delete=${employee.employeeId}`);
+          }}
+          onEdit={() => {
+            navigate(`/employee/${employee.employeeId}`);
+          }}
+        />
       </td>
     </tr>
   );
