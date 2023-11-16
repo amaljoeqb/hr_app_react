@@ -20,8 +20,7 @@ export default function TextInput({ label, ...props }: TextInputProps) {
       <label htmlFor={props.name}>{label}</label>
       <input type="text" {...field} {...props} />
       <InputError
-        message={meta.error ?? ""}
-        show={meta.touched && meta.error !== undefined}
+        message={meta.touched && meta.error ? meta.error : undefined}
       />
     </div>
   );

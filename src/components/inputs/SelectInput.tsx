@@ -63,8 +63,7 @@ export default function SelectInput<T>({
         }}
       />
       <InputError
-        message={meta.error ?? ""}
-        show={meta.touched && meta.error !== undefined}
+        message={meta.touched && meta.error ? meta.error : undefined}
       />
     </div>
   );
