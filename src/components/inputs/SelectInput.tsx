@@ -33,7 +33,6 @@ export default function SelectInput<T>({
           )
         : [];
     } else {
-      console.log(field.value, options);
       return options.find(
         (option) => option.value[optionId] === field.value[optionId]
       );
