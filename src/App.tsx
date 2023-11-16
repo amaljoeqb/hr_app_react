@@ -12,7 +12,9 @@ import { routes } from "./config";
 import EmployeeDeletePopup from "./pages/EmployeeListing/components/EmployeeDeletePopup";
 import useLoadData from "./hooks/useLoadData";
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {
+  basename: "/hr_app_react",
+});
 
 function App() {
   const loading = useLoadData();
