@@ -1,44 +1,59 @@
 import { useField } from "formik";
-import Select from "react-select";
+import Select, { Props } from "react-select";
 
-export interface SelectInputProps {
+export interface SelectOption<T> {
+  value: T;
   label: string;
-  name: string;
-  required?: boolean;
-  placeholder?: string;
-  disabled?: boolean;
-  options: { value: any; label: string }[];
-  id: string;
 }
 
-export default function SelectInput({
+export interface SelectInputProps<T> extends Props<SelectOption<T>> {
+  label: string;
+  name: string;
+  options: SelectOption<T>[];
+  optionId: keyof T;
+}
+
+export default function SelectInput<T>({
   label,
   options,
-  id,
+  optionId,
+  name,
+  isMulti,
   ...props
-}: SelectInputProps) {
-  const [{ onChange: fieldOnChange, ...field }, meta] = useField(props.name);
+}: SelectInputProps<T>) {
+  const [{ onChange: fieldOnChange, ...field }, meta] = useField(name);
 
   function getValue() {
-    return field.value
-      ? options.find((option) => option.value[id] === field.value[id])
-      : undefined;
+    if (isMulti) {
+      return field.value
+        ? options.filter((option) =>
+            field.value
+              .map((v: T) => v[optionId])
+              .includes(option.value[optionId])
+          )
+        : [];
+    } else {
+      console.log(field.value, options);
+      return options.find(
+        (option) => option.value[optionId] === field.value[optionId]
+      );
+    }
   }
+
   return (
-    <div id={`${props.name}-field`} className="field">
-      <label htmlFor={props.name}>{label}</label>
+    <div id={`${name}-field`} className="field">
+      <label htmlFor={name}>{label}</label>
       <Select
-        {...field}
         {...props}
-        menuPlacement={"auto"}
-        isMulti={false}
+        isMulti={isMulti}
         options={options}
+        menuPlacement={"auto"}
         value={getValue()}
-        onChange={(option) => {
+        onChange={(option: any) => {
           fieldOnChange({
             target: {
-              name: props.name,
-              value: option?.value,
+              name: name,
+              value: isMulti ? option.map((o: any) => o.value) : option?.value,
             },
           });
         }}

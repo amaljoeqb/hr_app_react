@@ -3,7 +3,6 @@ import { Department, Employee, Skill } from "../../../models";
 import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
 import { employeeSchema } from "../../../config";
-import MultiSelectInput from "../../../components/inputs/MutliSelectInput";
 import useEmployeeForm from "../hooks/useEmployeeForm";
 
 export interface EmployeeFormProps {
@@ -17,12 +16,17 @@ export default function EmployeeForm({
   skills,
   departments,
 }: EmployeeFormProps) {
-  const { initialValues, onSubmit, skillsOptions, departmentOptions, isInitialValid } =
-    useEmployeeForm({
-      employee,
-      skills,
-      departments,
-    });
+  const {
+    initialValues,
+    onSubmit,
+    skillsOptions,
+    departmentOptions,
+    isInitialValid,
+  } = useEmployeeForm({
+    employee,
+    skills,
+    departments,
+  });
 
   return (
     <Formik<Employee>
@@ -53,10 +57,10 @@ export default function EmployeeForm({
             type="text"
             required
           />
-          <SelectInput
+          <SelectInput<Department>
             label="Department"
             name="department"
-            id="departmentId"
+            optionId="departmentId"
             required
             options={departmentOptions}
           />
@@ -76,10 +80,11 @@ export default function EmployeeForm({
           />
         </div>
         <div className="row">
-          <MultiSelectInput
+          <SelectInput<Skill>
             label="Skills"
             name="skills"
-            id="skillId"
+            optionId="skillId"
+            isMulti
             required
             options={skillsOptions}
           />
