@@ -1,4 +1,5 @@
 import { useField } from "formik";
+import { InputError } from "../";
 
 export interface TextInputProps {
   label: string;
@@ -9,16 +10,19 @@ export interface TextInputProps {
   type?: string;
 }
 
-export default function TextInput({
-  label,
-  ...props
-}: TextInputProps) {
+export default function TextInput({ label, ...props }: TextInputProps) {
   const [field, meta] = useField(props.name);
+  if (props.name === "email") {
+    console.log(meta);
+  }
   return (
     <div id={`${props.name}-field`} className="field">
       <label htmlFor={props.name}>{label}</label>
       <input type="text" {...field} {...props} />
-      {meta.touched && meta.error ? <p className="error-msg" /> : null}
+      <InputError
+        message={meta.error ?? ""}
+        show={meta.touched && meta.error !== undefined}
+      />
     </div>
   );
 }

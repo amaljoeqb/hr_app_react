@@ -1,5 +1,6 @@
 import { useField } from "formik";
 import Select, { MultiValue, Props, SingleValue } from "react-select";
+import { InputError } from "../";
 
 export interface SelectOption<T> {
   value: T;
@@ -61,7 +62,10 @@ export default function SelectInput<T>({
           });
         }}
       />
-      {meta.touched && meta.error ? <p className="error-msg" /> : null}
+      <InputError
+        message={meta.error ?? ""}
+        show={meta.touched && meta.error !== undefined}
+      />
     </div>
   );
 }
