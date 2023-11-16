@@ -12,8 +12,10 @@ import { routes } from "./config";
 import EmployeeDeletePopup from "./pages/EmployeeListing/components/EmployeeDeletePopup";
 import useLoadData from "./hooks/useLoadData";
 
+const basename = process.env.NODE_ENV === "development" ? "/" : "/hr_app_react";
+
 const router = createBrowserRouter(routes, {
-  basename: "/hr_app_react",
+  basename,
 });
 
 function App() {
