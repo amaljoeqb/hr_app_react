@@ -2,11 +2,9 @@ import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
 import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
-import { useAppContext } from "../../../store/app.context";
-import { useNavigate } from "react-router-dom";
 import { employeeSchema } from "../../../config";
 import MultiSelectInput from "../../../components/inputs/MutliSelectInput";
-import { getNextEmployeeId } from "../../../services/helpers";
+import useEmployeeForm from "../hooks/useEmployeeForm";
 
 export interface EmployeeFormProps {
   employee: Employee | undefined;
@@ -19,31 +17,18 @@ export default function EmployeeForm({
   skills,
   departments,
 }: EmployeeFormProps) {
-  const navigate = useNavigate();
-  const appContext = useAppContext();
+  const { initialValues, onSubmit, skillsOptions, departmentOptions, isInitialValid } =
+    useEmployeeForm({
+      employee,
+      skills,
+      departments,
+    });
 
   return (
-    <Formik
-      initialValues={
-        employee ?? {
-          employeeId: getNextEmployeeId(appContext.state.employees),
-        }
-      }
-      onSubmit={(values, actions) => {
-        if (employee) {
-          appContext.dispatch({
-            type: "UPDATE_EMPLOYEE",
-            payload: values,
-          });
-        } else {
-          appContext.dispatch({
-            type: "ADD_EMPLOYEE",
-            payload: values,
-          });
-        }
-        actions.setSubmitting(false);
-        navigate("/");
-      }}
+    <Formik<Employee>
+      initialValues={initialValues}
+      isInitialValid={isInitialValid}
+      onSubmit={onSubmit}
       validationSchema={employeeSchema}
     >
       <Form id="emp-form">
@@ -59,12 +44,7 @@ export default function EmployeeForm({
         </div>
         <div className="row">
           <TextInput label="Email" name="email" required={true} />
-          <TextInput
-            type="number"
-            label="Salary"
-            name="salary"
-            required
-          />
+          <TextInput type="number" label="Salary" name="salary" required />
         </div>
         <div className="row">
           <TextInput
@@ -78,10 +58,7 @@ export default function EmployeeForm({
             name="department"
             id="departmentId"
             required
-            options={departments.map((department) => ({
-              value: department,
-              label: department.department,
-            }))}
+            options={departmentOptions}
           />
         </div>
         <div className="row">
@@ -104,10 +81,7 @@ export default function EmployeeForm({
             name="skills"
             id="skillId"
             required
-            options={skills.map((skill) => ({
-              value: skill,
-              label: skill.skill,
-            }))}
+            options={skillsOptions}
           />
         </div>
         <div className="flip-container">

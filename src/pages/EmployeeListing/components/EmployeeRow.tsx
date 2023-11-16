@@ -45,7 +45,7 @@ export default function EmployeeRow({
       </td>
       <td>
         <HighlightedSpan
-          text={employee.department.department}
+          text={employee.department?.department ?? ""}
           searchTerm={searchTerm}
         />
       </td>

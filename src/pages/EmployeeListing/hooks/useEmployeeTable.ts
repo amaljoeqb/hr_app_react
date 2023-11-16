@@ -75,7 +75,7 @@ function sortEmployees(
   order: "asc" | "desc"
 ): Employee[] {
   const asc = order === "asc";
-  const numericalSort = (a: Employee, b: Employee) => {
+  const numericalSort = (a: Employee, b: Employee, key: "salary") => {
     if (a[key] < b[key]) {
       return asc ? -1 : 1;
     }
@@ -85,7 +85,11 @@ function sortEmployees(
     return 0;
   };
 
-  const alphaNumericSort = (a: Employee, b: Employee) => {
+  const alphaNumericSort = (
+    a: Employee,
+    b: Employee,
+    key: "employeeId" | "name" | "designation" | "email"
+  ) => {
     const aString = a[key].toString().toLowerCase();
     const bString = b[key].toString().toLowerCase();
     if (aString < bString) {
@@ -98,8 +102,8 @@ function sortEmployees(
   };
 
   const departmentSort = (a: Employee, b: Employee) => {
-    const aString = a.department.department.toString().toLowerCase();
-    const bString = b.department.department.toString().toLowerCase();
+    const aString = a.department?.department.toString().toLowerCase() ?? "";
+    const bString = b.department?.department.toString().toLowerCase() ?? "";
     if (aString < bString) {
       return asc ? -1 : 1;
     }
@@ -110,13 +114,17 @@ function sortEmployees(
   };
 
   switch (key) {
-    case "employeeId":
     case "salary":
-      return employees.sort(numericalSort);
+      return employees.sort((a: Employee, b: Employee) =>
+        numericalSort(a, b, key)
+      );
+    case "employeeId":
     case "name":
     case "email":
     case "designation":
-      return employees.sort(alphaNumericSort);
+      return employees.sort((a: Employee, b: Employee) =>
+        alphaNumericSort(a, b, key)
+      );
     case "department":
       return employees.sort(departmentSort);
     default:

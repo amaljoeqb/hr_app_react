@@ -5,7 +5,7 @@ export default interface Employee {
     name: string;
     email: string;
     designation: string;
-    department: Department;
+    department?: Department;
     skills: Skill[];
     salary: number;
     joiningDate: string;
