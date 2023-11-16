@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import Select, { Props } from "react-select";
+import Select, { MultiValue, Props, SingleValue } from "react-select";
 
 export interface SelectOption<T> {
   value: T;
@@ -49,11 +49,15 @@ export default function SelectInput<T>({
         options={options}
         menuPlacement={"auto"}
         value={getValue()}
-        onChange={(option: any) => {
+        onChange={(option) => {
           fieldOnChange({
             target: {
               name: name,
-              value: isMulti ? option.map((o: any) => o.value) : option?.value,
+              value: isMulti
+                ? (option as MultiValue<SelectOption<T>>).map(
+                    (o: any) => o.value
+                  )
+                : (option as SingleValue<SelectOption<T>>)?.value,
             },
           });
         }}
