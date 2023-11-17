@@ -1,5 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
-import { Department, Employee, Skill } from "../models";
+import { createContext, useContext, useReducer, useState } from "react";
+import { Department, Employee, IToast, Skill } from "../models";
+import useToast from "../hooks/useToast";
 
 export interface AppState {
   employees: Employee[];
@@ -10,6 +11,9 @@ export interface AppState {
 export interface AppContextType {
   state: AppState;
   dispatch: any;
+  toasts: IToast[];
+  showToast: (message: string) => void;
+  closeToast: (id: number) => void;
 }
 
 // Initial state for your app
@@ -80,9 +84,12 @@ const appReducer = (
 };
 
 // Create a context
-const AppContext = createContext<AppContextType>({
+const AppContext = createContext({
   state: initialState,
   dispatch: () => null,
+  toasts: [],
+  showToast: () => null,
+  closeToast: () => null,
 } as AppContextType);
 
 export const useAppContext = () => {
@@ -92,9 +99,12 @@ export const useAppContext = () => {
 // Create a provider component
 export const AppProvider = ({ children }: { children: any }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
+  const { toasts, showToast, closeToast } = useToast();
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider
+      value={{ state, dispatch, toasts, showToast, closeToast }}
+    >
       {children}
     </AppContext.Provider>
   );

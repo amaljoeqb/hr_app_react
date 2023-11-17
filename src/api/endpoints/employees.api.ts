@@ -2,7 +2,7 @@ import { Employee } from "../../models";
 import { API } from "..";
 import {
   getEmployeeFromEmployeeGlobal,
-  getEmployeeGlobalFromEmployee,
+  getEmployeeRequestFromEmployee,
 } from "../services/converters";
 import { EmployeeResponse } from "../models";
 
@@ -20,7 +20,7 @@ export const getEmployee = async (id: string) => {
 };
 
 export const createEmployee = async (data: Employee) => {
-  const body = getEmployeeGlobalFromEmployee(data);
+  const body = getEmployeeRequestFromEmployee(data);
   const response = await API.post("/employee", body);
   return response.data;
 };

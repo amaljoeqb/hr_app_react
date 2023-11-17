@@ -8,13 +8,15 @@ export default function useApi() {
   async function getEmployees() {
     try {
       return API.getEmployees();
-    } catch (error) {
-      console.log("error", error);
+    } catch (error: any) {
+      appContext.showToast(error?.message);
     }
   }
 
   async function testApi() {
-    await API.createEmployee(data.employees[5]);
+    // await API.deleteEmployee(data.employees[5].employeeId);
+    // await API.createEmployee(data.employees[5]);
+    appContext.showToast("API is working!");
   }
 
   return {
