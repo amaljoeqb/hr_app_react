@@ -1,8 +1,14 @@
-import { API } from "./";
+import { Employee } from "../../models";
+import { API } from "..";
+import { getEmployeeFromEmployeeGlobal } from "../services/converters";
+import { EmployeeResponse } from "../models";
 
 export const getEmployees = async () => {
-  const response = await API.get("/employee");
-  return response.data;
+  const response: EmployeeResponse = await API.get("/employee");
+  const employees: Employee[] = response.data.employees.map((employee) =>
+    getEmployeeFromEmployeeGlobal(employee)
+  );
+  return employees;
 };
 
 export const getEmployee = async (id: string) => {
