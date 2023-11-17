@@ -14,7 +14,7 @@ export default function useApi() {
   }
 
   async function testApi() {
-    await API.createEmployee(data.employees[0]);
+    await API.createEmployee(data.employees[5]);
   }
 
   return {

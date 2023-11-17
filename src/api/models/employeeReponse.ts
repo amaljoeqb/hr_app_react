@@ -10,7 +10,7 @@ export interface EmployeeGlobal {
   id: number;
   firstName: string;
   lastName: string;
-  isActive: boolean;
+  isActive?: boolean;
   dob?: string;
   email: string;
   phone?: string;

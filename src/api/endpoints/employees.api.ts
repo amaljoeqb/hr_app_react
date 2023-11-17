@@ -1,6 +1,9 @@
 import { Employee } from "../../models";
 import { API } from "..";
-import { getEmployeeFromEmployeeGlobal } from "../services/converters";
+import {
+  getEmployeeFromEmployeeGlobal,
+  getEmployeeGlobalFromEmployee,
+} from "../services/converters";
 import { EmployeeResponse } from "../models";
 
 export const getEmployees = async () => {
@@ -16,8 +19,9 @@ export const getEmployee = async (id: string) => {
   return response.data;
 };
 
-export const createEmployee = async (data: any) => {
-  const response = await API.post("/employee", data);
+export const createEmployee = async (data: Employee) => {
+  const body = getEmployeeGlobalFromEmployee(data);
+  const response = await API.post("/employee", body);
   return response.data;
 };
 
