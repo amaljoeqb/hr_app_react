@@ -1,5 +1,6 @@
 import { useAppContext } from "../store/app.context";
 import * as API from "../api";
+import data from "../data.json";
 
 export default function useApi() {
   const appContext = useAppContext();
@@ -12,10 +13,8 @@ export default function useApi() {
     }
   }
 
-  function testApi() {
-    API.getEmployees().then((data) => {
-      console.log(data);
-    });
+  async function testApi() {
+    await API.createEmployee(data.employees[0]);
   }
 
   return {

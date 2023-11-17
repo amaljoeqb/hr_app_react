@@ -48,6 +48,7 @@ export default function SelectInput<T>({
       <label htmlFor={name}>{label}</label>
       <Select
         {...props}
+        {...field}
         isMulti={isMulti}
         options={options}
         menuPlacement={"auto"}

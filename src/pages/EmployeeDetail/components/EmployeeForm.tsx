@@ -35,7 +35,7 @@ export default function EmployeeForm({
       onSubmit={onSubmit}
       validationSchema={employeeSchema}
     >
-      <Form id="emp-form">
+      <Form id="emp-form" noValidate>
         <div className="row">
           <TextInput
             label="Employee ID"
