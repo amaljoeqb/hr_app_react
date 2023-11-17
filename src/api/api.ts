@@ -5,4 +5,14 @@ const API: AxiosInstance = axios.create({
   timeout: 120000,
 });
 
+API.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    console.log("error", error);
+    return Promise.reject(error);
+  }
+);
+
 export default API;

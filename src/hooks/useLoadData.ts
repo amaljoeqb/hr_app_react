@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../store/app.context";
 import data from "../data.json";
-
+import { useApi } from "./";
 
 export default function useLoadData() {
   const [loading, setLoading] = useState(true);
+  const api = useApi();
   const appContext = useAppContext();
 
   const loadData = async () => {
-    let employees =
-      localStorage.getItem("employees") &&
-      JSON.parse(localStorage.getItem("employees") as string);
+    let employees = await api.getEmployees();
     let skills =
       localStorage.getItem("skills") &&
       JSON.parse(localStorage.getItem("skills") as string);
@@ -18,7 +17,6 @@ export default function useLoadData() {
       localStorage.getItem("departments") &&
       JSON.parse(localStorage.getItem("departments") as string);
     if (skills === null || employees === null || departments === null) {
-      employees = data.employees;
       skills = data.skills;
       departments = data.departments;
     }

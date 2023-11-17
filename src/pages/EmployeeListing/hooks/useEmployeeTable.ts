@@ -75,11 +75,19 @@ function sortEmployees(
   order: "asc" | "desc"
 ): Employee[] {
   const asc = order === "asc";
+
   const numericalSort = (a: Employee, b: Employee, key: "salary") => {
-    if (a[key] < b[key]) {
-      return asc ? -1 : 1;
+    if (!a[key] && !b[key]) {
+      return 0;
+    } else if (!a[key]) {
+      return -1;
+    } else if (!b[key]) {
+      return 1;
     }
-    if (a[key] > b[key]) {
+
+    if (a[key]! < b[key]!) {
+      return asc ? -1 : 1;
+    } else if (a[key]! > b[key]!) {
       return asc ? 1 : -1;
     }
     return 0;
@@ -90,8 +98,15 @@ function sortEmployees(
     b: Employee,
     key: "employeeId" | "name" | "designation" | "email"
   ) => {
-    const aString = a[key].toString().toLowerCase();
-    const bString = b[key].toString().toLowerCase();
+    if (!a[key] && !b[key]) {
+      return 0;
+    } else if (!a[key]) {
+      return -1;
+    } else if (!b[key]) {
+      return 1;
+    }
+    const aString = a[key]!.toString().toLowerCase();
+    const bString = b[key]!.toString().toLowerCase();
     if (aString < bString) {
       return asc ? -1 : 1;
     }

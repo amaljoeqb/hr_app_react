@@ -9,14 +9,18 @@ export function getEmployeeFromEmployeeGlobal(
     name: `${employeeGlobal.firstName} ${employeeGlobal.lastName}`,
     email: employeeGlobal.email,
     designation: employeeGlobal.designation,
-    department: {
-      departmentId: employeeGlobal.department.id.toString(),
-      department: employeeGlobal.department.department,
-    },
-    skills: employeeGlobal.skills.split(",").map((skill) => {
+    department: employeeGlobal.department
+      ? {
+          departmentId: employeeGlobal.department?.id.toString(),
+          department: employeeGlobal.department?.department,
+        }
+      : undefined,
+    skills: employeeGlobal.skills?.split(",").map((skill) => {
       return { skillId: skill, skill: skill };
-    }),
-    salary: parseInt(employeeGlobal.salary),
+    }) ?? [],
+    salary: employeeGlobal.salary
+      ? parseInt(employeeGlobal?.salary)
+      : undefined,
     joiningDate: employeeGlobal.dateOfJoining,
     dateOfBirth: employeeGlobal.dob,
   };

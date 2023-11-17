@@ -4,12 +4,16 @@ import * as API from "../api";
 export default function useApi() {
   const appContext = useAppContext();
 
-  function getEmployees() {
-    API.getEmployees().then((data) => {});
+  async function getEmployees() {
+    try {
+      return API.getEmployees();
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 
   function testApi() {
-    API.getEmployee("1").then((data) => {
+    API.getEmployees().then((data) => {
       console.log(data);
     });
   }

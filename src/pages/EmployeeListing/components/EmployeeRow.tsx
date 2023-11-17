@@ -41,7 +41,10 @@ export default function EmployeeRow({
         </div>
       </td>
       <td>
-        <HighlightedSpan text={employee.designation} searchTerm={searchTerm} />
+        <HighlightedSpan
+          text={employee.designation ?? "N/A"}
+          searchTerm={searchTerm}
+        />
       </td>
       <td>
         <HighlightedSpan
