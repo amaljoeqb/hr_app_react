@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
-import { useQuery } from "../../hooks";
+import { useApi, useQuery } from "../../hooks";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -27,6 +27,7 @@ export function EmployeeListing() {
   } = useEmployeeTable(employees);
 
   const urlParams = useQuery();
+  const api = useApi();
   const deleteEmployeeId = urlParams.get("delete");
 
   return (
@@ -55,7 +56,8 @@ export function EmployeeListing() {
             </div>
             <HoverButton
               onClick={() => {
-                navigate("/employee");
+                // navigate("/employee");
+                api.testApi();
               }}
             >
               <span className="material-symbols-outlined"> add_circle </span>
