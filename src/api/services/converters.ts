@@ -33,34 +33,21 @@ export function getEmployeeFromEmployeeGlobal(
 }
 
 export function getEmployeeRequestFromEmployee(
-  employee: Employee,
-  employeeGlobal: EmployeeGlobal
+  employee: Employee
 ): EmployeeRequest {
-  // use employee global data if value is not present in employee
-  const nameEmployeeGlobal = `${employeeGlobal.firstName} ${employeeGlobal.lastName}`;
-  let firstName = employeeGlobal.firstName;
-  let lastName = employeeGlobal.lastName;
-  if (nameEmployeeGlobal !== employee.name) {
-    firstName = employee.name.split(" ")[0];
-    lastName = employee.name.substring(firstName.length + 1);
-  }
   return {
     id: parseInt(employee.employeeId),
-    firstName: firstName,
-    lastName: lastName,
+    firstName: employee.name.split(" ")[0],
+    lastName: employee.name.split(" ")[1],
     email: employee.email,
     designation: employee.designation,
-    departmentId: employee.department?.departmentId
-      ? parseInt(employee.department?.departmentId)
-      : employeeGlobal.department?.id,
-    skills: employee.skills?.map((skill) => skill.skillId).join(","),
+    department: employee.department && {
+      id: parseInt(employee.department?.departmentId),
+    },
+    skills: employee.skills.map((skill) => skill.skillId),
     salary: employee.salary?.toString(),
     dateOfJoining: employee.joiningDate,
     dob: employee.dateOfBirth,
-    roleId: employeeGlobal.role?.id,
-    address: employeeGlobal.address,
-    //phone: employeeGlobal.phone,
-    isActive: employeeGlobal.isActive,
   };
 }
 
