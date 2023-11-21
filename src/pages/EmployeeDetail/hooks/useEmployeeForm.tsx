@@ -9,6 +9,9 @@ export default function useEmployeeForm({
   employee,
   skills,
   departments,
+  isView,
+  onEdit,
+  onView,
 }: EmployeeFormProps) {
   const api = useApi();
   const appContext = useAppContext();
@@ -40,12 +43,17 @@ export default function useEmployeeForm({
     } else {
       api.createEmployee(values);
     }
-    navigate("/");
+    onView();
+  }
+
+  function onClickEdit() {
+    onEdit();
   }
 
   return {
     initialValues,
     onSubmit,
+    onClickEdit,
     departmentOptions,
     skillsOptions,
     isInitialValid,

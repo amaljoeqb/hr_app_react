@@ -9,24 +9,21 @@ export interface EmployeeFormProps {
   employee: Employee | undefined;
   skills: Skill[];
   departments: Department[];
+  isView: boolean;
+  onEdit: () => void;
+  onView: () => void;
 }
 
-export default function EmployeeForm({
-  employee,
-  skills,
-  departments,
-}: EmployeeFormProps) {
+export default function EmployeeForm(props: EmployeeFormProps) {
   const {
     initialValues,
     onSubmit,
     skillsOptions,
     departmentOptions,
     isInitialValid,
-  } = useEmployeeForm({
-    employee,
-    skills,
-    departments,
-  });
+    onClickEdit,
+  } = useEmployeeForm(props);
+
 
   return (
     <Formik<Employee>
@@ -63,6 +60,7 @@ export default function EmployeeForm({
             optionId="departmentId"
             required
             options={departmentOptions}
+            isDisabled={props.isView}
           />
         </div>
         <div className="row">
@@ -87,6 +85,7 @@ export default function EmployeeForm({
             isMulti
             required
             options={skillsOptions}
+            isDisabled={props.isView}
           />
         </div>
         <div className="flip-container">
@@ -99,7 +98,9 @@ export default function EmployeeForm({
             />
           </div>
           <div className="back">
-            <button id="edit-button" className="hover-btn" type="button">
+            <button id="edit-button" className="hover-btn" type="button" onClick={
+              onClickEdit
+            }>
               Edit
             </button>
           </div>

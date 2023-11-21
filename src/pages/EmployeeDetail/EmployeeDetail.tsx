@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
+import { useState } from "react";
 
 export default function EmployeeDetail() {
   const employeeId = useParams<{ employeeId: string }>().employeeId;
@@ -9,13 +10,18 @@ export default function EmployeeDetail() {
   const navigate = useNavigate();
   const { employees, skills, departments } = appContext.state;
   let employee: Employee | undefined = undefined;
+  const [isView, setIsView] = useState(true);
 
   if (employeeId) {
     employee = employees.find((employee) => employee.employeeId == employeeId);
   }
 
   return (
-    <div className="popup emp-popup view-popup show-popup">
+    <div
+      className={`popup emp-popup show-popup ${
+        isView ? "view-popup" : "edit-popup"
+      }`}
+    >
       <section className="popup-content">
         <div className="form-header">
           <h2>
@@ -47,6 +53,13 @@ export default function EmployeeDetail() {
           employee={employee}
           skills={skills}
           departments={departments}
+          isView={isView}
+          onEdit={() => {
+            setIsView(false);
+          }}
+          onView={() => {
+            setIsView(true);
+          }}
         />
       </section>
     </div>
