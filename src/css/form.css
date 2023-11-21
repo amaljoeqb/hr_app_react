@@ -46,7 +46,6 @@ form textarea,
   border-radius: 8px;
   border: 1px solid var(--light-grey);
   font-size: 14px;
-  color: black;
   box-shadow: var(--light-shadow);
 }
 
