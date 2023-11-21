@@ -11,28 +11,56 @@ export function selectStyle<T>(
         color: "#000",
         border: "none",
         backgroundColor: "#fff",
+        transition: "all 0.3s ease-in-out",
       }),
       indicatorsContainer: (base) => ({
         ...base,
-        display: "none",
+        opacity: "0",
+        transition: "all 0.3s ease-in-out",
       }),
       multiValueRemove: (base) => ({
         ...base,
-        display: "none",
+        opacity: "0",
+        transition: "all 0.3s ease-in-out",
       }),
       multiValueLabel: (base) => ({
         ...base,
-        padding: "0.2rem 0.5rem",
+        padding: "0.2rem 0rem 0.2rem 0.5rem",
+        transform: "translateX(0.5rem)",
+        transition: "all 0.3s ease-in-out",
       }),
       valueContainer: (base) => ({
         ...base,
         padding: "0",
+        transition: "all 0.3s ease-in-out",
       }),
       singleValue: (base) => ({
         ...base,
         color: "#000",
+        transition: "all 0.3s ease-in-out",
       }),
     };
   }
-  return {};
+  return {
+    control: (base, state) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+    indicatorsContainer: (base) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+    multiValueRemove: (base) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+    multiValueLabel: (base) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+    valueContainer: (base) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+  };
 }
