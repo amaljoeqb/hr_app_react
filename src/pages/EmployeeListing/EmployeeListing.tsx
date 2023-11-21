@@ -86,7 +86,7 @@ export function EmployeeListing() {
         <EmployeeDeletePopup
           employeeId={deleteEmployeeId}
           onClose={() => {
-            navigate("/");
+            navigate(-1);
           }}
         />
       )}
