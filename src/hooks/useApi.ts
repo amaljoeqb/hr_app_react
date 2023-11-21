@@ -6,15 +6,16 @@ import { Employee } from "../models";
 export default function useApi() {
   const appContext = useAppContext();
 
-  async function getEmployees(): Promise<Employee[]> {
+  async function getEmployees() {
     try {
-      return await API.getEmployees();
+      const employees = await API.getEmployees();
+      appContext.dispatch({ type: "SET_EMPLOYEES", payload: employees });
+      return employees;
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
         isError: true,
       });
-      return [];
     }
   }
 
@@ -23,9 +24,8 @@ export default function useApi() {
     // await API.createEmployee(data.employees[5]);
   }
 
-  async function getEmployee(id: string): Promise<Employee | null> {
+  async function getEmployee(id: string) {
     try {
-      return await API.getEmployee(id);
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -37,7 +37,6 @@ export default function useApi() {
 
   async function createEmployee(employee: Employee) {
     try {
-      await API.createEmployee(employee);
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -48,7 +47,6 @@ export default function useApi() {
 
   async function updateEmployee(employee: Employee) {
     try {
-      await API.updateEmployee(employee.employeeId, employee);
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -59,7 +57,6 @@ export default function useApi() {
 
   async function deleteEmployee(id: string) {
     try {
-      await API.deleteEmployee(id);
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -70,25 +67,26 @@ export default function useApi() {
 
   async function getSkills() {
     try {
-      return await API.getSkills();
+      const skills = await API.getSkills();
+      appContext.dispatch({ type: "SET_SKILLS", payload: skills });
+      return skills;
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
         isError: true,
       });
-      return [];
     }
   }
 
   async function getDepartments() {
     try {
-      return await API.getDepartments();
+      const departments = await API.getDepartments();
+      appContext.dispatch({ type: "SET_DEPARTMENTS", payload: departments });
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
         isError: true,
       });
-      return [];
     }
   }
 
