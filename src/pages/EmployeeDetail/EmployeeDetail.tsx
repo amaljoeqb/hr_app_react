@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
@@ -6,6 +6,7 @@ import { Employee } from "../../models";
 export default function EmployeeDetail() {
   const employeeId = useParams<{ employeeId: string }>().employeeId;
   const appContext = useAppContext();
+  const navigate = useNavigate();
   const { employees, skills, departments } = appContext.state;
   let employee: Employee | undefined = undefined;
 
@@ -18,6 +19,16 @@ export default function EmployeeDetail() {
       <section className="popup-content">
         <div className="form-header">
           <h2>
+            <span
+              className="material-symbols-outlined back-btn"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              {" "}
+              arrow_back{" "}
+            </span>
+
             <div className="add-heading">
               <span className="material-symbols-outlined"> add_circle </span>
             </div>
