@@ -17,7 +17,10 @@ export interface EmployeeGlobal {
   designation?: string;
   salary?: string;
   dateOfJoining?: string;
-  skills?: string;
+  skills: {
+    id: number;
+    skill: string;
+  }[];
   address?: string;
   role?: {
     id: number;

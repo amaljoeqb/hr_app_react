@@ -1,15 +1,17 @@
 import { useAppContext } from "../store/app.context";
 import * as API from "../api";
 import data from "../data.json";
+import { Employee } from "../models";
 
 export default function useApi() {
   const appContext = useAppContext();
 
-  async function getEmployees() {
+  async function getEmployees(): Promise<Employee[]> {
     try {
-      return API.getEmployees();
+      return await API.getEmployees();
     } catch (error: any) {
       appContext.showToast(error?.message);
+      return [];
     }
   }
 

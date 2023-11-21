@@ -5,12 +5,15 @@ const API: AxiosInstance = axios.create({
   timeout: 120000,
 });
 
+// reject promise if status code not 200
 API.interceptors.response.use(
   (response) => {
-    return response.data;
+    if (response.status !== 200) {
+      return Promise.reject(response);
+    }
+    return response;
   },
   (error) => {
-    console.log("error", error);
     return Promise.reject(error);
   }
 );

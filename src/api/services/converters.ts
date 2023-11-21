@@ -15,10 +15,10 @@ export function getEmployeeFromEmployeeGlobal(
           department: employeeGlobal.department?.department,
         }
       : undefined,
-    skills:
-      employeeGlobal.skills?.split(",").map((skill) => {
-        return { skillId: skill, skill: skill };
-      }) ?? [],
+    skills: employeeGlobal.skills.map((skill) => ({
+      skillId: skill.id.toString(),
+      skill: skill.skill,
+    })),
     salary: employeeGlobal.salary
       ? parseInt(employeeGlobal?.salary)
       : undefined,
@@ -37,9 +37,7 @@ export function getEmployeeRequestFromEmployee(employee: Employee) {
     departmentId: employee.department?.departmentId
       ? parseInt(employee.department?.departmentId)
       : undefined,
-    skills: employee.skills
-      ?.map((skill) => skill.skillId)
-      .join(","),
+    skills: employee.skills?.map((skill) => skill.skillId).join(","),
     salary: employee.salary?.toString(),
     dateOfJoining: employee.joiningDate,
     dob: employee.dateOfBirth,

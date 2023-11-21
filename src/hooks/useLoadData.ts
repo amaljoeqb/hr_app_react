@@ -9,21 +9,25 @@ export default function useLoadData() {
   const appContext = useAppContext();
 
   const loadData = async () => {
-    let employees = await api.getEmployees();
-    let skills =
-      localStorage.getItem("skills") &&
-      JSON.parse(localStorage.getItem("skills") as string);
-    let departments =
-      localStorage.getItem("departments") &&
-      JSON.parse(localStorage.getItem("departments") as string);
-    if (skills === null || employees === null || departments === null) {
-      skills = data.skills;
-      departments = data.departments;
+    try {
+      let employees = await api.getEmployees();
+      let skills =
+        localStorage.getItem("skills") &&
+        JSON.parse(localStorage.getItem("skills") as string);
+      let departments =
+        localStorage.getItem("departments") &&
+        JSON.parse(localStorage.getItem("departments") as string);
+      if (skills === null || employees === null || departments === null) {
+        skills = data.skills;
+        departments = data.departments;
+      }
+      appContext.dispatch({ type: "SET_EMPLOYEES", payload: employees });
+      appContext.dispatch({ type: "SET_SKILLS", payload: skills });
+      appContext.dispatch({ type: "SET_DEPARTMENTS", payload: departments });
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
-    appContext.dispatch({ type: "SET_EMPLOYEES", payload: employees });
-    appContext.dispatch({ type: "SET_SKILLS", payload: skills });
-    appContext.dispatch({ type: "SET_DEPARTMENTS", payload: departments });
-    setLoading(false);
   };
 
   useEffect(() => {
