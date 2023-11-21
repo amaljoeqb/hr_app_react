@@ -103,5 +103,6 @@ export const selectTheme: ThemeConfig = (theme: Theme) => ({
     primary: "var(--primary-color)",
     primary25: "#e8f0fe",
     primary50: "#e8f0fe",
+    danger: "var(--error-color)",
   },
 });
