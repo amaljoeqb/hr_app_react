@@ -91,7 +91,7 @@ form textarea:focus,
 }
 
 .heading-text {
-  margin-left: 8px;
+  margin: 0 8px;
 }
 
 .submit {
@@ -178,6 +178,7 @@ form textarea:focus,
   width: auto;
   height: auto;
 }
+
 
 .add-popup .add-heading {
   display: block;

@@ -248,6 +248,7 @@ span.close-toast {
 
 .material-symbols-outlined {
   user-select: none;
+  line-height: inherit;
 }
 
 #loading {

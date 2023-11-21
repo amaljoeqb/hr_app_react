@@ -15,7 +15,7 @@ export default function EmployeeDetail() {
   }
 
   return (
-    <div className="popup emp-popup show-popup">
+    <div className="popup emp-popup view-popup show-popup">
       <section className="popup-content">
         <div className="form-header">
           <h2>
@@ -32,6 +32,7 @@ export default function EmployeeDetail() {
             <div className="add-heading">
               <span className="material-symbols-outlined"> add_circle </span>
             </div>
+            <span className="heading-text">Employee</span>
             <div className="view-edit-heading flip-container">
               <div className="front">
                 <span className="material-symbols-outlined"> edit </span>
@@ -40,7 +41,6 @@ export default function EmployeeDetail() {
                 <span className="material-symbols-outlined"> visibility </span>
               </div>
             </div>
-            <span className="heading-text">Employee</span>
           </h2>
         </div>
         <EmployeeForm
