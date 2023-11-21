@@ -1,4 +1,4 @@
-import { GroupBase, StylesConfig } from "react-select";
+import { GroupBase, StylesConfig, Theme, ThemeConfig } from "react-select";
 import { SelectOption } from "../components/inputs/SelectInput";
 
 export function selectStyle<T>(
@@ -9,7 +9,8 @@ export function selectStyle<T>(
       control: (base, state) => ({
         ...base,
         color: "#000",
-        border: "none",
+        minHeight: "0",
+        borderColor: "transparent",
         backgroundColor: "#fff",
         transition: "all 0.3s ease-in-out",
       }),
@@ -36,6 +37,7 @@ export function selectStyle<T>(
       }),
       singleValue: (base) => ({
         ...base,
+        margin: "0",
         color: "#000",
         transition: "all 0.3s ease-in-out",
       }),
@@ -44,10 +46,35 @@ export function selectStyle<T>(
   return {
     control: (base, state) => ({
       ...base,
+      boxShadow: "var(--light-shadow)",
+      border: `1px solid ${
+        state.isFocused ? "var(--dark-grey)" : "var(--light-grey)"
+      }`,
+      borderRadius: "8px",
+      minHeight: "0",
       transition: "all 0.3s ease-in-out",
+      "&:hover": {
+        border: `1px solid ${
+          state.isFocused ? "var(--dark-grey)" : "var(--light-grey)"
+        }`,
+      },
+    }),
+    container: (base) => ({
+      ...base,
+      minHeight: "0",
     }),
     indicatorsContainer: (base) => ({
       ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: "6px 8px",
+      transition: "all 0.3s ease-in-out",
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      padding: "6px 8px",
       transition: "all 0.3s ease-in-out",
     }),
     multiValueRemove: (base) => ({
@@ -62,5 +89,19 @@ export function selectStyle<T>(
       ...base,
       transition: "all 0.3s ease-in-out",
     }),
+    singleValue: (base) => ({
+      ...base,
+      transition: "all 0.3s ease-in-out",
+    }),
   };
 }
+
+export const selectTheme: ThemeConfig = (theme: Theme) => ({
+  ...theme,
+  colors: {
+    ...theme.colors,
+    primary: "var(--primary-color)",
+    primary25: "#e8f0fe",
+    primary50: "#e8f0fe",
+  },
+});

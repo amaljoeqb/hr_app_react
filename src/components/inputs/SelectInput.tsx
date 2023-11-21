@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import Select, { MultiValue, Props, SingleValue } from "react-select";
 import { InputError } from "../";
-import { selectStyle } from "../../config";
+import { selectStyle, selectTheme } from "../../config";
 
 export interface SelectOption<T> {
   value: T;
@@ -55,6 +55,7 @@ export default function SelectInput<T>({
         styles={selectStyle<T>(props.isDisabled)}
         menuPlacement={"auto"}
         value={getValue()}
+        theme={selectTheme}
         onChange={(option) => {
           fieldOnChange({
             target: {
