@@ -9,6 +9,12 @@ import {
 export function getEmployeeFromEmployeeGlobal(
   employeeGlobal: EmployeeGlobal
 ): Employee {
+  const getSalary = () => {
+    if (!employeeGlobal.salary) return undefined;
+    const salary = parseInt(employeeGlobal.salary);
+    if (isNaN(salary)) return undefined;
+    return salary;
+  };
   return {
     employeeId: employeeGlobal.id.toString(),
     name: `${employeeGlobal.firstName} ${employeeGlobal.lastName}`,
@@ -24,9 +30,7 @@ export function getEmployeeFromEmployeeGlobal(
       skillId: skill.id.toString(),
       skill: skill.skill,
     })),
-    salary: employeeGlobal.salary
-      ? parseInt(employeeGlobal?.salary)
-      : undefined,
+    salary: getSalary(),
     joiningDate: employeeGlobal.dateOfJoining,
     dateOfBirth: employeeGlobal.dob,
   };
