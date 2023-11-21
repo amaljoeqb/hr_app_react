@@ -26,7 +26,7 @@ export function selectStyle<T>(
       }),
       multiValueLabel: (base) => ({
         ...base,
-        padding: "0.2rem 0rem 0.2rem 0.5rem",
+        padding: "0.4rem 0rem 0.4rem 0.5rem",
         transform: "translateX(0.5rem)",
         transition: "all 0.3s ease-in-out",
       }),
@@ -83,6 +83,8 @@ export function selectStyle<T>(
     }),
     multiValueLabel: (base) => ({
       ...base,
+      paddingTop: "0.4rem",
+      paddingBottom: "0.4rem",
       transition: "all 0.3s ease-in-out",
     }),
     valueContainer: (base) => ({
