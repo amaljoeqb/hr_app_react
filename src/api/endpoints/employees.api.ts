@@ -26,8 +26,10 @@ export const createEmployee = async (data: Employee) => {
   return response.data;
 };
 
-export const updateEmployee = async (id: string, data: any) => {
-  const response = await API.put(`/employee/${id}`, data);
+export const updateEmployee = async (data: Employee) => {
+  const id = data.employeeId;
+  const body = getEmployeeRequestFromEmployee(data);
+  const response = await API.put(`/employee/${id}`, body);
   return response.data;
 };
 

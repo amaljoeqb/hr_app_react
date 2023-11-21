@@ -19,11 +19,6 @@ export default function useApi() {
     }
   }
 
-  async function testApi() {
-    // await API.deleteEmployee(data.employees[5].employeeId);
-    // await API.createEmployee(data.employees[5]);
-  }
-
   async function getEmployee(id: string) {
     try {
     } catch (error: any) {
@@ -37,6 +32,8 @@ export default function useApi() {
 
   async function createEmployee(employee: Employee) {
     try {
+      await API.createEmployee(employee);
+      appContext.dispatch({ type: "ADD_EMPLOYEE", payload: employee });
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -47,6 +44,8 @@ export default function useApi() {
 
   async function updateEmployee(employee: Employee) {
     try {
+      await API.updateEmployee(employee);
+      appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -57,6 +56,8 @@ export default function useApi() {
 
   async function deleteEmployee(id: string) {
     try {
+      await API.deleteEmployee(id);
+      appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: id });
     } catch (error: any) {
       appContext.showToast({
         message: error.message,
@@ -104,7 +105,6 @@ export default function useApi() {
 
   return {
     getEmployees,
-    testApi,
     getEmployee,
     createEmployee,
     updateEmployee,

@@ -56,8 +56,7 @@ export function EmployeeListing() {
             </div>
             <HoverButton
               onClick={() => {
-                // navigate("/employee");
-                api.testApi();
+                navigate("/employee");
               }}
             >
               <span className="material-symbols-outlined"> add_circle </span>
@@ -85,7 +84,7 @@ export function EmployeeListing() {
       </main>
       {deleteEmployeeId && (
         <EmployeeDeletePopup
-          employeeId={parseInt(deleteEmployeeId)}
+          employeeId={deleteEmployeeId}
           onClose={() => {
             navigate("/");
           }}
