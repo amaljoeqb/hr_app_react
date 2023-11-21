@@ -4,62 +4,25 @@ import { SelectOption } from "../components/inputs/SelectInput";
 export function selectStyle<T>(
   isView: boolean = false
 ): StylesConfig<SelectOption<T>, boolean, GroupBase<SelectOption<T>>> {
-  if (isView) {
-    return {
-      control: (base, state) => ({
-        ...base,
-        color: "#000",
-        minHeight: state.isMulti ? "40px" : "0",
-        borderColor: "transparent",
-        backgroundColor: "#fff",
-        transition: "all 0.3s ease-in-out",
-      }),
-      indicatorsContainer: (base) => ({
-        ...base,
-        opacity: "0",
-        transition: "all 0.3s ease-in-out",
-      }),
-      multiValueRemove: (base) => ({
-        ...base,
-        opacity: "0",
-        transition: "all 0.3s ease-in-out",
-      }),
-      multiValueLabel: (base) => ({
-        ...base,
-        paddingTop: "0.4rem",
-        paddingBottom: "0.4rem",
-        transform: "translateX(0.5rem)",
-        transition: "all 0.3s ease-in-out",
-      }),
-      valueContainer: (base) => ({
-        ...base,
-        transform: "translateX(-8px)",
-        transition: "all 0.3s ease-in-out",
-      }),
-      multiValue: (base) => ({
-        ...base,
-        borderRadius: "4px",
-        transform: "translateX(-2px)",
-        transition: "all 0.3s ease-in-out",
-      }),
-      singleValue: (base) => ({
-        ...base,
-        margin: "0",
-        color: "#000",
-        transition: "all 0.3s ease-in-out",
-      }),
-    };
-  }
   return {
     control: (base, state) => ({
       ...base,
+      ...(isView && {
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0)",
+        border: "1px solid transparent",
+      }),
       boxShadow: "var(--light-shadow)",
       border: `1px solid ${
         state.isFocused ? "var(--dark-grey)" : "var(--light-grey)"
       }`,
+      backgroundColor: "transparent",
       borderRadius: "8px",
       minHeight: state.isMulti ? "40px" : "0",
       transition: "all 0.3s ease-in-out",
+      ...(isView && {
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0)",
+        border: "1px solid transparent",
+      }),
       "&:hover": {
         border: `1px solid ${
           state.isFocused ? "var(--dark-grey)" : "var(--light-grey)"
@@ -72,6 +35,9 @@ export function selectStyle<T>(
     }),
     indicatorsContainer: (base) => ({
       ...base,
+      ...(isView && {
+        opacity: "0",
+      }),
       transition: "all 0.3s ease-in-out",
     }),
     dropdownIndicator: (base) => ({
@@ -86,25 +52,39 @@ export function selectStyle<T>(
     }),
     multiValueRemove: (base) => ({
       ...base,
+      ...(isView && {
+        opacity: "0",
+      }),
       transition: "all 0.3s ease-in-out",
     }),
     multiValueLabel: (base) => ({
       ...base,
+      ...(isView && {
+        transform: "translateX(0.5rem)",
+      }),
       paddingTop: "0.4rem",
       paddingBottom: "0.4rem",
       transition: "all 0.3s ease-in-out",
     }),
-    multiValue: (base) => ({
-      ...base,
-      borderRadius: "4px",
-      transition: "all 0.3s ease-in-out",
-    }),
     valueContainer: (base) => ({
       ...base,
+      ...(isView && {
+        transform: "translateX(-8px)",
+      }),
+      transition: "all 0.3s ease-in-out",
+    }),
+    multiValue: (base) => ({
+      ...base,
+      ...(isView && {
+        transform: "translateX(-2px)",
+      }),
+      borderRadius: "4px",
       transition: "all 0.3s ease-in-out",
     }),
     singleValue: (base) => ({
       ...base,
+      color: "#000",
+      margin: "0",
       transition: "all 0.3s ease-in-out",
     }),
   };
