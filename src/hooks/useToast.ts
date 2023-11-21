@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { IToast } from "../models";
 
-export default function useToast() {
+export interface IShowToast {
+  message: string;
+  isError?: boolean;
+}
+
+export function useToast() {
   const [toasts, setToasts] = useState<IToast[]>([]);
 
-  const showToast = (message: string) => {
+  const showToast = ({message, isError}: IShowToast) => {
     const toast: IToast = {
       message,
-      isError: false,
+      isError: isError ?? false,
       id: Date.now(),
     };
     setInterval(() => {

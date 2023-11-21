@@ -10,7 +10,10 @@ export default function useApi() {
     try {
       return await API.getEmployees();
     } catch (error: any) {
-      appContext.showToast(error?.message);
+      appContext.showToast({
+        message: error.message,
+        isError: true,
+      });
       return [];
     }
   }
@@ -18,7 +21,6 @@ export default function useApi() {
   async function testApi() {
     // await API.deleteEmployee(data.employees[5].employeeId);
     // await API.createEmployee(data.employees[5]);
-    appContext.showToast("API is working!");
   }
 
   return {

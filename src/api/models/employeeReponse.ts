@@ -1,9 +1,9 @@
 export interface EmployeeResponse {
-  message: string;
   data: {
     employees: EmployeeGlobal[];
     count: number;
   };
+  message: string;
 }
 
 export interface EmployeeGlobal {

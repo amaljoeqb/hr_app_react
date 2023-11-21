@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useState } from "react";
 import { Department, Employee, IToast, Skill } from "../models";
-import useToast from "../hooks/useToast";
+import { IShowToast, useToast } from "../hooks/";
 
 export interface AppState {
   employees: Employee[];
@@ -12,7 +12,7 @@ export interface AppContextType {
   state: AppState;
   dispatch: any;
   toasts: IToast[];
-  showToast: (message: string) => void;
+  showToast: (params: IShowToast) => void;
   closeToast: (id: number) => void;
 }
 

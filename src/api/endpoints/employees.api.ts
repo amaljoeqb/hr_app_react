@@ -7,7 +7,8 @@ import {
 import { EmployeeResponse } from "../models";
 
 export const getEmployees = async () => {
-  const response: EmployeeResponse = await API.get("/employee1");
+  const response: EmployeeResponse = (await API.get("/employee")).data;
+  console.log(response.data);
   const employees: Employee[] = response.data.employees.map((employee) =>
     getEmployeeFromEmployeeGlobal(employee)
   );
