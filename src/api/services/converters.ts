@@ -15,9 +15,13 @@ export function getEmployeeFromEmployeeGlobal(
     if (isNaN(salary)) return undefined;
     return salary;
   };
+  let name = employeeGlobal.firstName;
+  if (employeeGlobal.lastName) {
+    name += ` ${employeeGlobal.lastName}`;
+  }
   return {
     employeeId: employeeGlobal.id.toString(),
-    name: `${employeeGlobal.firstName} ${employeeGlobal.lastName}`,
+    name,
     email: employeeGlobal.email,
     designation: employeeGlobal.designation,
     department: employeeGlobal.department
@@ -39,10 +43,12 @@ export function getEmployeeFromEmployeeGlobal(
 export function getEmployeeRequestFromEmployee(
   employee: Employee
 ): EmployeeRequest {
+  const firstName = employee.name.split(" ")[0];
+  const lastName = employee.name.substring(firstName.length + 1);
   return {
     id: parseInt(employee.employeeId),
-    firstName: employee.name.split(" ")[0],
-    lastName: employee.name.split(" ")[1],
+    firstName,
+    lastName,
     email: employee.email,
     designation: employee.designation,
     department: employee.department && {
