@@ -12,9 +12,6 @@ export interface TextInputProps {
 
 export default function TextInput({ label, ...props }: TextInputProps) {
   const [field, meta] = useField(props.name);
-  if (props.name === "email") {
-    console.log(meta);
-  }
   return (
     <div id={`${props.name}-field`} className="field">
       <label htmlFor={props.name}>{label}</label>

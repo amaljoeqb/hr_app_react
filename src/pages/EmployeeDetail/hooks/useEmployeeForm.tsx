@@ -16,7 +16,6 @@ export default function useEmployeeForm({
     employeeId: getNextEmployeeId(appContext.state.employees),
     name: "",
     email: "",
-    salary: 0,
     designation: "",
     department: undefined,
     skills: [],
