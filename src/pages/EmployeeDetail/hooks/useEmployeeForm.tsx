@@ -3,12 +3,14 @@ import { EmployeeFormProps } from "../components/EmployeeForm";
 import { useAppContext } from "../../../store/app.context";
 import { getNextEmployeeId } from "../../../services/helpers";
 import { Department, Employee, Skill } from "../../../models";
+import { useApi } from "../../../hooks";
 
 export default function useEmployeeForm({
   employee,
   skills,
   departments,
 }: EmployeeFormProps) {
+  const api = useApi();
   const appContext = useAppContext();
   const navigate = useNavigate();
   const isInitialValid = employee !== undefined;
@@ -34,15 +36,9 @@ export default function useEmployeeForm({
 
   function onSubmit(values: Employee) {
     if (employee) {
-      appContext.dispatch({
-        type: "UPDATE_EMPLOYEE",
-        payload: values,
-      });
+      api.updateEmployee(values);
     } else {
-      appContext.dispatch({
-        type: "ADD_EMPLOYEE",
-        payload: values,
-      });
+      api.createEmployee(values);
     }
     navigate("/");
   }

@@ -1,5 +1,10 @@
 import { Employee, Skill, Department } from "../../models";
-import { EmployeeGlobal, SkillGlobal, DepartmentGlobal } from "../models";
+import {
+  EmployeeGlobal,
+  SkillGlobal,
+  DepartmentGlobal,
+  EmployeeRequest,
+} from "../models";
 
 export function getEmployeeFromEmployeeGlobal(
   employeeGlobal: EmployeeGlobal
@@ -27,20 +32,35 @@ export function getEmployeeFromEmployeeGlobal(
   };
 }
 
-export function getEmployeeRequestFromEmployee(employee: Employee) {
+export function getEmployeeRequestFromEmployee(
+  employee: Employee,
+  employeeGlobal: EmployeeGlobal
+): EmployeeRequest {
+  // use employee global data if value is not present in employee
+  const nameEmployeeGlobal = `${employeeGlobal.firstName} ${employeeGlobal.lastName}`;
+  let firstName = employeeGlobal.firstName;
+  let lastName = employeeGlobal.lastName;
+  if (nameEmployeeGlobal !== employee.name) {
+    firstName = employee.name.split(" ")[0];
+    lastName = employee.name.substring(firstName.length + 1);
+  }
   return {
     id: parseInt(employee.employeeId),
-    firstName: employee.name.split(" ")[0],
-    lastName: employee.name.split(" ")[1],
+    firstName: firstName,
+    lastName: lastName,
     email: employee.email,
     designation: employee.designation,
     departmentId: employee.department?.departmentId
       ? parseInt(employee.department?.departmentId)
-      : undefined,
+      : employeeGlobal.department?.id,
     skills: employee.skills?.map((skill) => skill.skillId).join(","),
     salary: employee.salary?.toString(),
     dateOfJoining: employee.joiningDate,
     dob: employee.dateOfBirth,
+    roleId: employeeGlobal.role?.id,
+    address: employeeGlobal.address,
+    //phone: employeeGlobal.phone,
+    isActive: employeeGlobal.isActive,
   };
 }
 

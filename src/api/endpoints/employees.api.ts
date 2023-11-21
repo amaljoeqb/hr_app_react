@@ -20,15 +20,17 @@ export const getEmployee = async (id: string) => {
 };
 
 export const createEmployee = async (data: Employee) => {
-  const body = getEmployeeRequestFromEmployee(data);
+  const currentEmployee = await getEmployee(data.employeeId);
+  const body = getEmployeeRequestFromEmployee(data, currentEmployee);
   const response = await API.post("/employee", body);
   return response.data;
 };
 
 export const updateEmployee = async (data: Employee) => {
   const id = data.employeeId;
-  const body = getEmployeeRequestFromEmployee(data);
-  const response = await API.put(`/employee/${id}`, body);
+  const currentEmployee = await getEmployee(data.employeeId);
+  const body = getEmployeeRequestFromEmployee(data, currentEmployee);
+  const response = await API.patch(`/employee/${id}`, body);
   return response.data;
 };
 
