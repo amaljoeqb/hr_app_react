@@ -1,5 +1,5 @@
-import { Employee } from "../../models";
-import { EmployeeGlobal } from "../models";
+import { Employee, Skill, Department } from "../../models";
+import { EmployeeGlobal, SkillGlobal, DepartmentGlobal } from "../models";
 
 export function getEmployeeFromEmployeeGlobal(
   employeeGlobal: EmployeeGlobal
@@ -41,5 +41,21 @@ export function getEmployeeRequestFromEmployee(employee: Employee) {
     salary: employee.salary?.toString(),
     dateOfJoining: employee.joiningDate,
     dob: employee.dateOfBirth,
+  };
+}
+
+export function getSkillFromSkillGlobal(skillGlobal: SkillGlobal): Skill {
+  return {
+    skillId: skillGlobal.id.toString(),
+    skill: skillGlobal.skill,
+  };
+}
+
+export function getDepartmentFromDepartmentGlobal(
+  departmentGlobal: DepartmentGlobal
+): Department {
+  return {
+    departmentId: departmentGlobal.id.toString(),
+    department: departmentGlobal.department,
   };
 }

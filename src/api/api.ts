@@ -11,7 +11,7 @@ API.interceptors.response.use(
     if (response.status !== 200) {
       return Promise.reject(response);
     }
-    return response;
+    return response.data;
   },
   (error) => {
     return Promise.reject(error);

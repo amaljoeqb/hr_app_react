@@ -11,12 +11,8 @@ export default function useLoadData() {
   const loadData = async () => {
     try {
       let employees = await api.getEmployees();
-      let skills =
-        localStorage.getItem("skills") &&
-        JSON.parse(localStorage.getItem("skills") as string);
-      let departments =
-        localStorage.getItem("departments") &&
-        JSON.parse(localStorage.getItem("departments") as string);
+      let skills = await api.getSkills();
+      let departments = await api.getDepartments();
       if (skills === null || employees === null || departments === null) {
         skills = data.skills;
         departments = data.departments;
