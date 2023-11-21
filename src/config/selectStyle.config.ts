@@ -9,7 +9,7 @@ export function selectStyle<T>(
       control: (base, state) => ({
         ...base,
         color: "#000",
-        minHeight: "0",
+        minHeight: state.isMulti ? "40px" : "0",
         borderColor: "transparent",
         backgroundColor: "#fff",
         transition: "all 0.3s ease-in-out",
@@ -26,13 +26,20 @@ export function selectStyle<T>(
       }),
       multiValueLabel: (base) => ({
         ...base,
-        padding: "0.4rem 0rem 0.4rem 0.5rem",
+        paddingTop: "0.4rem",
+        paddingBottom: "0.4rem",
         transform: "translateX(0.5rem)",
         transition: "all 0.3s ease-in-out",
       }),
       valueContainer: (base) => ({
         ...base,
-        padding: "0",
+        transform: "translateX(-8px)",
+        transition: "all 0.3s ease-in-out",
+      }),
+      multiValue: (base) => ({
+        ...base,
+        borderRadius: "4px",
+        transform: "translateX(-2px)",
         transition: "all 0.3s ease-in-out",
       }),
       singleValue: (base) => ({
@@ -51,7 +58,7 @@ export function selectStyle<T>(
         state.isFocused ? "var(--dark-grey)" : "var(--light-grey)"
       }`,
       borderRadius: "8px",
-      minHeight: "0",
+      minHeight: state.isMulti ? "40px" : "0",
       transition: "all 0.3s ease-in-out",
       "&:hover": {
         border: `1px solid ${
@@ -85,6 +92,11 @@ export function selectStyle<T>(
       ...base,
       paddingTop: "0.4rem",
       paddingBottom: "0.4rem",
+      transition: "all 0.3s ease-in-out",
+    }),
+    multiValue: (base) => ({
+      ...base,
+      borderRadius: "4px",
       transition: "all 0.3s ease-in-out",
     }),
     valueContainer: (base) => ({
