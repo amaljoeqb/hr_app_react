@@ -13,7 +13,7 @@ export default function useApi() {
       return employees;
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: "There was en error while fetching employees",
         isError: true,
       });
     }
@@ -23,7 +23,7 @@ export default function useApi() {
     try {
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: `There was en error while fetching employee (ID: ${id})`,
         isError: true,
       });
       return null;
@@ -32,36 +32,53 @@ export default function useApi() {
 
   async function createEmployee(employee: Employee) {
     try {
-      await API.createEmployee(employee);
       appContext.dispatch({ type: "ADD_EMPLOYEE", payload: employee });
+      await API.createEmployee(employee);
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: `There was en error while creating employee (${employee.name})`,
         isError: true,
       });
+      appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: employee });
     }
   }
 
   async function updateEmployee(employee: Employee) {
+    const currentEmployee = appContext.state.employees.find(
+      (e) => e.employeeId === employee.employeeId
+    );
     try {
-      await API.updateEmployee(employee);
       appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
+      await API.updateEmployee(employee);
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: `There was en error while updating employee (${employee.name})`,
         isError: true,
+      });
+      appContext.dispatch({
+        type: "UPDATE_EMPLOYEE",
+        payload: currentEmployee,
       });
     }
   }
 
   async function deleteEmployee(id: string) {
+    const currentEmployee = appContext.state.employees.find(
+      (e) => e.employeeId === id
+    );
     try {
-      await API.deleteEmployee(id);
       appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: id });
+      await API.deleteEmployee(id);
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: `There was en error while deleting employee (${
+          currentEmployee?.name ?? "ID: " + id
+        })`,
         isError: true,
+      });
+      appContext.dispatch({
+        type: "ADD_EMPLOYEE",
+        payload: currentEmployee,
       });
     }
   }
@@ -73,7 +90,7 @@ export default function useApi() {
       return skills;
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: "There was en error while fetching skills",
         isError: true,
       });
     }
@@ -85,7 +102,7 @@ export default function useApi() {
       appContext.dispatch({ type: "SET_DEPARTMENTS", payload: departments });
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: "There was en error while fetching departments",
         isError: true,
       });
     }
@@ -96,7 +113,7 @@ export default function useApi() {
       return await API.getRoles();
     } catch (error: any) {
       appContext.showToast({
-        message: error.message,
+        message: "There was en error while fetching roles",
         isError: true,
       });
       return [];
