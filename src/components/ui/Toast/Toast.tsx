@@ -10,8 +10,7 @@ export default function Toast({ toast, onClose }: ToastProps) {
     <div className={`toast show ${toast.isError ? "error" : ""}`}>
       <p className="toast-message">{toast.message}</p>
       <span className="material-symbols-outlined close-toast" onClick={onClose}>
-        {" "}
-        close{" "}
+        close
       </span>
     </div>
   );

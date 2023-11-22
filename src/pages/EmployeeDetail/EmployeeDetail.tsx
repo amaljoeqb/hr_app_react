@@ -32,8 +32,7 @@ export default function EmployeeDetail() {
                 navigate(-1);
               }}
             >
-              {" "}
-              arrow_back{" "}
+              arrow_back
             </span>
 
             <div className="add-heading">
