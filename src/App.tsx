@@ -13,7 +13,7 @@ import Toast from "./components/ui/Toast/Toast";
 import ToastContainer from "./components/ui/Toast/ToastContainer";
 import { Loader } from "./components";
 
-const basename = process.env.NODE_ENV === "development" ? "/" : "/hr_app_react";
+const basename = "/hr_app_react";
 
 const router = createBrowserRouter(routes, {
   basename,

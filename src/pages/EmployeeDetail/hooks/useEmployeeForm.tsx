@@ -59,6 +59,7 @@ export default function useEmployeeForm({
   function onAutofill() {
     const randomIndex = Math.floor(Math.random() * data.employees.length);
     const employee = data.employees[randomIndex];
+    employee.employeeId = getNextEmployeeId(appContext.state.employees);
     setInitialValues(employee);
   }
 

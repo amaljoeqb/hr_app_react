@@ -25,6 +25,15 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     onAutofill,
   } = useEmployeeForm(props);
 
+  /**
+   * This function is only for development purpose.
+   */
+  function onEmployeeIdDoubleClick() {
+    if (process.env.NODE_ENV === "development") {
+      onAutofill();
+    }
+  }
+
   return (
     <Formik<Employee>
       key={initialValues.employeeId}
@@ -41,7 +50,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
             type="number"
             required
             disabled
-            onDoubleClick={onAutofill}
+            onDoubleClick={onEmployeeIdDoubleClick}
           />
           <TextInput label="Name" name="name" required={true} />
         </div>
