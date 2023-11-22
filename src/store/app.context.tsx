@@ -62,6 +62,24 @@ const appReducer = (
         employees,
       };
     }
+    case "SET_EMPLOYEE": {
+      let exists = false;
+      const employees = state.employees.map((employee) => {
+        if (employee.employeeId === action.payload.employeeId) {
+          exists = true;
+          return action.payload;
+        }
+        return employee;
+      });
+      if (!exists) {
+        employees.push(action.payload);
+      }
+      localStorage.setItem("employees", JSON.stringify(employees));
+      return {
+        ...state,
+        employees,
+      };
+    }
     case "DELETE_EMPLOYEE": {
       const employees = state.employees.filter(
         (employee) => employee.employeeId !== action.payload

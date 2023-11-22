@@ -1,5 +1,5 @@
 export interface EmployeeRequest {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   isActive?: boolean;

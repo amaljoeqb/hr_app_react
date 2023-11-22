@@ -46,7 +46,6 @@ export function getEmployeeRequestFromEmployee(
   const firstName = employee.name.split(" ")[0];
   const lastName = employee.name.substring(firstName.length + 1);
   return {
-    id: parseInt(employee.employeeId),
     firstName,
     lastName,
     email: employee.email,

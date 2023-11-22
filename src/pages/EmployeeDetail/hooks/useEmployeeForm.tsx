@@ -11,7 +11,7 @@ export default function useEmployeeForm({
   departments,
   isView,
   onEdit,
-  onView,
+  onSave: onView,
 }: EmployeeFormProps) {
   const api = useApi();
   const appContext = useAppContext();

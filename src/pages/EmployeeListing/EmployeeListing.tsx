@@ -29,6 +29,7 @@ export function EmployeeListing() {
 
   const urlParams = useQuery();
   const api = useApi();
+
   const deleteEmployeeId = urlParams.get("delete");
   const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
@@ -58,7 +59,7 @@ export function EmployeeListing() {
             </div>
             <HoverButton
               onClick={() => {
-                navigate("/employee");
+                navigate("/employee/?edit=true");
               }}
             >
               <span className="material-symbols-outlined"> add_circle </span>

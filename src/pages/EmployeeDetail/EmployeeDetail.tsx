@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
-import { useState } from "react";
+import { useQuery } from "../../hooks";
 
 export default function EmployeeDetail() {
   const employeeId = useParams<{ employeeId: string }>().employeeId;
@@ -10,7 +10,8 @@ export default function EmployeeDetail() {
   const navigate = useNavigate();
   const { employees, skills, departments } = appContext.state;
   let employee: Employee | undefined = undefined;
-  const [isView, setIsView] = useState(true);
+  const urlParams = useQuery();
+  const isEdit = urlParams.get("edit") === "true";
 
   if (employeeId) {
     employee = employees.find((employee) => employee.employeeId == employeeId);
@@ -19,7 +20,7 @@ export default function EmployeeDetail() {
   return (
     <div
       className={`popup emp-popup show-popup ${
-        isView ? "view-popup" : "edit-popup"
+        isEdit ? "edit-popup" : "view-popup"
       }`}
     >
       <section className="popup-content">
@@ -53,12 +54,12 @@ export default function EmployeeDetail() {
           employee={employee}
           skills={skills}
           departments={departments}
-          isView={isView}
+          isView={!isEdit}
           onEdit={() => {
-            setIsView(false);
+            navigate(`/employee/${employeeId}?edit=true`);
           }}
-          onView={() => {
-            setIsView(true);
+          onSave={() => {
+            navigate(-1);
           }}
         />
       </section>

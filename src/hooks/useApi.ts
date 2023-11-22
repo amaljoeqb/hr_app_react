@@ -21,6 +21,9 @@ export default function useApi() {
 
   async function getEmployee(id: string) {
     try {
+      const employee = await API.getEmployee(id);
+      appContext.dispatch({ type: "SET_EMPLOYEE", payload: employee });
+      return employee;
     } catch (error: any) {
       appContext.showToast({
         message: `There was en error while fetching employee (ID: ${id})`,

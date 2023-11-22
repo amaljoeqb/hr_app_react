@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const employeeSchema = Yup.object({
-  employeeId: Yup.number().required("Required"),
+  employeeId: Yup.number(),
   name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   salary: Yup.number()

@@ -11,7 +11,7 @@ export interface EmployeeFormProps {
   departments: Department[];
   isView: boolean;
   onEdit: () => void;
-  onView: () => void;
+  onSave: () => void;
 }
 
 export default function EmployeeForm(props: EmployeeFormProps) {
@@ -23,7 +23,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     isInitialValid,
     onClickEdit,
   } = useEmployeeForm(props);
-
 
   return (
     <Formik<Employee>
@@ -98,9 +97,12 @@ export default function EmployeeForm(props: EmployeeFormProps) {
             />
           </div>
           <div className="back">
-            <button id="edit-button" className="hover-btn" type="button" onClick={
-              onClickEdit
-            }>
+            <button
+              id="edit-button"
+              className="hover-btn"
+              type="button"
+              onClick={onClickEdit}
+            >
               Edit
             </button>
           </div>
