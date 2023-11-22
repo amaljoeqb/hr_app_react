@@ -64,7 +64,7 @@ export default function EmployeeRow({
             navigate(`/?delete=${employee.employeeId}`);
           }}
           onEdit={() => {
-            navigate(`/employee/${employee.employeeId}`);
+            navigate(`/employee/${employee.employeeId}?edit=true`);
           }}
         />
       </td>
