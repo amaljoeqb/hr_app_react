@@ -22,10 +22,12 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     departmentOptions,
     isInitialValid,
     onClickEdit,
+    onAutofill,
   } = useEmployeeForm(props);
 
   return (
     <Formik<Employee>
+      key={initialValues.employeeId}
       initialValues={initialValues}
       validateOnMount={isInitialValid}
       onSubmit={onSubmit}
@@ -39,6 +41,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
             type="number"
             required
             disabled
+            onDoubleClick={onAutofill}
           />
           <TextInput label="Name" name="name" required={true} />
         </div>

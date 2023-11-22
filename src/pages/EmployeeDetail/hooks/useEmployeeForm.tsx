@@ -4,6 +4,8 @@ import { useAppContext } from "../../../store/app.context";
 import { getNextEmployeeId } from "../../../services/";
 import { Department, Employee, Skill } from "../../../models";
 import { useApi } from "../../../hooks";
+import { useState } from "react";
+import data from "../../../data/data.json";
 
 export default function useEmployeeForm({
   employee,
@@ -17,7 +19,7 @@ export default function useEmployeeForm({
   const appContext = useAppContext();
   const navigate = useNavigate();
   const isInitialValid = employee !== undefined;
-  const initialValues: Employee = employee ?? {
+  const newEmployee: Employee = {
     employeeId: getNextEmployeeId(appContext.state.employees),
     name: "",
     email: "",
@@ -27,6 +29,10 @@ export default function useEmployeeForm({
     dateOfBirth: "",
     joiningDate: "",
   };
+  const [initialValues, setInitialValues] = useState<Employee>(
+    employee || newEmployee
+  );
+
   const departmentOptions = departments.map((department) => ({
     value: department,
     label: department.department,
@@ -50,14 +56,17 @@ export default function useEmployeeForm({
     onEdit();
   }
 
-  function onClickReset() {
-    navigate(-1);
+  function onAutofill() {
+    const randomIndex = Math.floor(Math.random() * data.employees.length);
+    const employee = data.employees[randomIndex];
+    setInitialValues(employee);
   }
 
   return {
     initialValues,
     onSubmit,
     onClickEdit,
+    onAutofill,
     departmentOptions,
     skillsOptions,
     isInitialValid,
