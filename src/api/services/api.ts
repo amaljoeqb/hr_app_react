@@ -1,9 +1,7 @@
 import axios, { AxiosInstance } from "axios";
+import { apiConfig } from "../";
 
-const API: AxiosInstance = axios.create({
-  baseURL: "http://3.145.178.76:4000/",
-  timeout: 120000,
-});
+const API: AxiosInstance = axios.create(apiConfig);
 
 // reject promise if status code not 200
 API.interceptors.response.use(
