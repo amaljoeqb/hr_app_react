@@ -11,7 +11,7 @@ export default function useEmployeeForm({
   departments,
   isView,
   onEdit,
-  onSave: onView,
+  onSave,
 }: EmployeeFormProps) {
   const api = useApi();
   const appContext = useAppContext();
@@ -43,11 +43,15 @@ export default function useEmployeeForm({
     } else {
       api.createEmployee(values);
     }
-    onView();
+    onSave();
   }
 
   function onClickEdit() {
     onEdit();
+  }
+
+  function onClickReset() {
+    navigate(-1);
   }
 
   return {
