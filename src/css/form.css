@@ -49,6 +49,8 @@ form textarea,
   box-shadow: var(--light-shadow);
 }
 
+
+
 input.skill-input {
   border: none;
   padding: 10px 0;
@@ -189,15 +191,19 @@ form textarea:focus,
   display: block;
 }
 
+
 .view-popup input:not(.skill-input),
 .view-popup textarea,
 .view-popup .skills-input-container {
   border: 1px solid transparent;
-  background-color: transparent;
-  padding: 4px 0;
+  transform: translateX(-13px);
   font-size: 16px;
   color: black;
   box-shadow: none;
+}
+
+.view-popup input:disabled{
+  background-color: transparent;
 }
 
 .view-popup .field {
