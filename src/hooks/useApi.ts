@@ -38,6 +38,7 @@ export default function useApi() {
       appContext.dispatch({ type: "ADD_EMPLOYEE", payload: employee });
       await API.createEmployee(employee);
     } catch (error: any) {
+      console.log(error);
       appContext.showToast({
         message: `There was en error while creating employee (${employee.name})`,
         isError: true,

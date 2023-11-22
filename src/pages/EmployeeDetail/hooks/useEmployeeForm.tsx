@@ -18,7 +18,7 @@ export default function useEmployeeForm({
   const navigate = useNavigate();
   const isInitialValid = employee !== undefined;
   const initialValues: Employee = employee ?? {
-    employeeId: "",
+    employeeId: getNextEmployeeId(appContext.state.employees),
     name: "",
     email: "",
     designation: "",

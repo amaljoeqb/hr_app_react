@@ -45,7 +45,9 @@ export function getEmployeeRequestFromEmployee(
 ): EmployeeRequest {
   const firstName = employee.name.split(" ")[0];
   const lastName = employee.name.substring(firstName.length + 1);
+  const employeeId = parseInt(employee.employeeId);
   return {
+    id: isNaN(employeeId) ? undefined : employeeId,
     firstName,
     lastName,
     email: employee.email,
