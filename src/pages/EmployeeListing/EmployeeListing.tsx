@@ -25,10 +25,12 @@ export function EmployeeListing() {
     setPage,
     filteredData,
   } = useEmployeeTable(employees);
+  const PER_PAGE = 10;
 
   const urlParams = useQuery();
   const api = useApi();
   const deleteEmployeeId = urlParams.get("delete");
+  const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
   return (
     <>
@@ -74,13 +76,15 @@ export function EmployeeListing() {
             }}
           />
         </div>
-        <PaginationControl
-          current={page}
-          total={Math.ceil(filteredData.length / 10)}
-          onChange={(page) => {
-            setPage(page);
-          }}
-        />
+        {totalPages > 1 && (
+          <PaginationControl
+            current={page}
+            total={totalPages}
+            onChange={(page) => {
+              setPage(page);
+            }}
+          />
+        )}
       </main>
       {deleteEmployeeId && (
         <EmployeeDeletePopup
