@@ -1,7 +1,7 @@
 import { useAppContext } from "../store/app.context";
 import * as API from "../api";
 import { Employee } from "../models";
-import { errorMessages } from "../constants";
+import { errorMessages } from "../services/";
 
 export default function useApi() {
   const appContext = useAppContext();

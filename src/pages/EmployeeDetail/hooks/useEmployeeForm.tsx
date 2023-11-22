@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { EmployeeFormProps } from "../components/EmployeeForm";
 import { useAppContext } from "../../../store/app.context";
-import { getNextEmployeeId } from "../../../services/helpers";
+import { getNextEmployeeId } from "../../../services/";
 import { Department, Employee, Skill } from "../../../models";
 import { useApi } from "../../../hooks";
 
