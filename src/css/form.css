@@ -45,7 +45,7 @@ form textarea,
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid var(--light-grey);
-  font-size: 14px;
+  font-size: 16px;
   box-shadow: var(--light-shadow);
 }
 
@@ -195,11 +195,9 @@ form textarea:focus,
 .view-popup input:not(.skill-input),
 .view-popup textarea,
 .view-popup .skills-input-container {
-  border: 1px solid transparent;
+  border-color: transparent;
   transform: translateX(-13px);
-  font-size: 16px;
-  color: black;
-  box-shadow: none;
+  box-shadow: var(--no-shadow);
 }
 
 .view-popup input:disabled{

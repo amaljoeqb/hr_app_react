@@ -7,6 +7,7 @@
   --accent-color: hsl(240 4.8% 95.9%);
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   --light-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --no-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0);
   --light-grey: #e4e4e4;
   --dark-grey: #a5a5a5;
   --text-color: rgb(24, 24, 27);
