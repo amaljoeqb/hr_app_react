@@ -1,7 +1,7 @@
 import { useAppContext } from "../store/app.context";
 import * as API from "../api";
-import data from "../data.json";
 import { Employee } from "../models";
+import { errorMessages } from "../constants";
 
 export default function useApi() {
   const appContext = useAppContext();
@@ -13,7 +13,7 @@ export default function useApi() {
       return employees;
     } catch (error: any) {
       appContext.showToast({
-        message: "There was en error while fetching employees",
+        message: errorMessages.getEmployeesError,
         isError: true,
       });
     }
@@ -26,7 +26,7 @@ export default function useApi() {
       return employee;
     } catch (error: any) {
       appContext.showToast({
-        message: `There was en error while fetching employee (ID: ${id})`,
+        message: errorMessages.getEmployeeError(id),
         isError: true,
       });
       return null;
@@ -40,7 +40,7 @@ export default function useApi() {
     } catch (error: any) {
       console.log(error);
       appContext.showToast({
-        message: `There was en error while creating employee (${employee.name})`,
+        message: errorMessages.createEmployeeError(employee.name),
         isError: true,
       });
       appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: employee });
@@ -56,7 +56,7 @@ export default function useApi() {
       await API.updateEmployee(employee);
     } catch (error: any) {
       appContext.showToast({
-        message: `There was en error while updating employee (${employee.name})`,
+        message: errorMessages.updateEmployeeError(currentEmployee?.name ?? employee.employeeId),
         isError: true,
       });
       appContext.dispatch({
@@ -75,9 +75,7 @@ export default function useApi() {
       await API.deleteEmployee(id);
     } catch (error: any) {
       appContext.showToast({
-        message: `There was en error while deleting employee (${
-          currentEmployee?.name ?? "ID: " + id
-        })`,
+        message: errorMessages.deleteEmployeeError(currentEmployee?.name ?? id),
         isError: true,
       });
       appContext.dispatch({
@@ -94,7 +92,7 @@ export default function useApi() {
       return skills;
     } catch (error: any) {
       appContext.showToast({
-        message: "There was en error while fetching skills",
+        message: errorMessages.getSkillsError,
         isError: true,
       });
     }
@@ -106,7 +104,7 @@ export default function useApi() {
       appContext.dispatch({ type: "SET_DEPARTMENTS", payload: departments });
     } catch (error: any) {
       appContext.showToast({
-        message: "There was en error while fetching departments",
+        message: errorMessages.getDepartmentsError,
         isError: true,
       });
     }
@@ -117,12 +115,14 @@ export default function useApi() {
       return await API.getRoles();
     } catch (error: any) {
       appContext.showToast({
-        message: "There was en error while fetching roles",
+        message: errorMessages.getRolesError,
         isError: true,
       });
       return [];
     }
   }
+
+  
 
   return {
     getEmployees,
