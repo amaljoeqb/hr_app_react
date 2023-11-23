@@ -15,7 +15,9 @@ export default function SkillsCell({ skills }: { skills: Skill[] }) {
   }
 
   function onMouseLeave() {
-    setIsActive(false);
+    if (isActive) {
+      setIsActive(false);
+    }
   }
 
   return (

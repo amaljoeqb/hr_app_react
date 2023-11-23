@@ -1,6 +1,7 @@
 .table-container {
   width: 100%;
   overflow-x: auto;
+  padding-bottom: 64px;
 }
 
 .emp-table {
@@ -229,7 +230,7 @@ table .name:hover {
 }
 
 .pagination {
-  margin: 24px;
+  margin: 12px 24px 24px 24px;
   display: flex;
   column-gap: 16px;
 }
