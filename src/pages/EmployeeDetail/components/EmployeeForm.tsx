@@ -1,10 +1,10 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
-import { Formik, Form } from "formik";
+import { Formik, Form, useFormik, useFormikContext, FormikProps } from "formik";
 import { SelectInput } from "../../../components";
 import { employeeSchema } from "../../../config";
 import useEmployeeForm from "../hooks/useEmployeeForm";
-import AutofillButton from "./AutofillButton";
+import { useEffect, useRef } from "react";
 
 export interface EmployeeFormProps {
   employee: Employee | undefined;
@@ -26,6 +26,20 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     onAutofill,
   } = useEmployeeForm(props);
 
+  const formik = useRef<FormikProps<Employee>>(null);
+
+  useEffect(() => {
+    if (formik.current) {
+      formik.current.setValues(initialValues);
+    }
+  }, [props.isView, props.employee, initialValues]);
+
+  function onEmployeeIdDoubleClick() {
+    if (formik.current) {
+      onAutofill(formik.current);
+    }
+  }
+
   return (
     <Formik<Employee>
       key={initialValues.employeeId}
@@ -33,10 +47,11 @@ export default function EmployeeForm(props: EmployeeFormProps) {
       validateOnMount={isInitialValid}
       onSubmit={onSubmit}
       validationSchema={employeeSchema}
+      innerRef={formik}
     >
       <Form id="emp-form" noValidate>
         <div className="row">
-          <AutofillButton onAutofill={onAutofill}>
+          <div onDoubleClick={onEmployeeIdDoubleClick} className="field">
             <TextInput
               label="Employee ID"
               name="employeeId"
@@ -44,7 +59,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               required
               disabled
             />
-          </AutofillButton>
+          </div>
           <TextInput label="Name" name="name" required={true} />
         </div>
         <div className="row">
