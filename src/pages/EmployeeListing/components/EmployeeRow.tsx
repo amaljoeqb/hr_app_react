@@ -4,6 +4,7 @@ import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
 import { Link, useNavigate } from "react-router-dom";
 import EmployeeActionMenu from "./EmployeeActionMenu";
+import SkillsCell from "./SkillsCell";
 
 export interface EmployeeRowProps {
   employee: Employee;
@@ -52,12 +53,7 @@ export default function EmployeeRow({
           searchTerm={searchTerm}
         />
       </td>
-      <td className="skills-cell">
-        {employee.skills.map((skill) => (
-          <Chip key={skill.skillId}>{skill.skill}</Chip>
-        ))}
-        <div className="skills-tooltip">{skillsToString(employee.skills)}</div>
-      </td>
+      <SkillsCell skills={employee.skills} />
       <td className="overflow">
         <EmployeeActionMenu
           onDelete={() => {

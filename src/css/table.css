@@ -283,6 +283,10 @@ table .name:hover {
   display: none;
 }
 
+.skills-tooltip.active {
+  display: block;
+}
+
 .no-data {
   text-align: center;
 }
