@@ -30,9 +30,7 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Header />
           <RouterProvider router={router} />
-          <Footer />
         </>
       )}
       <ToastContainer toasts={toasts} onCloseToast={closeToast} />

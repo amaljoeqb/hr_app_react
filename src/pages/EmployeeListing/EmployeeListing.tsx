@@ -8,6 +8,7 @@ import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useApi, useQuery } from "../../hooks";
+import { Footer, Header } from "../../layout";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -35,6 +36,7 @@ export function EmployeeListing() {
 
   return (
     <>
+      <Header />
       <main className="card">
         <h1>Employees</h1>
         <div className="emp-listing-header">
@@ -95,6 +97,7 @@ export function EmployeeListing() {
           }}
         />
       )}
+      <Footer />
     </>
   );
 }

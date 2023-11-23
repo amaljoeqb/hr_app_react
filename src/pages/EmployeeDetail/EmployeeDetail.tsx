@@ -3,6 +3,7 @@ import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
 import { useQuery } from "../../hooks";
+import { Footer, Header } from "../../layout";
 
 export default function EmployeeDetail() {
   const employeeId = useParams<{ employeeId: string }>().employeeId;
@@ -18,50 +19,58 @@ export default function EmployeeDetail() {
   }
 
   return (
-    <div
-      className={`popup emp-popup show-popup ${
-        isEdit ? "edit-popup" : "view-popup"
-      }`}
-    >
-      <section className="popup-content">
-        <div className="form-header">
-          <h2>
-            <span
-              className="material-symbols-outlined back-btn"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              arrow_back
-            </span>
+    <>
+      <Header />
 
-            <div className="add-heading">
-              <span className="material-symbols-outlined"> add_circle </span>
-            </div>
-            <span className="heading-text">Employee</span>
-            <div className="view-edit-heading flip-container">
-              <div className="front">
-                <span className="material-symbols-outlined"> edit </span>
+      <div
+        className={`popup emp-popup show-popup ${
+          isEdit ? "edit-popup" : "view-popup"
+        }`}
+      >
+        <section className="popup-content">
+          <div className="form-header">
+            <h2>
+              <span
+                className="material-symbols-outlined back-btn"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                arrow_back
+              </span>
+
+              <div className="add-heading">
+                <span className="material-symbols-outlined"> add_circle </span>
               </div>
-              <div className="back">
-                <span className="material-symbols-outlined"> visibility </span>
+              <span className="heading-text">Employee</span>
+              <div className="view-edit-heading flip-container">
+                <div className="front">
+                  <span className="material-symbols-outlined"> edit </span>
+                </div>
+                <div className="back">
+                  <span className="material-symbols-outlined">
+                    {" "}
+                    visibility{" "}
+                  </span>
+                </div>
               </div>
-            </div>
-          </h2>
-        </div>
-        <EmployeeForm
-          employee={employee}
-          skills={skills}
-          departments={departments}
-          isView={!isEdit}
-          onEdit={() => {
-            navigate(`/employee/${employeeId}?edit=true`);
-          }}
-          onSave={() => {
-            navigate(-1);
-          }}
-        />
-      </section>
-    </div>
+            </h2>
+          </div>
+          <EmployeeForm
+            employee={employee}
+            skills={skills}
+            departments={departments}
+            isView={!isEdit}
+            onEdit={() => {
+              navigate(`/employee/${employeeId}?edit=true`);
+            }}
+            onSave={() => {
+              navigate(-1);
+            }}
+          />
+        </section>
+      </div>
+      <Footer />
+    </>
   );
 }
