@@ -9,7 +9,6 @@ export default function SkillsCell({ skills }: { skills: Skill[] }) {
 
   function onMouseEnter() {
     if (cellRef.current === null) return;
-    console.log(cellRef.current.clientWidth, cellRef.current.scrollWidth);
     if (cellRef.current.clientWidth < cellRef.current.scrollWidth) {
       setIsActive(true);
     }
