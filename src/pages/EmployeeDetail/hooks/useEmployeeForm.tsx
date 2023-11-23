@@ -61,7 +61,7 @@ export default function useEmployeeForm({
     }
     const nextId = getNextEmployeeId(appContext.state.employees);
     if (formik.values.employeeId !== nextId) {
-      return
+      return;
     }
     const randomIndex = Math.floor(Math.random() * data.employees.length);
     const employee = data.employees[randomIndex];

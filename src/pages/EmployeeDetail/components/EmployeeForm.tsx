@@ -32,7 +32,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     if (formik.current) {
       formik.current.setValues(initialValues);
     }
-  }, [props.isView, props.employee, initialValues]);
+  }, [props.isView, initialValues]);
 
   function onEmployeeIdDoubleClick() {
     if (formik.current) {
@@ -42,7 +42,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
 
   return (
     <Formik<Employee>
-      key={initialValues.employeeId}
       initialValues={initialValues}
       validateOnMount={isInitialValid}
       onSubmit={onSubmit}
