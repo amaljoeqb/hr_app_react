@@ -12,6 +12,7 @@ import { useAppContext } from "./store/app.context";
 import Toast from "./components/ui/Toast/Toast";
 import ToastContainer from "./components/ui/Toast/ToastContainer";
 import { Loader } from "./components";
+import { Footer, Header } from "./layout";
 
 const basename = "/hr_app_react";
 
@@ -29,10 +30,12 @@ function App() {
         <Loader />
       ) : (
         <>
+          <Header />
           <RouterProvider router={router} />
-          <ToastContainer toasts={toasts} onCloseToast={closeToast} />
+          <Footer />
         </>
       )}
+      <ToastContainer toasts={toasts} onCloseToast={closeToast} />
     </div>
   );
 }
