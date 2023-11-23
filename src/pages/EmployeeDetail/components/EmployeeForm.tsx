@@ -4,6 +4,7 @@ import { Formik, Form } from "formik";
 import { SelectInput } from "../../../components";
 import { employeeSchema } from "../../../config";
 import useEmployeeForm from "../hooks/useEmployeeForm";
+import AutofillButton from "./AutofillButton";
 
 export interface EmployeeFormProps {
   employee: Employee | undefined;
@@ -25,15 +26,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     onAutofill,
   } = useEmployeeForm(props);
 
-  /**
-   * This function is only for development purpose.
-   */
-  function onEmployeeIdDoubleClick() {
-    if (process.env.NODE_ENV === "development") {
-      onAutofill();
-    }
-  }
-
   return (
     <Formik<Employee>
       key={initialValues.employeeId}
@@ -44,14 +36,15 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     >
       <Form id="emp-form" noValidate>
         <div className="row">
-          <TextInput
-            label="Employee ID"
-            name="employeeId"
-            type="number"
-            required
-            disabled
-            onDoubleClick={onEmployeeIdDoubleClick}
-          />
+          <AutofillButton onAutofill={onAutofill}>
+            <TextInput
+              label="Employee ID"
+              name="employeeId"
+              type="number"
+              required
+              disabled
+            />
+          </AutofillButton>
           <TextInput label="Name" name="name" required={true} />
         </div>
         <div className="row">

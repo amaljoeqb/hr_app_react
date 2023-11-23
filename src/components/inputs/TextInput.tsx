@@ -13,7 +13,6 @@ export interface TextInputProps
 
 export default function TextInput({
   label,
-  onDoubleClick,
   ...props
 }: TextInputProps) {
   const [field, meta] = useField(props.name);
@@ -21,7 +20,6 @@ export default function TextInput({
     <div
       id={`${props.name}-field`}
       className="field"
-      onDoubleClick={onDoubleClick}
     >
       <label htmlFor={props.name}>{label}</label>
       <input type="text" {...field} {...props} />

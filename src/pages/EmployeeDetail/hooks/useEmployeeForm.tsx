@@ -6,6 +6,7 @@ import { Department, Employee, Skill } from "../../../models";
 import { useApi } from "../../../hooks";
 import { useState } from "react";
 import data from "../../../data/data.json";
+import { FormikContextType } from "formik";
 
 export default function useEmployeeForm({
   employee,
@@ -29,9 +30,7 @@ export default function useEmployeeForm({
     dateOfBirth: "",
     joiningDate: "",
   };
-  const [initialValues, setInitialValues] = useState<Employee>(
-    employee || newEmployee
-  );
+  const initialValues = employee || newEmployee;
 
   const departmentOptions = departments.map((department) => ({
     value: department,
@@ -56,11 +55,18 @@ export default function useEmployeeForm({
     onEdit();
   }
 
-  function onAutofill() {
+  function onAutofill(formik: FormikContextType<Employee>) {
+    if (process.env.NODE_ENV !== "development") {
+      return;
+    }
+    const nextId = getNextEmployeeId(appContext.state.employees);
+    if (formik.values.employeeId !== nextId) {
+      return
+    }
     const randomIndex = Math.floor(Math.random() * data.employees.length);
     const employee = data.employees[randomIndex];
-    employee.employeeId = getNextEmployeeId(appContext.state.employees);
-    setInitialValues(employee);
+    employee.employeeId = nextId;
+    formik.setValues(employee);
   }
 
   return {

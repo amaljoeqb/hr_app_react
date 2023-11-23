@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAppContext } from "../store/app.context";
-import data from "../data.json";
 import { useApi } from "./";
 
 export default function useLoadData() {
