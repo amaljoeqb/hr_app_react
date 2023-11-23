@@ -43,7 +43,10 @@ export default function useApi() {
         message: errorMessages.createEmployeeError(employee.name),
         isError: true,
       });
-      appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: employee });
+      appContext.dispatch({
+        type: "DELETE_EMPLOYEE",
+        payload: employee.employeeId,
+      });
     }
   }
 
@@ -56,7 +59,9 @@ export default function useApi() {
       await API.updateEmployee(employee);
     } catch (error: any) {
       appContext.showToast({
-        message: errorMessages.updateEmployeeError(currentEmployee?.name ?? employee.employeeId),
+        message: errorMessages.updateEmployeeError(
+          currentEmployee?.name ?? employee.employeeId
+        ),
         isError: true,
       });
       appContext.dispatch({
@@ -121,8 +126,6 @@ export default function useApi() {
       return [];
     }
   }
-
-  
 
   return {
     getEmployees,
