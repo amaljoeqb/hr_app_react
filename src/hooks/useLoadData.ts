@@ -9,7 +9,7 @@ export default function useLoadData() {
     const employees = api.getEmployees();
     const skills = api.getSkills();
     const departments = api.getDepartments();
-    Promise.all([employees, skills, departments]).then(() => {
+    const promises = Promise.all([employees, skills, departments]).then(() => {
       setLoading(false);
     });
   }, []);
