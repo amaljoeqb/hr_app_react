@@ -45,10 +45,11 @@ form textarea,
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid var(--light-grey);
-  font-size: 14px;
-  color: black;
+  font-size: 16px;
   box-shadow: var(--light-shadow);
 }
+
+
 
 input.skill-input {
   border: none;
@@ -92,7 +93,7 @@ form textarea:focus,
 }
 
 .heading-text {
-  margin-left: 8px;
+  margin: 0 8px;
 }
 
 .submit {
@@ -180,6 +181,7 @@ form textarea:focus,
   height: auto;
 }
 
+
 .add-popup .add-heading {
   display: block;
 }
@@ -189,15 +191,17 @@ form textarea:focus,
   display: block;
 }
 
+
 .view-popup input:not(.skill-input),
 .view-popup textarea,
 .view-popup .skills-input-container {
-  border: 1px solid transparent;
+  border-color: transparent;
+  transform: translateX(-13px);
+  box-shadow: var(--no-shadow);
+}
+
+.view-popup input:disabled{
   background-color: transparent;
-  padding: 4px 0;
-  font-size: 16px;
-  color: black;
-  box-shadow: none;
 }
 
 .view-popup .field {

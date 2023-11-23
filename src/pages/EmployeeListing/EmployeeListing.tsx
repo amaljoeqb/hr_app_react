@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
-import { useQuery } from "../../hooks";
+import { useApi, useQuery } from "../../hooks";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -25,9 +25,13 @@ export function EmployeeListing() {
     setPage,
     filteredData,
   } = useEmployeeTable(employees);
+  const PER_PAGE = 10;
 
   const urlParams = useQuery();
+  const api = useApi();
+
   const deleteEmployeeId = urlParams.get("delete");
+  const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
   return (
     <>
@@ -55,7 +59,7 @@ export function EmployeeListing() {
             </div>
             <HoverButton
               onClick={() => {
-                navigate("/employee");
+                navigate("/employee/?edit=true");
               }}
             >
               <span className="material-symbols-outlined"> add_circle </span>
@@ -73,19 +77,21 @@ export function EmployeeListing() {
             }}
           />
         </div>
-        <PaginationControl
-          current={page}
-          total={Math.ceil(filteredData.length / 10)}
-          onChange={(page) => {
-            setPage(page);
-          }}
-        />
+        {totalPages > 1 && (
+          <PaginationControl
+            current={page}
+            total={totalPages}
+            onChange={(page) => {
+              setPage(page);
+            }}
+          />
+        )}
       </main>
       {deleteEmployeeId && (
         <EmployeeDeletePopup
-          employeeId={parseInt(deleteEmployeeId)}
+          employeeId={deleteEmployeeId}
           onClose={() => {
-            navigate("/");
+            navigate(-1);
           }}
         />
       )}

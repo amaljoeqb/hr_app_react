@@ -8,8 +8,12 @@ import "./css/input.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { routes } from "./config";
 import useLoadData from "./hooks/useLoadData";
+import { useAppContext } from "./store/app.context";
+import Toast from "./components/ui/Toast/Toast";
+import ToastContainer from "./components/ui/Toast/ToastContainer";
+import { Loader } from "./components";
 
-const basename = process.env.NODE_ENV === "development" ? "/" : "/hr_app_react";
+const basename = "/hr_app_react";
 
 const router = createBrowserRouter(routes, {
   basename,
@@ -17,14 +21,18 @@ const router = createBrowserRouter(routes, {
 
 function App() {
   const loading = useLoadData();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const { toasts, closeToast } = useAppContext();
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <RouterProvider router={router} />
+          <ToastContainer toasts={toasts} onCloseToast={closeToast} />
+        </>
+      )}
     </div>
   );
 }

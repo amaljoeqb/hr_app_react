@@ -1,8 +1,9 @@
 import { Popup } from "../../../components";
+import { useApi } from "../../../hooks";
 import { useAppContext } from "../../../store/app.context";
 
 export interface EmployeeDeletePopupProps {
-  employeeId: number;
+  employeeId: string;
   onClose: () => void;
 }
 
@@ -10,13 +11,10 @@ export default function EmployeeDeletePopup({
   employeeId,
   onClose,
 }: EmployeeDeletePopupProps) {
-  const appContext = useAppContext();
+  const api = useApi();
 
   function onDelete() {
-    appContext.dispatch({
-      type: "DELETE_EMPLOYEE",
-      payload: employeeId,
-    });
+    api.deleteEmployee(employeeId);
     onClose();
   }
 

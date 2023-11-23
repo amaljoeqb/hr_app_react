@@ -75,23 +75,76 @@ function sortEmployees(
   order: "asc" | "desc"
 ): Employee[] {
   const asc = order === "asc";
+
+  /**
+   * Sorts two employees based on a numerical property.
+   * @param a - The first employee.
+   * @param b - The second employee.
+   * @param key - The key of the numerical property to sort by.
+   * @returns A negative number if `a` should be sorted before `b`, a positive number if `b` should be sorted before `a`, or 0 if they are equal.
+   */
   const numericalSort = (a: Employee, b: Employee, key: "salary") => {
-    if (a[key] < b[key]) {
-      return asc ? -1 : 1;
+    if (!a[key] && !b[key]) {
+      return 0;
+    } else if (!a[key]) {
+      return -1;
+    } else if (!b[key]) {
+      return 1;
     }
-    if (a[key] > b[key]) {
+
+    if (a[key]! < b[key]!) {
+      return asc ? -1 : 1;
+    } else if (a[key]! > b[key]!) {
       return asc ? 1 : -1;
     }
     return 0;
   };
 
+  /**
+   * Sorts employees based on their employeeId in ascending or descending order.
+   * @param a - The first employee object to compare.
+   * @param b - The second employee object to compare.
+   * @returns - A negative number if a should be sorted before b, a positive number if b should be sorted before a, or 0 if they are equal.
+   */
+  const idSort = (a: Employee, b: Employee) => {
+    const aId = parseInt(a.employeeId);
+    const bId = parseInt(b.employeeId);
+    if (isNaN(aId) && isNaN(bId)) {
+      return 0;
+    } else if (isNaN(aId)) {
+      return -1;
+    } else if (isNaN(bId)) {
+      return 1;
+    }
+    if (aId < bId) {
+      return asc ? -1 : 1;
+    } else if (aId > bId) {
+      return asc ? 1 : -1;
+    }
+    return 0;
+  };
+
+  /**
+   * Sorts an array of objects based on a specified key in an alphanumeric order.
+   * @param a - The first object to compare.
+   * @param b - The second object to compare.
+   * @param key - The key to use for comparison. Can be "employeeId", "name", "designation", or "email".
+   * @returns A negative number if a should be sorted before b, a positive number if a should be sorted after b, or 0 if they are equal.
+   */
   const alphaNumericSort = (
     a: Employee,
     b: Employee,
     key: "employeeId" | "name" | "designation" | "email"
   ) => {
-    const aString = a[key].toString().toLowerCase();
-    const bString = b[key].toString().toLowerCase();
+    if (!a[key] && !b[key]) {
+      return 0;
+    } else if (!a[key]) {
+      return -1;
+    } else if (!b[key]) {
+      return 1;
+    }
+    const aString = a[key]!.toString().toLowerCase();
+    const bString = b[key]!.toString().toLowerCase();
     if (aString < bString) {
       return asc ? -1 : 1;
     }
@@ -101,6 +154,12 @@ function sortEmployees(
     return 0;
   };
 
+  /**
+   * Sorts employees based on their department name.
+   * @param a - The first employee object to compare.
+   * @param b - The second employee object to compare.
+   * @returns A negative number if `a` should be sorted before `b`, a positive number if `a` should be sorted after `b`, or 0 if they are equal.
+   */
   const departmentSort = (a: Employee, b: Employee) => {
     const aString = a.department?.department.toString().toLowerCase() ?? "";
     const bString = b.department?.department.toString().toLowerCase() ?? "";
@@ -114,11 +173,12 @@ function sortEmployees(
   };
 
   switch (key) {
+    case "employeeId":
+      return employees.sort(idSort);
     case "salary":
       return employees.sort((a: Employee, b: Employee) =>
         numericalSort(a, b, key)
       );
-    case "employeeId":
     case "name":
     case "email":
     case "designation":

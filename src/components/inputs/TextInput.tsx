@@ -1,7 +1,8 @@
 import { useField } from "formik";
 import { InputError } from "../";
 
-export interface TextInputProps {
+export interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
   required?: boolean;
@@ -10,13 +11,16 @@ export interface TextInputProps {
   type?: string;
 }
 
-export default function TextInput({ label, ...props }: TextInputProps) {
+export default function TextInput({
+  label,
+  ...props
+}: TextInputProps) {
   const [field, meta] = useField(props.name);
-  if (props.name === "email") {
-    console.log(meta);
-  }
   return (
-    <div id={`${props.name}-field`} className="field">
+    <div
+      id={`${props.name}-field`}
+      className="field"
+    >
       <label htmlFor={props.name}>{label}</label>
       <input type="text" {...field} {...props} />
       <InputError

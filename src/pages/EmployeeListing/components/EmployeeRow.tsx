@@ -1,5 +1,5 @@
 import { Employee } from "../../../models";
-import { skillsToString } from "../../../services/helpers";
+import { skillsToString } from "../../../services/";
 import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,7 +41,10 @@ export default function EmployeeRow({
         </div>
       </td>
       <td>
-        <HighlightedSpan text={employee.designation} searchTerm={searchTerm} />
+        <HighlightedSpan
+          text={employee.designation ?? "N/A"}
+          searchTerm={searchTerm}
+        />
       </td>
       <td>
         <HighlightedSpan
@@ -61,7 +64,7 @@ export default function EmployeeRow({
             navigate(`/?delete=${employee.employeeId}`);
           }}
           onEdit={() => {
-            navigate(`/employee/${employee.employeeId}`);
+            navigate(`/employee/${employee.employeeId}?edit=true`);
           }}
         />
       </td>

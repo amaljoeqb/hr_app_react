@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
-import { Department, Employee, Skill } from "../models";
+import { Department, Employee, IToast, Skill } from "../models";
+import { IShowToast, useToast } from "../hooks/";
 
 export interface AppState {
   employees: Employee[];
@@ -10,6 +11,9 @@ export interface AppState {
 export interface AppContextType {
   state: AppState;
   dispatch: any;
+  toasts: IToast[];
+  showToast: (params: IShowToast) => void;
+  closeToast: (id: number) => void;
 }
 
 // Initial state for your app
@@ -58,6 +62,24 @@ const appReducer = (
         employees,
       };
     }
+    case "SET_EMPLOYEE": {
+      let exists = false;
+      const employees = state.employees.map((employee) => {
+        if (employee.employeeId === action.payload.employeeId) {
+          exists = true;
+          return action.payload;
+        }
+        return employee;
+      });
+      if (!exists) {
+        employees.push(action.payload);
+      }
+      localStorage.setItem("employees", JSON.stringify(employees));
+      return {
+        ...state,
+        employees,
+      };
+    }
     case "DELETE_EMPLOYEE": {
       const employees = state.employees.filter(
         (employee) => employee.employeeId !== action.payload
@@ -80,9 +102,12 @@ const appReducer = (
 };
 
 // Create a context
-const AppContext = createContext<AppContextType>({
+const AppContext = createContext({
   state: initialState,
   dispatch: () => null,
+  toasts: [],
+  showToast: () => null,
+  closeToast: () => null,
 } as AppContextType);
 
 export const useAppContext = () => {
@@ -92,9 +117,12 @@ export const useAppContext = () => {
 // Create a provider component
 export const AppProvider = ({ children }: { children: any }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
+  const { toasts, showToast, closeToast } = useToast();
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider
+      value={{ state, dispatch, toasts, showToast, closeToast }}
+    >
       {children}
     </AppContext.Provider>
   );

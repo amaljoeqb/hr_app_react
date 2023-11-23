@@ -1,32 +1,44 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
-import { Formik, Form } from "formik";
+import { Formik, Form, useFormik, useFormikContext, FormikProps } from "formik";
 import { SelectInput } from "../../../components";
 import { employeeSchema } from "../../../config";
 import useEmployeeForm from "../hooks/useEmployeeForm";
+import { useEffect, useRef } from "react";
 
 export interface EmployeeFormProps {
   employee: Employee | undefined;
   skills: Skill[];
   departments: Department[];
+  isView: boolean;
+  onEdit: () => void;
+  onSave: () => void;
 }
 
-export default function EmployeeForm({
-  employee,
-  skills,
-  departments,
-}: EmployeeFormProps) {
+export default function EmployeeForm(props: EmployeeFormProps) {
   const {
     initialValues,
     onSubmit,
     skillsOptions,
     departmentOptions,
     isInitialValid,
-  } = useEmployeeForm({
-    employee,
-    skills,
-    departments,
-  });
+    onClickEdit,
+    onAutofill,
+  } = useEmployeeForm(props);
+
+  const formik = useRef<FormikProps<Employee>>(null);
+
+  useEffect(() => {
+    if (formik.current) {
+      formik.current.setValues(initialValues);
+    }
+  }, [props.isView, initialValues]);
+
+  function onEmployeeIdDoubleClick() {
+    if (formik.current) {
+      onAutofill(formik.current);
+    }
+  }
 
   return (
     <Formik<Employee>
@@ -34,16 +46,19 @@ export default function EmployeeForm({
       validateOnMount={isInitialValid}
       onSubmit={onSubmit}
       validationSchema={employeeSchema}
+      innerRef={formik}
     >
-      <Form id="emp-form">
+      <Form id="emp-form" noValidate>
         <div className="row">
-          <TextInput
-            label="Employee ID"
-            name="employeeId"
-            type="number"
-            required
-            disabled
-          />
+          <div onDoubleClick={onEmployeeIdDoubleClick} className="field">
+            <TextInput
+              label="Employee ID"
+              name="employeeId"
+              type="number"
+              required
+              disabled
+            />
+          </div>
           <TextInput label="Name" name="name" required={true} />
         </div>
         <div className="row">
@@ -63,6 +78,7 @@ export default function EmployeeForm({
             optionId="departmentId"
             required
             options={departmentOptions}
+            isDisabled={props.isView}
           />
         </div>
         <div className="row">
@@ -87,6 +103,7 @@ export default function EmployeeForm({
             isMulti
             required
             options={skillsOptions}
+            isDisabled={props.isView}
           />
         </div>
         <div className="flip-container">
@@ -99,7 +116,12 @@ export default function EmployeeForm({
             />
           </div>
           <div className="back">
-            <button id="edit-button" className="hover-btn" type="button">
+            <button
+              id="edit-button"
+              className="hover-btn"
+              type="button"
+              onClick={onClickEdit}
+            >
               Edit
             </button>
           </div>
