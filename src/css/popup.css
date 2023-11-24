@@ -12,8 +12,10 @@
 }
 
 .popup.emp-popup {
+  position: relative;
   background-color: transparent;
   z-index: 0;
+  margin: 12px;
 }
 
 .show-popup {
