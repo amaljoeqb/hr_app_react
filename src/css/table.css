@@ -2,6 +2,7 @@
   width: 100%;
   overflow-x: auto;
   padding-bottom: 64px;
+
 }
 
 .emp-table {
@@ -11,6 +12,7 @@
   border-radius: 8px;
   position: relative;
 }
+
 
 .emp-table th {
   border: none;
