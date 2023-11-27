@@ -26,7 +26,6 @@ export default function EmployeeDetail() {
   return (
     <>
       <Header />
-
       <div
         className={`popup emp-popup show-popup ${
           isEdit ? "edit-popup" : "view-popup"

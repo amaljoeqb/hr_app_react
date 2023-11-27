@@ -156,25 +156,6 @@ body {
   box-shadow: var(--shadow);
 }
 
-footer {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  justify-self: flex-end;
-}
-
-
-footer .lower {
-  height: 64px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 14px;
-}
 
 .card {
   background-color: white;
