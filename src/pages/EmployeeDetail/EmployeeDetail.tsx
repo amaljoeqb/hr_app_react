@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useRouteError } from "react-router-dom";
 import EmployeeForm from "./components/EmployeeForm";
 import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
@@ -16,6 +16,11 @@ export default function EmployeeDetail() {
 
   if (employeeId) {
     employee = employees.find((employee) => employee.employeeId == employeeId);
+  }
+
+  if (employee === undefined && !isEdit) {
+    navigate("/404");
+    return null;
   }
 
   return (

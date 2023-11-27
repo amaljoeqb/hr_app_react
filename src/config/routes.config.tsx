@@ -7,6 +7,7 @@ const routesConfig: RouteObject[] = [
   { path: "/", element: <EmployeeListing />, errorElement: <ErrorPage /> },
   { path: "/employee/:employeeId", element: <EmployeeDetail /> },
   { path: "/employee/", element: <EmployeeDetail /> },
+  { path: "/404", element: <ErrorPage /> },
 ];
 
 export default routesConfig;
