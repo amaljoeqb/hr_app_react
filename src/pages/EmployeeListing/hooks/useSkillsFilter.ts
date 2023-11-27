@@ -26,6 +26,7 @@ export default function useSkillsFilter({
   }
 
   function onClickClearFilters() {
+    setIsActive(false);
     onChange?.([]);
   }
 
