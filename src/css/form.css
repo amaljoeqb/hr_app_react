@@ -6,7 +6,6 @@ form {
   max-width: 600px;
 }
 
-
 form .field {
   display: flex;
   flex-direction: column;
