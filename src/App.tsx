@@ -24,6 +24,7 @@ function App() {
   const loading = useLoadData();
   const { toasts, closeToast } = useAppContext();
 
+  
   return (
     <div className="App">
       {loading ? (
