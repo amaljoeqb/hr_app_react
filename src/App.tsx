@@ -9,10 +9,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { routes } from "./config";
 import useLoadData from "./hooks/useLoadData";
 import { useAppContext } from "./store/app.context";
-import Toast from "./components/ui/Toast/Toast";
 import ToastContainer from "./components/ui/Toast/ToastContainer";
 import { Loader } from "./components";
-import { Footer, Header } from "./layout";
 
 const basename = "/hr_app_react";
 
@@ -24,7 +22,7 @@ function App() {
   const loading = useLoadData();
   const { toasts, closeToast } = useAppContext();
 
-  
+
   return (
     <div className="App">
       {loading ? (

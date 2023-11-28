@@ -1,9 +1,6 @@
-import { useRouteError } from "react-router-dom";
 import { StyledErrorScreen } from "./ErrorScreen.style";
-import { Link } from "react-router-dom";
 
 export default function ErrorPage() {
-  const error = useRouteError();
 
   return (
     <StyledErrorScreen>

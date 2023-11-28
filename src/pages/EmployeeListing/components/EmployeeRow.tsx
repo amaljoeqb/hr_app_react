@@ -1,8 +1,6 @@
 import { Employee } from "../../../models";
-import { skillsToString } from "../../../services/";
-import { Chip } from "../../../components";
 import HighlightedSpan from "../../../components/ui/HighlightedSpan";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EmployeeActionMenu from "./EmployeeActionMenu";
 import SkillsCell from "./SkillsCell";
 
