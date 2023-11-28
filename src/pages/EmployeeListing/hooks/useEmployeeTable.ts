@@ -139,9 +139,9 @@ function sortEmployees(
     if (!a[key] && !b[key]) {
       return 0;
     } else if (!a[key]) {
-      return -1;
-    } else if (!b[key]) {
       return 1;
+    } else if (!b[key]) {
+      return -1;
     }
     const aString = a[key]!.toString().toLowerCase();
     const bString = b[key]!.toString().toLowerCase();
@@ -161,8 +161,17 @@ function sortEmployees(
    * @returns A negative number if `a` should be sorted before `b`, a positive number if `a` should be sorted after `b`, or 0 if they are equal.
    */
   const departmentSort = (a: Employee, b: Employee) => {
-    const aString = a.department?.department.toString().toLowerCase() ?? "";
-    const bString = b.department?.department.toString().toLowerCase() ?? "";
+    const aString = a.department?.department.toString().toLowerCase();
+    const bString = b.department?.department.toString().toLowerCase();
+    if(!aString && !bString) {
+      return 0;
+    }
+    if(!aString) {
+      return 1;
+    }
+    if(!bString) {
+      return -1;
+    }
     if (aString < bString) {
       return asc ? -1 : 1;
     }
