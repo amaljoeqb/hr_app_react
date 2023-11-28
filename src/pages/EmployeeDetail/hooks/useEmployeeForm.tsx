@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { EmployeeFormProps } from "../components/EmployeeForm";
 import { useAppContext } from "../../../store/app.context";
 import { getNextEmployeeId } from "../../../services/";
-import { Department, Employee, Skill } from "../../../models";
+import { Employee,  } from "../../../models";
 import { useApi } from "../../../hooks";
-import { useState } from "react";
 import data from "../../../data/data.json";
 import { FormikContextType } from "formik";
 
@@ -18,7 +16,6 @@ export default function useEmployeeForm({
 }: EmployeeFormProps) {
   const api = useApi();
   const appContext = useAppContext();
-  const navigate = useNavigate();
   const isInitialValid = employee !== undefined;
   const newEmployee: Employee = {
     employeeId: getNextEmployeeId(appContext.state.employees),

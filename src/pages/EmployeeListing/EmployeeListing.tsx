@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
-import { useApi, useQuery } from "../../hooks";
+import { useQuery } from "../../hooks";
 import { Footer, Header } from "../../layout";
 
 export function EmployeeListing() {
@@ -29,7 +29,6 @@ export function EmployeeListing() {
   const PER_PAGE = 10;
 
   const urlParams = useQuery();
-  const api = useApi();
 
   const deleteEmployeeId = urlParams.get("delete");
   const totalPages = Math.ceil(filteredData.length / PER_PAGE);

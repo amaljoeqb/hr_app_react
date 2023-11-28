@@ -12,7 +12,7 @@ export default function useLoadData() {
     Promise.all([employees, skills, departments]).then(() => {
       setLoading(false);
     });
-  }, []);
+  }, [api]);
 
   return loading;
 }

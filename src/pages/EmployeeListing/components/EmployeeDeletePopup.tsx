@@ -1,6 +1,5 @@
 import { Popup } from "../../../components";
 import { useApi } from "../../../hooks";
-import { useAppContext } from "../../../store/app.context";
 
 export interface EmployeeDeletePopupProps {
   employeeId: string;
