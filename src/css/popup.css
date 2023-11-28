@@ -17,6 +17,7 @@
   z-index: 0;
 }
 
+
 .show-popup {
   display: flex;
 }
@@ -46,8 +47,9 @@
   flex-direction: column;
   max-width: 600px;
   box-shadow: var(--shadow);
-  margin: 12px;
+  margin: 16px;
 }
+
 
 .popup-content .close {
   border: none;
