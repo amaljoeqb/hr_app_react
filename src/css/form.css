@@ -201,7 +201,7 @@ form textarea:focus,
 }
 
 .view-popup input:disabled{
-  color: #000;
+  color: var(--text-color);
 }
 
 .view-popup input:disabled{
@@ -271,7 +271,7 @@ span.close-chip {
 }
 
 span.close-chip:hover {
-  background-color: #ddd;
+  background-color: var(--grey-bg-color);
 }
 
 .chip p {

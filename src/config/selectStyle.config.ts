@@ -83,7 +83,7 @@ export function selectStyle<T>(
     }),
     singleValue: (base) => ({
       ...base,
-      color: "#000",
+      color: "var(--text-color)",
       margin: "0",
       transition: "all 0.3s ease-in-out",
     }),

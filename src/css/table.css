@@ -8,7 +8,7 @@
 .emp-table {
   border-collapse: collapse;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   position: relative;
 }
@@ -16,12 +16,12 @@
 
 .emp-table th {
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .emp-table td {
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   padding: 6px 8px;
   max-width: 300px;
   text-overflow: ellipsis;
@@ -59,7 +59,7 @@
 
 .column-title button,
 .column-title {
-  color: #666;
+  color: var(--grey-title-color);
   transition: all 0.2s ease-in-out;
 }
 
@@ -79,7 +79,7 @@
   margin-left: 0.5rem;
   line-height: 0.45;
   font-size: 14px;
-  color: #666;
+  color: var(--grey-title-color);
   transition: all 0.2s ease-in-out;
   user-select: none;
 }
@@ -123,7 +123,7 @@
 
 .name-container .email {
   font-size: 12px;
-  color: #666;
+  color: var(--grey-title-color);
   margin: 0;
 }
 
@@ -150,7 +150,7 @@
   font-size: 18px;
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   outline-color: var(--primary-color);
 }
 

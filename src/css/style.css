@@ -7,12 +7,14 @@
   --accent-color: hsl(240 4.8% 95.9%);
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   --light-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  --no-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0);
   --light-grey: #e4e4e4;
   --dark-grey: #a5a5a5;
+  --border-color: #ddd;
+  --grey-bg-color: #eee;
   --text-color: rgb(24, 24, 27);
   --error-color: rgb(255, 33, 33);
   --hover-color: #f1f1f1;
+  --grey-title-color: #666;
 }
 
 body {
@@ -52,7 +54,7 @@ body {
 
 .hover-btn span {
   font-size: 16px;
-  color: #000;
+  color: var(--text-color);
 }
 
 .hover-btn p {
@@ -62,14 +64,14 @@ body {
 .hover-btn {
   background-color: white;
   border: none;
-  outline: 1px solid #ddd;
+  outline: 1px solid var(--border-color);
   box-shadow: var(--light-shadow);
   padding: 6px 12px;
   font-weight: bold;
   font-size: 16px;
   display: flex;
   column-gap: 6px;
-  color: #000;
+  color: var(--text-color);
   align-items: center;
   justify-content: center;
   border-radius: 6px;
@@ -130,7 +132,7 @@ body {
   font-size: 14px;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
