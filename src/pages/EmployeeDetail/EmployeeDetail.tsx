@@ -53,8 +53,7 @@ export default function EmployeeDetail() {
                 </div>
                 <div className="back">
                   <span className="material-symbols-outlined">
-                    {" "}
-                    visibility{" "}
+                    visibility
                   </span>
                 </div>
               </div>
