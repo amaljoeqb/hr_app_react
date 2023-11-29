@@ -40,6 +40,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     }
   }
 
+
   return (
     <Formik<Employee>
       initialValues={initialValues}
@@ -50,15 +51,13 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     >
       <Form id="emp-form" noValidate>
         <div className="row">
-          <div onDoubleClick={onEmployeeIdDoubleClick} className="field">
-            <TextInput
-              label="Employee ID"
-              name="employeeId"
-              type="number"
-              required
-              disabled
-            />
-          </div>
+          <TextInput
+            label="Employee ID"
+            name="employeeId"
+            type="number"
+            required
+            disabled
+          />
           <TextInput label="Name" name="name" required={true} />
         </div>
         <div className="row">
