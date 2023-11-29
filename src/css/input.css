@@ -117,14 +117,6 @@ input.filter-search:focus {
   background-color: var(--grey-bg-color);
 }
 
-.filter-btn {
-  border: 1px dashed var(--border-color);
-  outline: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-weight: 400;
-}
 
 .filter-btn .selected-items {
   padding-left: 6px;
@@ -160,5 +152,5 @@ input.filter-search:focus {
 }
 
 .filter-btn .selected-item:hover {
-  background-color: var(--grey-bg-color);
+  background-color: var(--border-color);
 }

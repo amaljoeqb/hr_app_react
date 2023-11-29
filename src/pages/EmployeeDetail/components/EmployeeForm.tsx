@@ -1,7 +1,7 @@
 import TextInput from "../../../components/inputs/TextInput";
 import { Department, Employee, Skill } from "../../../models";
 import { Formik, Form, FormikProps } from "formik";
-import { SelectInput } from "../../../components";
+import { HoverButton, SelectInput, SubmitButton } from "../../../components";
 import { employeeSchema } from "../../../config";
 import useEmployeeForm from "../hooks/useEmployeeForm";
 import { useEffect, useRef } from "react";
@@ -108,22 +108,24 @@ export default function EmployeeForm(props: EmployeeFormProps) {
         </div>
         <div className="flip-container">
           <div className="front">
-            <input
+            <SubmitButton
               id="save-button"
               className="hover-btn primary submit"
               type="submit"
               value="Save"
-            />
+            >
+              Save
+            </SubmitButton>
           </div>
           <div className="back">
-            <button
+            <HoverButton
               id="edit-button"
               className="hover-btn"
               type="button"
               onClick={onClickEdit}
             >
               Edit
-            </button>
+            </HoverButton>
           </div>
         </div>
       </Form>

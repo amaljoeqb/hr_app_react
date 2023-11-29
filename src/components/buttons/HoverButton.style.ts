@@ -17,17 +17,17 @@ export const StyledHoverButton = styled.button`
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 
-  &:hover {
-    background-color: var(--accent-color);
+  &.dotted {
+    border: 1px dashed var(--border-color);
+    outline: none;
   }
 
-  &.primary {
-    background-color: var(--primary-color);
-    color: white;
+  &.regular {
+    font-weight: 400;
+  }
 
-    &:hover {
-      background-color: var(--primary-overlay);
-    }
+  &:hover {
+    background-color: var(--accent-color);
   }
 
   span {
@@ -37,5 +37,15 @@ export const StyledHoverButton = styled.button`
 
   p {
     font-size: 14px;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    cursor: default;
+    color: var(--dark-grey);
+
+    span {
+      color: var(--dark-grey);
+    }
   }
 `;

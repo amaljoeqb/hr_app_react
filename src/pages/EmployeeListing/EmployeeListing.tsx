@@ -1,6 +1,6 @@
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
-import PaginationControl from "./components/PaginationControl";
+import {PaginationControl} from "../../components/";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
