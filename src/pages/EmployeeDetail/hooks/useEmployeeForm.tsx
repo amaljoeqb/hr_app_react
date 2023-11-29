@@ -42,7 +42,6 @@ export default function useEmployeeForm({
 
   function onSubmit(values: Employee) {
     if (employee) {
-      console.log("onSubmit", values, employee);
       if (!isEmployeeEqual(employee, values)) {
         api.updateEmployee(values);
       }
