@@ -26,13 +26,6 @@ body {
 }
 
 
-.App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 
 .fill-button {
   background-color: var(--primary-color);
@@ -134,12 +127,7 @@ main {
   margin: 32px;
 }
 
-header {
-  display: flex;
-  background-color: white;
-  z-index: 10;
-  border-bottom: 1px solid var(--light-grey);
-}
+
 
 .logo {
   display: flex;

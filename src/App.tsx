@@ -11,6 +11,8 @@ import useLoadData from "./hooks/useLoadData";
 import { useAppContext } from "./store/app.context";
 import ToastContainer from "./components/ui/Toast/ToastContainer";
 import { Loader } from "./components";
+import styled from "styled-components";
+import { StyledApp } from "./App.style";
 
 const basename = "/hr_app_react";
 
@@ -22,9 +24,8 @@ function App() {
   const loading = useLoadData();
   const { toasts, closeToast } = useAppContext();
 
-
   return (
-    <div className="App">
+    <StyledApp className="App">
       {loading ? (
         <Loader />
       ) : (
@@ -33,7 +34,7 @@ function App() {
         </>
       )}
       <ToastContainer toasts={toasts} onCloseToast={closeToast} />
-    </div>
+    </StyledApp>
   );
 }
 
