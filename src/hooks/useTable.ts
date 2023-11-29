@@ -13,7 +13,7 @@ export default function useTable<T>(props: TableProps<T>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [sort, setSort] = useState<{ key: keyof T; order: "asc" | "desc" }>({
     key: id,
-    order: "asc",
+    order: "desc",
   });
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData] = useState<T[]>([]);
