@@ -2,6 +2,7 @@ import { useAppContext } from "../store/app.context";
 import * as API from "../api";
 import { Employee } from "../models";
 import { errorMessages } from "../services/";
+import { successMessages } from "../services/successMessages";
 
 export default function useApi() {
   const appContext = useAppContext();
@@ -14,7 +15,7 @@ export default function useApi() {
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.getEmployeesError,
-        isError: true,
+        type:"error",
       });
     }
   }
@@ -27,7 +28,7 @@ export default function useApi() {
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.getEmployeeError(id),
-        isError: true,
+        type:"error",
       });
       return null;
     }
@@ -37,11 +38,15 @@ export default function useApi() {
     try {
       appContext.dispatch({ type: "ADD_EMPLOYEE", payload: employee });
       await API.createEmployee(employee);
+      appContext.showToast({
+        message: successMessages.createEmployeeSuccess(employee.name),
+        type: "success",
+      });
     } catch (error: any) {
       console.log(error);
       appContext.showToast({
         message: errorMessages.createEmployeeError(employee.name),
-        isError: true,
+        type:"error",
       });
       appContext.dispatch({
         type: "DELETE_EMPLOYEE",
@@ -57,12 +62,16 @@ export default function useApi() {
     try {
       appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
       await API.updateEmployee(employee);
+      appContext.showToast({
+        message: successMessages.updateEmployeeSuccess(employee.name),
+        type: "success",
+      });
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.updateEmployeeError(
           currentEmployee?.name ?? employee.employeeId
         ),
-        isError: true,
+        type:"error",
       });
       appContext.dispatch({
         type: "UPDATE_EMPLOYEE",
@@ -78,10 +87,14 @@ export default function useApi() {
     try {
       appContext.dispatch({ type: "DELETE_EMPLOYEE", payload: id });
       await API.deleteEmployee(id);
+      appContext.showToast({
+        message: successMessages.deleteEmployeeSuccess(currentEmployee?.name ?? id),
+        type: "success",
+      });
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.deleteEmployeeError(currentEmployee?.name ?? id),
-        isError: true,
+        type:"error",
       });
       appContext.dispatch({
         type: "ADD_EMPLOYEE",
@@ -98,7 +111,7 @@ export default function useApi() {
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.getSkillsError,
-        isError: true,
+        type:"error",
       });
     }
   }
@@ -110,7 +123,7 @@ export default function useApi() {
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.getDepartmentsError,
-        isError: true,
+        type:"error",
       });
     }
   }
@@ -121,7 +134,7 @@ export default function useApi() {
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.getRolesError,
-        isError: true,
+        type:"error",
       });
       return [];
     }

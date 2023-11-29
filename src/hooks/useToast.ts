@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { IToast } from "../models";
+import { IToast, ToastType } from "../models";
 
 export interface IShowToast {
   message: string;
-  isError?: boolean;
+  type: ToastType;
 }
 
 export function useToast() {
   const [toasts, setToasts] = useState<IToast[]>([]);
 
-  const showToast = ({ message, isError }: IShowToast) => {
+  const showToast = ({ message, type }: IShowToast) => {
     const toast: IToast = {
       message,
-      isError: isError ?? false,
+      type,
       id: Date.now(),
     };
     console.log(toasts);
