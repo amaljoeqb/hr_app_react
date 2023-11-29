@@ -1,6 +1,6 @@
 import { Department, Skill } from "./";
 
-export default interface Employee {
+export interface Employee {
   employeeId: string;
   name: string;
   email: string;
@@ -11,5 +11,3 @@ export default interface Employee {
   joiningDate?: string;
   dateOfBirth?: string;
 }
-
-

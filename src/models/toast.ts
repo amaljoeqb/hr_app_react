@@ -1,4 +1,4 @@
-export default interface IToast {
+export interface IToast {
     message: string;
     type: ToastType;
     id: number;
