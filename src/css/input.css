@@ -52,7 +52,7 @@ input.filter-search {
 
 .filter-dropdown hr {
   width: 100%;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--grey-bg-color);
   margin: 0;
 }
 
