@@ -22,6 +22,15 @@ export const StyledHoverButton = styled.button`
     outline: none;
   }
 
+  &.primary {
+    background-color: var(--primary-color);
+    color: white;
+
+    &:hover {
+      background-color: var(--primary-overlay);
+    }
+  }
+
   &.regular {
     font-weight: 400;
   }

@@ -1,5 +1,6 @@
-import { Popup } from "../../../components";
+import { HoverButton, Popup } from "../../../components";
 import { useApi } from "../../../hooks";
+import { useAppContext } from "../../../store/app.context";
 
 export interface EmployeeDeletePopupProps {
   employeeId: string;
@@ -11,6 +12,11 @@ export default function EmployeeDeletePopup({
   onClose,
 }: EmployeeDeletePopupProps) {
   const api = useApi();
+  const appContext = useAppContext();
+
+  const employee = appContext.state.employees.find(
+    (employee) => employee.employeeId === employeeId
+  );
 
   function onDelete() {
     api.deleteEmployee(employeeId);
@@ -19,16 +25,20 @@ export default function EmployeeDeletePopup({
 
   return (
     <Popup
-      content="Are you sure you want to delete this employee?"
+      content={
+        <>
+          Are you sure you want to delete employee <b>{employee?.name}</b>?
+        </>
+      }
       title="Delete Employee"
       actions={
         <>
-          <button className="hover-btn primary confirm" onClick={onDelete}>
+          <HoverButton className="hover-btn primary confirm" onClick={onDelete}>
             Yes
-          </button>
-          <button className="hover-btn cancel" onClick={onClose}>
+          </HoverButton>
+          <HoverButton className="hover-btn cancel" onClick={onClose}>
             No
-          </button>
+          </HoverButton>
         </>
       }
       onClose={onClose}
