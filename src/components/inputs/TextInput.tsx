@@ -16,7 +16,7 @@ export default function TextInput({ label, ...props }: TextInputProps) {
   return (
     <div id={`${props.name}-field`} className="field">
       <label htmlFor={props.name}>{label}</label>
-      <Field type="text" {...props} />
+      <Field {...props} />
       <InputError
         message={meta.touched && meta.error ? meta.error : undefined}
       />

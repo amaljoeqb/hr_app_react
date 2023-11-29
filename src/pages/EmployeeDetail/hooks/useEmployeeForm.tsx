@@ -22,6 +22,7 @@ export default function useEmployeeForm({
     name: "",
     email: "",
     designation: "",
+    salary: 0,
     department: undefined,
     skills: [],
     dateOfBirth: "",
