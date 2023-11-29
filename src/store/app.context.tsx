@@ -62,6 +62,19 @@ const appReducer = (
         employees,
       };
     }
+    case "UPDATE_EMPLOYEE_ID": {
+      const employees = state.employees.map((employee) => {
+        if (employee.employeeId === action.payload.oldId) {
+          return { ...employee, employeeId: action.payload.newId };
+        }
+        return employee;
+      });
+      localStorage.setItem("employees", JSON.stringify(employees));
+      return {
+        ...state,
+        employees,
+      };
+    }
     case "SET_EMPLOYEE": {
       let exists = false;
       const employees = state.employees.map((employee) => {

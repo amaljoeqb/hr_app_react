@@ -6,6 +6,15 @@ export interface EmployeeResponse {
   message: string;
 }
 
+
+export interface EmployeeCreateResponse {
+  message: string;
+  data: {
+    id: number;
+  };
+}
+
+
 export interface EmployeeGlobal {
   id: number;
   firstName: string;
