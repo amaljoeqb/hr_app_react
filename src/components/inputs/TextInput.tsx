@@ -1,5 +1,6 @@
 import { Field, useField } from "formik";
 import { InputError } from "../";
+import { useEffect } from "react";
 
 export interface TextInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,7 +13,8 @@ export interface TextInputProps
 }
 
 export default function TextInput({ label, ...props }: TextInputProps) {
-  const [field, meta] = useField(props.name);
+  const [, meta] = useField(props.name);
+
   return (
     <div id={`${props.name}-field`} className="field">
       <label htmlFor={props.name}>{label}</label>

@@ -5,6 +5,7 @@ import { Employee } from "../../../models";
 import { useApi } from "../../../hooks";
 import data from "../../../data/data.json";
 import { FormikContextType } from "formik";
+import { useMemo, useRef } from "react";
 
 export default function useEmployeeForm({
   employee,
@@ -17,18 +18,20 @@ export default function useEmployeeForm({
   const api = useApi();
   const appContext = useAppContext();
   const isInitialValid = employee !== undefined;
-  const newEmployee: Employee = {
-    employeeId: getNextEmployeeId(appContext.state.employees),
-    name: "",
-    email: "",
-    designation: "",
-    salary: 0,
-    department: undefined,
-    skills: [],
-    dateOfBirth: "",
-    joiningDate: "",
-  };
-  const initialValues = employee || newEmployee;
+  const initialValues = useMemo(() => {
+    const newEmployee: Employee = {
+      employeeId: getNextEmployeeId(appContext.state.employees),
+      name: "",
+      email: "",
+      designation: "",
+      salary: 0,
+      department: undefined,
+      skills: [],
+      dateOfBirth: "",
+      joiningDate: "",
+    };
+    return employee || newEmployee;
+  }, [employee, appContext.state.employees]);
 
   const departmentOptions = departments.map((department) => ({
     value: department,

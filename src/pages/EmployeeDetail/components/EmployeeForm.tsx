@@ -40,7 +40,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     }
   }
 
-
   return (
     <Formik<Employee>
       initialValues={initialValues}
