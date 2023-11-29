@@ -1,7 +1,7 @@
 import { EmployeeFormProps } from "../components/EmployeeForm";
 import { useAppContext } from "../../../store/app.context";
-import { getNextEmployeeId } from "../../../services/";
-import { Employee,  } from "../../../models";
+import { getNextEmployeeId, isEmployeeEqual } from "../../../services/";
+import { Employee } from "../../../models";
 import { useApi } from "../../../hooks";
 import data from "../../../data/data.json";
 import { FormikContextType } from "formik";
@@ -41,7 +41,10 @@ export default function useEmployeeForm({
 
   function onSubmit(values: Employee) {
     if (employee) {
-      api.updateEmployee(values);
+      console.log("onSubmit", values, employee);
+      if (!isEmployeeEqual(employee, values)) {
+        api.updateEmployee(values);
+      }
     } else {
       api.createEmployee(values);
     }

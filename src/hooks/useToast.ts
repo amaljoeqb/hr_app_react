@@ -15,7 +15,6 @@ export function useToast() {
       type,
       id: Date.now(),
     };
-    console.log(toasts);
     setInterval(() => {
       closeToast(toast.id);
     }, 3000);

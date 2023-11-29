@@ -43,7 +43,6 @@ export default function useApi() {
         type: "success",
       });
     } catch (error: any) {
-      console.log(error);
       appContext.showToast({
         message: errorMessages.createEmployeeError(employee.name),
         type:"error",

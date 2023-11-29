@@ -108,3 +108,35 @@ export function getNextEmployeeId(employees: Employee[]) {
   const maxId = Math.max(...employeeIds.map((id) => parseInt(id)));
   return (maxId + 1).toString();
 }
+
+
+/**
+ * Checks if two employee objects are equal.
+ * @param employee1 - The first employee object.
+ * @param employee2 - The second employee object.
+ * @returns True if the employee objects are equal, false otherwise.
+ */
+export function isEmployeeEqual(employee1: Employee, employee2: Employee) {
+  function isSkillsEqual(skills1: Skill[], skills2: Skill[]) {
+    if (skills1.length !== skills2.length) return false;
+    const skillIds1 = skills1.map((skill) => skill.skillId);
+    const skillIds2 = skills2.map((skill) => skill.skillId);
+    skillIds1.forEach((skill1) => {
+      if (!skillIds2.includes(skill1)) return false;
+    });
+
+    return true;
+  }
+
+  return (
+    employee1.employeeId === employee2.employeeId &&
+    employee1.name === employee2.name &&
+    employee1.email === employee2.email &&
+    employee1.designation === employee2.designation &&
+    employee1.department?.departmentId === employee2.department?.departmentId &&
+    employee1.salary === employee2.salary &&
+    employee1.joiningDate === employee2.joiningDate &&
+    employee1.dateOfBirth === employee2.dateOfBirth &&
+    isSkillsEqual(employee1.skills, employee2.skills)
+  );
+}
