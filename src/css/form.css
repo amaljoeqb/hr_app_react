@@ -196,8 +196,17 @@ form textarea:focus,
 .view-popup textarea,
 .view-popup .skills-input-container {
   border-color: transparent;
+  background-color: white;
   transform: translateX(-13px);
   box-shadow: var(--no-shadow);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .view-popup input:disabled{
