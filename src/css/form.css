@@ -197,7 +197,7 @@ form textarea:focus,
 .view-popup .skills-input-container {
   border-color: transparent;
   background-color: white;
-  transform: translateX(0);
+  transform: translateX(-13px);
   box-shadow: var(--no-shadow);
 }
 
