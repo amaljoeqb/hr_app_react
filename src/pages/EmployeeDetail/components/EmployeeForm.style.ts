@@ -79,8 +79,6 @@ export const StyledEmployeeForm = styled.div`
     border: 1px solid var(--dark-grey);
   }
 
-  
-
   .dropdown {
     position: relative;
     display: flex;
@@ -148,10 +146,9 @@ export const StyledEmployeeForm = styled.div`
     opacity: 1;
   }
 
-
-  .view-popup input:not(.skill-input),
-  .view-popup textarea,
-  .view-popup .skills-input-container {
+  &.view input:not(.skill-input),
+  &.view textarea,
+  &.view .skills-input-container {
     border-color: transparent;
     background-color: white;
     transform: translateX(-13px);
@@ -162,12 +159,12 @@ export const StyledEmployeeForm = styled.div`
     transition: all 0.3s ease-in-out;
   }
 
-  .view-popup input[type="date"]::-webkit-calendar-picker-indicator {
+  &.view input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
     transform: translateX(-10px);
   }
 
-  .view-popup .error-msg.show {
+  &.view .error-msg.show {
     opacity: 0;
     transform: translateY(10px);
   }
@@ -180,30 +177,30 @@ export const StyledEmployeeForm = styled.div`
     transition: background-color 5000s ease-in-out 0s;
   }
 
-  .view-popup input:disabled {
+  &.view input:disabled {
     color: var(--text-color);
   }
 
-  .view-popup input:disabled {
+  &.view input:disabled {
     background-color: transparent;
   }
 
-  .view-popup .field {
+  &.view .field {
     pointer-events: none;
     margin-bottom: 12px;
   }
 
-  .view-popup .submit {
+  &.view .submit {
     opacity: 0;
     pointer-events: none;
   }
 
-  .popup input,
-  .popup textarea,
-  .popup .submit,
-  .popup .skills-input-container,
-  .popup .field,
-  .popup .error-msg {
+  input,
+  textarea,
+  .submit,
+  .skills-input-container,
+  .field,
+  .error-msg {
     transition: all 0.3s ease-in-out;
   }
 
@@ -260,20 +257,20 @@ export const StyledEmployeeForm = styled.div`
     transition: transform 0.3s ease-in-out;
   }
 
-  .view-popup span.close-chip {
+  &.view span.close-chip {
     opacity: 0;
     transform: scale(0);
   }
 
-  .view-popup p {
+  &.view p {
     transform: translateX(10px);
   }
 
-  .view-popup .field.error .error-msg {
+  &.view .field.error .error-msg {
     opacity: 0;
   }
 
-  .view-popup .skill-input {
+  &.view .skill-input {
     opacity: 0;
     transform: translateX(50px);
   }

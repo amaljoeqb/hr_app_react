@@ -63,6 +63,7 @@ export default function EmployeeDetail() {
             skills={skills}
             departments={departments}
             isView={!isEdit}
+            className={isEdit ? "edit" : "view"}
             onEdit={() => {
               navigate(`/employee/${employeeId}?edit=true`);
             }}

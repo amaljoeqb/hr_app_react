@@ -12,6 +12,7 @@ export interface EmployeeFormProps {
   skills: Skill[];
   departments: Department[];
   isView: boolean;
+  className?: string;
   onEdit: () => void;
   onSave: () => void;
 }
@@ -43,7 +44,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
   }
 
   return (
-    <StyledEmployeeForm>
+    <StyledEmployeeForm className={props.className}>
       <Formik<Employee>
         initialValues={initialValues}
         validateOnMount={isInitialValid}
