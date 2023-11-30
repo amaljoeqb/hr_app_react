@@ -11,7 +11,7 @@ const employeeSchema = Yup.object({
   department: Yup.object().required("Required"),
   dateOfBirth: Yup.date().required("Required"),
   joiningDate: Yup.date().required("Required"),
-  skills: Yup.array().required("Required").length(1, "Required"),
+  skills: Yup.array(),
 });
 
 export default employeeSchema;
