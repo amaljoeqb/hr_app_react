@@ -41,7 +41,7 @@ export default function Table<T>({
 
   return (
     <StyledTable>
-      <table className="emp-table">
+      <table>
         <colgroup>
           {columns.map((column) => {
             return (

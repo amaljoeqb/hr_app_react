@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const StyledTable = styled.div`
   width: 100%;
   overflow-x: auto;
-  padding-bottom: 64px;
-  min-height: 620px;
+  overflow-y: hidden;
 
-  .emp-table {
+  table {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid var(--border-color);
@@ -14,12 +13,12 @@ export const StyledTable = styled.div`
     position: relative;
   }
 
-  .emp-table th {
+  table th {
     border: none;
     border-bottom: 1px solid var(--border-color);
   }
 
-  .emp-table td {
+  table td {
     border: none;
     border-bottom: 1px solid var(--border-color);
     padding: 6px 8px;
@@ -29,7 +28,7 @@ export const StyledTable = styled.div`
     white-space: nowrap;
   }
 
-  .emp-table td:not(.overflow) {
+  table td:not(.overflow) {
     overflow: hidden;
   }
 
@@ -231,7 +230,6 @@ export const StyledTable = styled.div`
   .skills-cell {
     font-size: 16px;
     max-lines: 2;
-    text-wrap: wrap;
   }
 
   .skills-cell .skills-tooltip {
