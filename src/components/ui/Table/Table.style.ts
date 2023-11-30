@@ -103,14 +103,14 @@ export const StyledTable = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 4px;
-      }
+  }
 
   .name-container .name {
     font-weight: 600;
     color: var(--text-color);
     display: flex;
     align-items: center;
-      }
+  }
 
   .name-container .name span.material-symbols-outlined {
     font-size: 16px;
@@ -121,7 +121,7 @@ export const StyledTable = styled.div`
     font-size: 12px;
     color: var(--grey-title-color);
     margin: 0;
-      }
+  }
 
   .filter {
     font-weight: 400;
