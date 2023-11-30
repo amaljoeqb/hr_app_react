@@ -32,12 +32,9 @@ export default function SkillsCell({ skills }: { skills: Skill[] }) {
           <Chip key={skill.skillId}>{skill.skill}</Chip>
         ))}
       </div>
-      <Dropdown
-        isOpen={isActive}
-        className={`skills-tooltip ${isActive ? "active" : ""}`}
-      >
-        {skillsToString(skills)}
-      </Dropdown>
+      {isActive && (
+        <Dropdown className="skills-tooltip">{skillsToString(skills)}</Dropdown>
+      )}
     </td>
   );
 }

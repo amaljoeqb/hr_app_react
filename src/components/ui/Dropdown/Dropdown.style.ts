@@ -1,16 +1,13 @@
 import styled from "styled-components";
-import { DropdownProps } from "./Dropdown";
 
-export const StyledDropdown = styled.div<DropdownProps>`
+export const StyledDropdown = styled.div`
   position: absolute;
   top: 100%;
   z-index: 100;
-  overflow: hidden;
-  display: none;
+  display: block;
 
-  ${({ isOpen }) =>
-    isOpen &&
-    `
-        display: block;
-    `}
+  &.top {
+    top: auto;
+    bottom: 100%;
+  }
 `;

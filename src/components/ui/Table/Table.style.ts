@@ -241,9 +241,6 @@ export const StyledTable = styled.div`
     border-radius: 4px;
     white-space: break-spaces;
     padding: 8px;
-    /* margin-left: -4px;
-    margin-right: 120px; */
-
     box-shadow: var(--light-shadow);
   }
 

@@ -25,20 +25,22 @@ export default function EmployeeActionMenu(props: EmployeeActionMenuProps) {
         >
           <span className="material-symbols-outlined"> more_horiz </span>
         </button>
-        <Dropdown isOpen={isActive} className="action-menu">
-          <ul>
-            <li>
-              <button className="edit-btn" onClick={props.onEdit}>
-                Edit
-              </button>
-            </li>
-            <li>
-              <button className="delete-btn" onClick={props.onDelete}>
-                Delete
-              </button>
-            </li>
-          </ul>
-        </Dropdown>
+        {isActive && (
+          <Dropdown className="action-menu">
+            <ul>
+              <li>
+                <button className="edit-btn" onClick={props.onEdit}>
+                  Edit
+                </button>
+              </li>
+              <li>
+                <button className="delete-btn" onClick={props.onDelete}>
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </Dropdown>
+        )}
       </div>
     </ClickAwayListener>
   );
