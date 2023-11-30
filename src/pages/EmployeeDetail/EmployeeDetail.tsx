@@ -4,6 +4,7 @@ import { useAppContext } from "../../store/app.context";
 import { Employee } from "../../models";
 import { useQuery } from "../../hooks";
 import { Footer, Header } from "../../layout";
+import { StyledEmployeeDetail } from "./EmployeeDetail.style";
 
 export default function EmployeeDetail() {
   const employeeId = useParams<{ employeeId: string }>().employeeId;
@@ -24,7 +25,7 @@ export default function EmployeeDetail() {
   }
 
   return (
-    <>
+    <StyledEmployeeDetail>
       <Header />
       <div
         className={`popup emp-popup show-popup ${
@@ -52,9 +53,7 @@ export default function EmployeeDetail() {
                   <span className="material-symbols-outlined"> edit </span>
                 </div>
                 <div className="back">
-                  <span className="material-symbols-outlined">
-                    visibility
-                  </span>
+                  <span className="material-symbols-outlined">visibility</span>
                 </div>
               </div>
             </h2>
@@ -74,6 +73,6 @@ export default function EmployeeDetail() {
         </section>
       </div>
       <Footer />
-    </>
+    </StyledEmployeeDetail>
   );
 }

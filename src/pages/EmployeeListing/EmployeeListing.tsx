@@ -1,6 +1,6 @@
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
-import {PaginationControl} from "../../components/";
+import { PaginationControl } from "../../components/";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useQuery } from "../../hooks";
 import { Footer, Header } from "../../layout";
+import { StyledEmployeeListing } from "./EmployeeListing.style";
 
 export function EmployeeListing() {
   const appContext = useAppContext();
@@ -34,7 +35,7 @@ export function EmployeeListing() {
   const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
   return (
-    <>
+    <StyledEmployeeListing>
       <Header />
       <main className="card">
         <h1>Employees</h1>
@@ -68,15 +69,15 @@ export function EmployeeListing() {
             </HoverButton>
           </div>
         </div>
-        
-          <EmployeeTable
-            employees={displayData}
-            searchTerm={searchTerm}
-            sort={sort}
-            onChangeSort={(sort) => {
-              setSort(sort);
-            }}
-          />
+
+        <EmployeeTable
+          employees={displayData}
+          searchTerm={searchTerm}
+          sort={sort}
+          onChangeSort={(sort) => {
+            setSort(sort);
+          }}
+        />
         {totalPages > 1 && (
           <PaginationControl
             current={page}
@@ -96,6 +97,6 @@ export function EmployeeListing() {
         />
       )}
       <Footer />
-    </>
+    </StyledEmployeeListing>
   );
 }
