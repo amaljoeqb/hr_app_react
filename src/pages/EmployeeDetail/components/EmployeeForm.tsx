@@ -24,6 +24,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     isInitialValid,
     onClickEdit,
     onAutofill,
+    isCreate,
   } = useEmployeeForm(props);
 
   const formik = useRef<FormikProps<Employee>>(null);
@@ -52,7 +53,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
         <div className="row">
           <TextInput
             label="Employee ID"
-            name="employeeId"
+            name={isCreate ? "placeholder" : "employeeId"}
             type="number"
             required
             disabled

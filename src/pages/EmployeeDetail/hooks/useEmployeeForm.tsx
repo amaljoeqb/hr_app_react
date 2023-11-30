@@ -33,6 +33,8 @@ export default function useEmployeeForm({
     return employee || newEmployee;
   }, [employee, appContext.state.employees]);
 
+  const isCreate = !employee;
+
   const departmentOptions = departments.map((department) => ({
     value: department,
     label: department.department,
@@ -80,5 +82,6 @@ export default function useEmployeeForm({
     departmentOptions,
     skillsOptions,
     isInitialValid,
+    isCreate
   };
 }
