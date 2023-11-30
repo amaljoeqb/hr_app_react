@@ -186,17 +186,13 @@ export const StyledTable = styled.div`
   }
 
   .action-menu {
-    position: absolute;
     background-color: white;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     display: none;
     border-radius: 6px;
     align-self: flex-end;
-    top: 100%;
     box-shadow: var(--shadow);
-    z-index: 60;
-    overflow: hidden;
     padding: 4px;
   }
 
@@ -227,28 +223,28 @@ export const StyledTable = styled.div`
     display: none;
   }
 
-  .skills-cell {
+  td.skills-cell {
     font-size: 16px;
-    max-lines: 2;
+    position: relative;
+    overflow: visible;
+  }
+
+  .skill-chips {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 
   .skills-cell .skills-tooltip {
-    position: absolute;
     background-color: white;
     border: 1px solid var(--border-color);
     font-size: 12px;
     border-radius: 4px;
-    text-wrap: wrap;
-    z-index: 60;
-    margin-right: 120px;
+    white-space: break-spaces;
     padding: 8px;
-    margin-left: -4px;
-    box-shadow: var(--light-shadow);
-    display: none;
-  }
+    /* margin-left: -4px;
+    margin-right: 120px; */
 
-  .skills-tooltip.active {
-    display: block;
+    box-shadow: var(--light-shadow);
   }
 
   .no-data {

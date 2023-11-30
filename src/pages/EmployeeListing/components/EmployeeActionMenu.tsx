@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ClickAwayListener } from "../../../components";
+import { Dropdown } from "../../../components/ui/Dropdown/Dropdown";
 
 export interface EmployeeActionMenuProps {
   onDelete: () => void;
@@ -24,7 +25,7 @@ export default function EmployeeActionMenu(props: EmployeeActionMenuProps) {
         >
           <span className="material-symbols-outlined"> more_horiz </span>
         </button>
-        <div className="action-menu">
+        <Dropdown isOpen={isActive} className="action-menu">
           <ul>
             <li>
               <button className="edit-btn" onClick={props.onEdit}>
@@ -37,7 +38,7 @@ export default function EmployeeActionMenu(props: EmployeeActionMenuProps) {
               </button>
             </li>
           </ul>
-        </div>
+        </Dropdown>
       </div>
     </ClickAwayListener>
   );
