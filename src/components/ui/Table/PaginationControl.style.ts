@@ -37,4 +37,14 @@ export const StyledPaginationControl = styled.div`
   .pagination .hover-btn span {
     font-size: 12px;
   }
+
+  @media screen and (max-width: 480px) {
+    .page-number:not(.active) {
+      display: none;
+    }
+
+    .page-numbers {
+      column-gap: 0;
+    }
+  }
 `;

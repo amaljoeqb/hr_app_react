@@ -1,4 +1,5 @@
 import React from "react";
+import { StyledTable } from "./Table.style";
 
 export type ColumnKey<T> = keyof T | "actions";
 
@@ -39,55 +40,57 @@ export default function Table<T>({
   }
 
   return (
-    <table className="emp-table">
-      <colgroup>
-        {columns.map((column) => {
-          return (
-            <col
-              key={column.key.toString()}
-              style={{ width: `${(column.flex / totalFlex) * 100}%` }}
-            />
-          );
-        })}
-      </colgroup>
-      <thead>
-        <tr className="header-row">
+    <StyledTable>
+      <table className="emp-table">
+        <colgroup>
           {columns.map((column) => {
             return (
-              <th key={column.key.toString()}>
-                <div className="header-container">
-                  <h3
-                    className={getTitleClassName(column.key, column.sortable)}
-                    data-key={column.key}
-                    onClick={() => {
-                      if (
-                        column.sortable &&
-                        onClickSort &&
-                        column.key !== "actions"
-                      ) {
-                        onClickSort(column.key);
-                      }
-                    }}
-                  >
-                    {column.title}
-                    {column.sortable && (
-                      <span className="sort-icon">
-                        <span className="material-symbols-outlined up">
-                          keyboard_arrow_up
-                        </span>
-                        <span className="material-symbols-outlined down">
-                          keyboard_arrow_down
-                        </span>
-                      </span>
-                    )}
-                  </h3>
-                </div>
-              </th>
+              <col
+                key={column.key.toString()}
+                style={{ width: `${(column.flex / totalFlex) * 100}%` }}
+              />
             );
           })}
-        </tr>
-      </thead>
-      <tbody>{children}</tbody>
-    </table>
+        </colgroup>
+        <thead>
+          <tr className="header-row">
+            {columns.map((column) => {
+              return (
+                <th key={column.key.toString()}>
+                  <div className="header-container">
+                    <h3
+                      className={getTitleClassName(column.key, column.sortable)}
+                      data-key={column.key}
+                      onClick={() => {
+                        if (
+                          column.sortable &&
+                          onClickSort &&
+                          column.key !== "actions"
+                        ) {
+                          onClickSort(column.key);
+                        }
+                      }}
+                    >
+                      {column.title}
+                      {column.sortable && (
+                        <span className="sort-icon">
+                          <span className="material-symbols-outlined up">
+                            keyboard_arrow_up
+                          </span>
+                          <span className="material-symbols-outlined down">
+                            keyboard_arrow_down
+                          </span>
+                        </span>
+                      )}
+                    </h3>
+                  </div>
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>{children}</tbody>
+      </table>
+    </StyledTable>
   );
 }

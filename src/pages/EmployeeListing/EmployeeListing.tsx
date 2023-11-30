@@ -68,7 +68,7 @@ export function EmployeeListing() {
             </HoverButton>
           </div>
         </div>
-        <div className="table-container">
+        
           <EmployeeTable
             employees={displayData}
             searchTerm={searchTerm}
@@ -77,7 +77,6 @@ export function EmployeeListing() {
               setSort(sort);
             }}
           />
-        </div>
         {totalPages > 1 && (
           <PaginationControl
             current={page}
