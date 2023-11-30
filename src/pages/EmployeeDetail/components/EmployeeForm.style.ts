@@ -34,7 +34,7 @@ export const StyledEmployeeForm = styled.div`
     transform: translateY(0);
   }
 
-  form .row {
+  .row {
     display: flex;
     flex-direction: row;
     justify-content: stretch;
@@ -273,5 +273,11 @@ export const StyledEmployeeForm = styled.div`
   &.view .skill-input {
     opacity: 0;
     transform: translateX(50px);
+  }
+
+  @media (max-width: 480px) {
+    .row {
+      flex-direction: column;
+    }
   }
 `;
