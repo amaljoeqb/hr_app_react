@@ -2,15 +2,12 @@ import styled from "styled-components";
 
 export const StyledTable = styled.div`
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
 
   table {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    position: relative;
   }
 
   table th {
@@ -22,7 +19,7 @@ export const StyledTable = styled.div`
     border: none;
     border-bottom: 1px solid var(--border-color);
     padding: 6px 8px;
-    max-width: 300px;
+    max-width: 50px;
     text-overflow: ellipsis;
     border-radius: 8px;
     white-space: nowrap;
@@ -106,14 +103,14 @@ export const StyledTable = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 4px;
-  }
+      }
 
   .name-container .name {
     font-weight: 600;
     color: var(--text-color);
     display: flex;
     align-items: center;
-  }
+      }
 
   .name-container .name span.material-symbols-outlined {
     font-size: 16px;
@@ -124,7 +121,7 @@ export const StyledTable = styled.div`
     font-size: 12px;
     color: var(--grey-title-color);
     margin: 0;
-  }
+      }
 
   .filter {
     font-weight: 400;
