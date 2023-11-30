@@ -61,10 +61,10 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               required
               disabled
             />
-            <TextInput label="Name" name="name" required={true} />
+            <TextInput label="Name *" name="name" required={true} />
           </div>
           <div className="row">
-            <TextInput label="Email" name="email" required={true} />
+            <TextInput label="Email *" name="email" required={true} />
             <TextInput type="number" label="Salary" name="salary" required />
           </div>
           <div className="row">
@@ -75,7 +75,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               required
             />
             <SelectInput<Department>
-              label="Department"
+              label="Department *"
               name="department"
               optionId="departmentId"
               required
@@ -85,13 +85,13 @@ export default function EmployeeForm(props: EmployeeFormProps) {
           </div>
           <div className="row">
             <TextInput
-              label="Date of birth"
+              label="Date of birth *"
               name="dateOfBirth"
               type="date"
               required
             />
             <TextInput
-              label="Date of Joining"
+              label="Date of Joining *"
               name="joiningDate"
               type="date"
               required
