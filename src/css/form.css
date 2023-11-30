@@ -201,6 +201,15 @@ form textarea:focus,
   box-shadow: var(--no-shadow);
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  transition: all 0.3s ease-in-out;
+}
+
+.view-popup input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
 .view-popup .error-msg.show {
   opacity: 0;
   transform: translateY(10px);
