@@ -22,6 +22,7 @@ export default function EmployeeTable({
   sort,
   onChangeSort,
 }: EmployeeTableProps) {
+
   const [columns, setColumns] = useState(columnIds.large);
 
   // remove skills column on mobile, resize observer

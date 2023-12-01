@@ -1,7 +1,7 @@
 import { useAppContext } from "../store/app.context";
 import * as API from "../api";
 import { Employee } from "../models";
-import { errorMessages } from "../services/";
+import { errorMessages, getEmployeeDiff } from "../services/";
 import { successMessages } from "../services/successMessages";
 
 export default function useApi() {
@@ -13,15 +13,12 @@ export default function useApi() {
       type: "SET_PREV_EMPLOYEE",
       payload: payload,
     });
-    setTimeout(() => {
-      appContext.dispatch(
-        {
-          type: "DELETE_PREV_EMPLOYEE",
-          payload: payload,
-        },
-        3000
-      );
-    });
+    // setTimeout(() => {
+    //   appContext.dispatch({
+    //     type: "DELETE_PREV_EMPLOYEE",
+    //     payload: payload,
+    //   });
+    // }, 10000);
   }
 
   async function getEmployees() {
@@ -85,7 +82,7 @@ export default function useApi() {
       (e) => e.employeeId === employee.employeeId
     );
     try {
-      setPrevEmployee(employee.employeeId, currentEmployee ?? {});
+      setPrevEmployee(employee.employeeId, getEmployeeDiff(currentEmployee, employee));
       appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
       await API.updateEmployee(employee);
       appContext.showToast({

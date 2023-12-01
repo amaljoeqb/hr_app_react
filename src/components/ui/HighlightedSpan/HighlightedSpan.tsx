@@ -39,13 +39,14 @@ export default function HighlightSpan({
       current?.classList.remove("modified");
     };
     if (modified) {
+      console.log("modified", text);
       current?.classList.add("modified");
       current?.addEventListener("animationend", onAnimationEnd);
     }
     return () => {
       current?.removeEventListener("animationend", onAnimationEnd);
     };
-  }, [modified, ref]);
+  }, [modified, ref, text]);
 
   return (
     <StyledHighlightSpan ref={ref} {...props}>

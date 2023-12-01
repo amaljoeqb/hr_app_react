@@ -139,7 +139,14 @@ export function isEmployeeEqual(employee1: Employee, employee2: Employee) {
   );
 }
 
-export function getEmployeeDiff(oldEmployee: Employee, newEmployee: Employee) {
+export function getEmployeeDiff(
+  oldEmployee?: Employee,
+  newEmployee?: Employee
+) {
+  if (!oldEmployee || !newEmployee) return {};
+  else if (!oldEmployee) return newEmployee;
+  else if (!newEmployee) return oldEmployee;
+  
   const diff: Partial<Employee> = {};
   if (oldEmployee.name !== newEmployee.name) diff.name = oldEmployee.name;
   if (oldEmployee.email !== newEmployee.email) diff.email = oldEmployee.email;
@@ -158,4 +165,5 @@ export function getEmployeeDiff(oldEmployee: Employee, newEmployee: Employee) {
     diff.dateOfBirth = oldEmployee.dateOfBirth;
   if (!isSkillsEqual(oldEmployee.skills, newEmployee.skills))
     diff.skills = oldEmployee.skills;
+  return diff;
 }

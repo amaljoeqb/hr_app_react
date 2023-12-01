@@ -43,10 +43,12 @@ export default function EmployeeRow({
               />
               <span className="material-symbols-outlined"> visibility </span>
             </div>
-            <HighlightSpan text={employee.email} 
-            searchTerm={searchTerm}
-            modified={prevEmployee && prevEmployee.email !== undefined}
-            className="email"/>
+            <HighlightSpan
+              text={employee.email}
+              searchTerm={searchTerm}
+              modified={prevEmployee && prevEmployee.email !== undefined}
+              className="email"
+            />
           </div>
         </td>
       )}
