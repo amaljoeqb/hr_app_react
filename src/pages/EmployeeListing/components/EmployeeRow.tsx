@@ -16,8 +16,6 @@ export default function EmployeeRow({
   searchTerm,
   cells,
 }: EmployeeRowProps) {
-  const cellsSet = new Set(cells);
-
   const navigate = useNavigate();
 
   return (

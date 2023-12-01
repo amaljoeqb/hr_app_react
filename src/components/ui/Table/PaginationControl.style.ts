@@ -38,6 +38,13 @@ export const StyledPaginationControl = styled.div`
     font-size: 12px;
   }
 
+  @media screen and (max-width: 768px) {
+    .page-last,
+    .page-first {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 480px) {
     .page-number:not(.active) {
       display: none;

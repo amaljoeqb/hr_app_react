@@ -31,6 +31,8 @@ export default function EmployeeTable({
         setColumns(columnIds.small);
       } else if (width < 800) {
         setColumns(columnIds.medium);
+      } else {
+        setColumns(columnIds.large);
       }
     });
     resizeObserver.observe(document.body);
