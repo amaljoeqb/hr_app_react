@@ -54,8 +54,4 @@ export const StyledPaginationControl = styled.div`
       column-gap: 0;
     }
   }
-
-  @media (max-width: 250px) {
-    opacity: 0;
-  }
 `;

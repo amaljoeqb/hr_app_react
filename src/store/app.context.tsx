@@ -6,6 +6,7 @@ export interface AppState {
   employees: Employee[];
   skills: Skill[];
   departments: Department[];
+  prevEmployees: Map<String, Partial<Employee>>;
 }
 
 export interface AppContextType {
@@ -21,6 +22,7 @@ const initialState: AppState = {
   employees: [],
   skills: [],
   departments: [],
+  prevEmployees: new Map(),
 };
 
 // Reducer function to manage state changes
@@ -110,6 +112,16 @@ const appReducer = (
     }
     default: {
       return state;
+    }
+    case "SET_PREV_EMPLOYEE": {
+      const prevEmployees = new Map(state.prevEmployees);
+      prevEmployees.set(action.payload.id, action.payload.data);
+      return { ...state, prevEmployees };
+    }
+    case "DELETE_PREV_EMPLOYEE": {
+      const prevEmployees = new Map(state.prevEmployees);
+      prevEmployees.delete(action.payload);
+      return { ...state, prevEmployees };
     }
   }
 };
