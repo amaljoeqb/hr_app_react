@@ -167,7 +167,6 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 12px;
   transition: all 0.3s ease-in-out;
   z-index: 100;
   width: 100%;
@@ -177,6 +176,7 @@ main {
   background-color: var(--toast-bg-color);
   color: white;
   padding: 12px 16px;
+  margin: 0 12px;
   display: flex;
   border-radius: 8px;
   box-shadow: var(--shadow);
@@ -184,6 +184,7 @@ main {
   column-gap: 12px;
   transition: all 0.3s ease-in-out;
   opacity: 0;
+  text-align: center;
   transform: translateY(100%);
 }
 
