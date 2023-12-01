@@ -91,8 +91,18 @@ export default function EmployeeForm(props: EmployeeFormProps) {
             />
           </div>
           <div className="row">
-            <TextInput label="Date of birth" name="dateOfBirth" type="date" />
-            <TextInput label="Date of Joining" name="joiningDate" type="date" />
+            <TextInput
+              label="Date of birth"
+              name="dateOfBirth"
+              type="date"
+              required
+            />
+            <TextInput
+              label="Date of Joining"
+              name="joiningDate"
+              type="date"
+              required
+            />
           </div>
           <div className="row">
             <SelectInput<Skill>
