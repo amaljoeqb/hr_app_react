@@ -21,7 +21,7 @@ export const StyledHighlightSpan = styled.span`
   }
 
   &.added {
-    animation: added-anim 2s ease-in-out;
+    animation: added-anim 1s ease-in-out;
 
     @keyframes added-anim {
       0% {
