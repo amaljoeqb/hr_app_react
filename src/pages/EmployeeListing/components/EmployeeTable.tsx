@@ -1,8 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "../../../components";
 import { Employee } from "../../../models";
 import EmployeeRow from "./EmployeeRow";
-import { Column, ColumnKey } from "../../../components/ui/Table/Table";
 import { columnIds, columns as tableColumns } from "../../../config";
 
 export interface EmployeeTableProps {

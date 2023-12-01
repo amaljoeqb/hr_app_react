@@ -1,6 +1,5 @@
 import { Field, useField } from "formik";
 import { InputError } from "../";
-import { useEffect } from "react";
 
 export interface TextInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

@@ -10,7 +10,6 @@ import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useQuery } from "../../hooks";
 import { Footer, Header } from "../../layout";
 import { StyledEmployeeListing } from "./EmployeeListing.style";
-import { useEffect } from "react";
 
 export function EmployeeListing() {
   const appContext = useAppContext();

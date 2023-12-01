@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import HoverButton from "../../buttons/HoverButton";
 import { StyledHoverButton } from "../../buttons/HoverButton.style";
 
 export const StyledPaginationControl = styled.div`

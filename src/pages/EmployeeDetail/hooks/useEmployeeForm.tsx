@@ -3,9 +3,7 @@ import { useAppContext } from "../../../store/app.context";
 import { getNextEmployeeId, isEmployeeEqual } from "../../../services/";
 import { Employee } from "../../../models";
 import { useApi } from "../../../hooks";
-import data from "../../../data/data.json";
-import { FormikContextType } from "formik";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 
 export default function useEmployeeForm({
   employee,
