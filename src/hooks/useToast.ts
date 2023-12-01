@@ -16,7 +16,7 @@ export function useToast() {
       id: Date.now(),
     };
     setInterval(() => {
-      closeToast(toast.id);
+      //closeToast(toast.id);
     }, 3000);
     setToasts(
       (toasts) => [...toasts, toast] // add new toast to the end of the array
