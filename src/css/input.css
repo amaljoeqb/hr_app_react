@@ -157,6 +157,12 @@ input.filter-search:focus {
   background-color: var(--border-color);
 }
 
+@media screen and (max-width: 425px) {
+  .filter-btn .selected-items:empty {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .filter-btn .selected-items {
     display: none;
