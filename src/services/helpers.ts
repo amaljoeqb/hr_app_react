@@ -146,15 +146,21 @@ export function getEmployeeDiff(
   if (!oldEmployee || !newEmployee) return {};
   else if (!oldEmployee) return newEmployee;
   else if (!newEmployee) return oldEmployee;
-  
+
   const diff: Partial<Employee> = {};
   if (oldEmployee.name !== newEmployee.name) diff.name = oldEmployee.name;
   if (oldEmployee.email !== newEmployee.email) diff.email = oldEmployee.email;
   if (oldEmployee.designation !== newEmployee.designation)
     diff.designation = oldEmployee.designation;
   if (
-    oldEmployee.department?.departmentId !==
-    newEmployee.department?.departmentId
+    !(
+      oldEmployee.department === undefined &&
+      newEmployee.department === undefined
+    ) &&
+    (oldEmployee.department === undefined ||
+      newEmployee.department === undefined ||
+      oldEmployee.department?.departmentId !==
+        newEmployee.department?.departmentId)
   )
     diff.department = oldEmployee.department;
   if (oldEmployee.salary !== newEmployee.salary)
@@ -165,5 +171,6 @@ export function getEmployeeDiff(
     diff.dateOfBirth = oldEmployee.dateOfBirth;
   if (!isSkillsEqual(oldEmployee.skills, newEmployee.skills))
     diff.skills = oldEmployee.skills;
+  console.log(diff);
   return diff;
 }

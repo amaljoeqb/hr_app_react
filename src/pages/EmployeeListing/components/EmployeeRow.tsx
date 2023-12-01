@@ -96,7 +96,7 @@ export default function EmployeeRow({
             searchTerm={searchTerm}
             modified={
               prevEmployee !== undefined &&
-              prevEmployee.department?.department !== undefined
+              prevEmployee.department !== undefined
             }
             onModifiedAnimationEnd={() => {
               onShowModifiedField(employee.employeeId, "department");

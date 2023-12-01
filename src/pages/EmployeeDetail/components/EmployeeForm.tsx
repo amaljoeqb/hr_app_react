@@ -85,6 +85,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               label="Department"
               name="department"
               optionId="departmentId"
+              isClearable
               placeholder={isCreate ? "Select Department" : "N/A"}
               options={departmentOptions}
               isDisabled={props.isView}
