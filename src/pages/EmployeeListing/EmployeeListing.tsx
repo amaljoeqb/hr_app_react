@@ -26,7 +26,8 @@ export function EmployeeListing() {
     filteredData,
     employees,
     skills,
-    totalPages
+    totalPages,
+    prevEmployees,
   } = useEmployeeTable();
   const urlParams = useQuery();
   const deleteEmployeeId = urlParams.get("delete");
@@ -71,6 +72,7 @@ export function EmployeeListing() {
 
         <EmployeeTable
           employees={displayData}
+          prevEmployees={prevEmployees}
           searchTerm={searchTerm}
           sort={sort}
           onChangeSort={(sort) => {

@@ -6,6 +6,7 @@ import { columnIds, columns as tableColumns } from "../../../config";
 
 export interface EmployeeTableProps {
   employees: Employee[];
+  prevEmployees: Map<string, Partial<Employee>>;
   searchTerm: string;
   sort: {
     key: keyof Employee;
@@ -16,6 +17,7 @@ export interface EmployeeTableProps {
 
 export default function EmployeeTable({
   employees,
+  prevEmployees,
   searchTerm,
   sort,
   onChangeSort,
@@ -64,6 +66,7 @@ export default function EmployeeTable({
         <EmployeeRow
           key={employee.employeeId}
           employee={employee}
+          prevEmployee={prevEmployees.get(employee.employeeId)}
           searchTerm={searchTerm}
           cells={columns}
         />

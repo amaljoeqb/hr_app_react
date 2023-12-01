@@ -1,13 +1,17 @@
 import { StyledHighlightSpan } from "./HighlightedSpan.style";
 
-export interface HighlightSpanProps {
+export interface HighlightSpanProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
   text: string | number;
   searchTerm: string;
+  modified?: boolean;
 }
 
 export default function HighlightSpan({
   text,
   searchTerm,
+  modified,
+  ...props
 }: HighlightSpanProps) {
   const textString = text.toString();
   const lowerCaseText = textString.toString().toLowerCase();
@@ -28,7 +32,7 @@ export default function HighlightSpan({
   }
 
   return (
-    <StyledHighlightSpan>
+    <StyledHighlightSpan {...props}>
       {!searchTerm || !lowerCaseText.includes(searchTerm)
         ? text
         : getHighlightedElement()}

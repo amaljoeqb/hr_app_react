@@ -7,12 +7,14 @@ import { ColumnKey } from "../../../components/ui/Table/Table";
 
 export interface EmployeeRowProps {
   employee: Employee;
+  prevEmployee?: Partial<Employee>;
   searchTerm: string;
   cells: Set<ColumnKey<Employee>>;
 }
 
 export default function EmployeeRow({
   employee,
+  prevEmployee,
   searchTerm,
   cells,
 }: EmployeeRowProps) {
@@ -34,10 +36,17 @@ export default function EmployeeRow({
                 navigate(`/employee/${employee.employeeId}`);
               }}
             >
-              <HighlightSpan text={employee.name} searchTerm={searchTerm} />
+              <HighlightSpan
+                text={employee.name}
+                searchTerm={searchTerm}
+                modified={prevEmployee && prevEmployee.name !== undefined}
+              />
               <span className="material-symbols-outlined"> visibility </span>
             </div>
-            <p className="email">{employee.email}</p>
+            <HighlightSpan text={employee.email} 
+            searchTerm={searchTerm}
+            modified={prevEmployee && prevEmployee.email !== undefined}
+            className="email"/>
           </div>
         </td>
       )}
@@ -46,6 +55,7 @@ export default function EmployeeRow({
           <HighlightSpan
             text={employee.designation ?? "N/A"}
             searchTerm={searchTerm}
+            modified={prevEmployee && prevEmployee.designation !== undefined}
           />
         </td>
       )}
@@ -54,6 +64,9 @@ export default function EmployeeRow({
           <HighlightSpan
             text={employee.department?.department ?? ""}
             searchTerm={searchTerm}
+            modified={
+              prevEmployee && prevEmployee.department?.department !== undefined
+            }
           />
         </td>
       )}

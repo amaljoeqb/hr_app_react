@@ -6,7 +6,7 @@ export interface AppState {
   employees: Employee[];
   skills: Skill[];
   departments: Department[];
-  prevEmployees: Map<String, Partial<Employee>>;
+  prevEmployees: Map<string, Partial<Employee>>;
 }
 
 export interface AppContextType {

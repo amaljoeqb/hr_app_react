@@ -24,16 +24,13 @@ export default function useEmployeeTable() {
     id: "employeeId",
   });
 
-  useEffect(() => {
-    console.log("prevEmployees", prevEmployees);
-  }, [prevEmployees]);
-
   return {
     ...employeeTable,
     selectedSkills,
     setSelectedSkills,
     skills,
     employees,
+    prevEmployees,
   };
 }
 
