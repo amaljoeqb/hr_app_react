@@ -32,8 +32,14 @@ const small: Set<ColumnKey<Employee>> = new Set<ColumnKey<Employee>>([
   "actions",
 ]);
 
+const extraSmall: Set<ColumnKey<Employee>> = new Set<ColumnKey<Employee>>([
+  "name",
+  "actions",
+]);
+
 export const columnIds = {
   large,
   medium,
   small,
+  extraSmall,
 };

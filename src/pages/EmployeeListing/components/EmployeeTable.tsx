@@ -27,7 +27,9 @@ export default function EmployeeTable({
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const width = entries[0].contentRect.width;
-      if (width < 600) {
+      if (width < 320) {
+        setColumns(columnIds.extraSmall);
+      } else if (width < 600) {
         setColumns(columnIds.small);
       } else if (width < 800) {
         setColumns(columnIds.medium);

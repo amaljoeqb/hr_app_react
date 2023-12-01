@@ -57,4 +57,10 @@ export const StyledHoverButton = styled.button`
       color: var(--dark-grey);
     }
   }
+
+  @media screen and (max-width: 425px) {
+    & > p {
+      display: none;
+    }
+  }
 `;
