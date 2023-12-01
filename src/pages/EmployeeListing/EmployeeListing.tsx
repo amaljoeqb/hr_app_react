@@ -12,8 +12,6 @@ import { Footer, Header } from "../../layout";
 import { StyledEmployeeListing } from "./EmployeeListing.style";
 
 export function EmployeeListing() {
-  const appContext = useAppContext();
-  const { employees, skills } = appContext.state;
   const navigate = useNavigate();
   const {
     displayData,
@@ -26,13 +24,14 @@ export function EmployeeListing() {
     page,
     setPage,
     filteredData,
-  } = useEmployeeTable(employees);
-  const PER_PAGE = 10;
-
+    employees,
+    skills,
+    totalPages
+  } = useEmployeeTable();
   const urlParams = useQuery();
-
   const deleteEmployeeId = urlParams.get("delete");
-  const totalPages = Math.ceil(filteredData.length / PER_PAGE);
+
+  
 
   return (
     <StyledEmployeeListing>

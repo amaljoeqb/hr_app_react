@@ -1,8 +1,13 @@
 import { useCallback, useState } from "react";
 import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
+import { useAppContext } from "../../../store/app.context";
 
-export default function useEmployeeTable(employees: Employee[]) {
+export default function useEmployeeTable() {
+
+  const appContext = useAppContext();
+  const { employees, skills } = appContext.state;
+
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
   const searchFunction = searchEmployees;
@@ -19,11 +24,15 @@ export default function useEmployeeTable(employees: Employee[]) {
     filterFunction,
     id: "employeeId",
   });
+  
+
 
   return {
     ...employeeTable,
     selectedSkills,
     setSelectedSkills,
+    skills,
+    employees,
   };
 }
 
@@ -163,13 +172,13 @@ function sortEmployees(
   const departmentSort = (a: Employee, b: Employee) => {
     const aString = a.department?.department.toString().toLowerCase();
     const bString = b.department?.department.toString().toLowerCase();
-    if(!aString && !bString) {
+    if (!aString && !bString) {
       return 0;
     }
-    if(!aString) {
+    if (!aString) {
       return 1;
     }
-    if(!bString) {
+    if (!bString) {
       return -1;
     }
     if (aString < bString) {

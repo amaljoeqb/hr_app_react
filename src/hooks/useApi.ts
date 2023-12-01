@@ -7,6 +7,23 @@ import { successMessages } from "../services/successMessages";
 export default function useApi() {
   const appContext = useAppContext();
 
+  function setPrevEmployee(id: string, employee: Partial<Employee>) {
+    const payload = { id: id, employee: employee };
+    appContext.dispatch({
+      type: "SET_PREV_EMPLOYEE",
+      payload: payload,
+    });
+    setTimeout(() => {
+      appContext.dispatch(
+        {
+          type: "DELETE_PREV_EMPLOYEE",
+          payload: payload,
+        },
+        3000
+      );
+    });
+  }
+
   async function getEmployees() {
     try {
       const employees = await API.getEmployees();
@@ -49,6 +66,7 @@ export default function useApi() {
         message: successMessages.createEmployeeSuccess(employee.name),
         type: "success",
       });
+      setPrevEmployee(receivedId, { employeeId: employee.employeeId });
     } catch (error: any) {
       appContext.showToast({
         message: errorMessages.createEmployeeError(employee.name),

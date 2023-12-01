@@ -120,7 +120,9 @@ const appReducer = (
     }
     case "DELETE_PREV_EMPLOYEE": {
       const prevEmployees = new Map(state.prevEmployees);
-      prevEmployees.delete(action.payload);
+      if (prevEmployees.get(action.payload.id) === action.payload.employee) {
+        prevEmployees.delete(action.payload.id);
+      }
       return { ...state, prevEmployees };
     }
   }

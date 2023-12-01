@@ -9,6 +9,7 @@ export interface TableProps<T> {
 }
 
 export default function useTable<T>(props: TableProps<T>) {
+  const PER_PAGE = 10;
   const { data, searchFunction, sortFunction, filterFunction, id } = props;
   const [searchTerm, setSearchTerm] = useState("");
   const [sort, setSort] = useState<{ key: keyof T; order: "asc" | "desc" }>({
@@ -18,6 +19,7 @@ export default function useTable<T>(props: TableProps<T>) {
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData] = useState<T[]>([]);
   const [displayData, setDisplayData] = useState<T[]>([]);
+  const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
   useEffect(() => {
     let filtered = searchFunction(data, searchTerm);
@@ -46,5 +48,6 @@ export default function useTable<T>(props: TableProps<T>) {
     setPage,
     filteredData,
     displayData,
+    totalPages,
   };
 }
