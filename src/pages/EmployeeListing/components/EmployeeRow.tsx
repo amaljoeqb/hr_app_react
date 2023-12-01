@@ -21,6 +21,7 @@ export default function EmployeeRow({
   onShowModifiedField,
 }: EmployeeRowProps) {
   const navigate = useNavigate();
+  const modifiedFields = new Set(Object.keys(prevEmployee ?? {}));
 
   return (
     <tr key={employee.employeeId} className="emp-row">
@@ -51,9 +52,7 @@ export default function EmployeeRow({
               <HighlightSpan
                 text={employee.name}
                 searchTerm={searchTerm}
-                modified={
-                  prevEmployee !== undefined && prevEmployee.name !== undefined
-                }
+                modified={modifiedFields.has("name")}
                 onModifiedAnimationEnd={() => {
                   onShowModifiedField(employee.employeeId, "name");
                 }}
@@ -63,9 +62,7 @@ export default function EmployeeRow({
             <HighlightSpan
               text={employee.email}
               searchTerm={searchTerm}
-              modified={
-                prevEmployee !== undefined && prevEmployee.email !== undefined
-              }
+              modified={modifiedFields.has("email")}
               className="email"
               onModifiedAnimationEnd={() => {
                 onShowModifiedField(employee.employeeId, "email");
@@ -79,10 +76,7 @@ export default function EmployeeRow({
           <HighlightSpan
             text={employee.designation ?? "N/A"}
             searchTerm={searchTerm}
-            modified={
-              prevEmployee !== undefined &&
-              prevEmployee.designation !== undefined
-            }
+            modified={modifiedFields.has("designation")}
             onModifiedAnimationEnd={() => {
               onShowModifiedField(employee.employeeId, "designation");
             }}
@@ -94,10 +88,7 @@ export default function EmployeeRow({
           <HighlightSpan
             text={employee.department?.department ?? ""}
             searchTerm={searchTerm}
-            modified={
-              prevEmployee !== undefined &&
-              prevEmployee.department !== undefined
-            }
+            modified={modifiedFields.has("department")}
             onModifiedAnimationEnd={() => {
               onShowModifiedField(employee.employeeId, "department");
             }}
