@@ -9,8 +9,8 @@ const employeeSchema = Yup.object({
     .min(0, "Salary can't be negative"),
   designation: Yup.string(),
   department: Yup.object(),
-  dateOfBirth: Yup.date().required("Required"),
-  joiningDate: Yup.date().required("Required"),
+  dateOfBirth: Yup.date(),
+  joiningDate: Yup.date(),
   skills: Yup.array(),
 });
 

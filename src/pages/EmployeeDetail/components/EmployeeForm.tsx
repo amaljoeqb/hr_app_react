@@ -51,21 +51,41 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               label="Employee ID"
               name={isCreate ? "placeholder" : "employeeId"}
               type="number"
-              required
               disabled
             />
-            <TextInput label="Name" name="name" required={true} />
+            <TextInput
+              label="Name"
+              name="name"
+              placeholder="Employee Name"
+              required
+            />
           </div>
           <div className="row">
-            <TextInput label="Email" name="email" required={true} />
-            <TextInput type="number" label="Salary" name="salary" />
+            <TextInput
+              label="Email"
+              name="email"
+              required
+              placeholder="Employee Email ID"
+            />
+            <TextInput
+              type="number"
+              label="Salary"
+              name="salary"
+              placeholder=""
+            />
           </div>
           <div className="row">
-            <TextInput label="Designation" name="designation" type="text" />
+            <TextInput
+              label="Designation"
+              placeholder="N/A"
+              name="designation"
+              type="text"
+            />
             <SelectInput<Department>
               label="Department"
               name="department"
               optionId="departmentId"
+              placeholder="N/A"
               options={departmentOptions}
               isDisabled={props.isView}
             />
@@ -80,6 +100,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               name="skills"
               optionId="skillId"
               isMulti
+              placeholder="N/A"
               options={skillsOptions}
               isDisabled={props.isView}
             />
