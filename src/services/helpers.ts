@@ -171,6 +171,5 @@ export function getEmployeeDiff(
     diff.dateOfBirth = oldEmployee.dateOfBirth;
   if (!isSkillsEqual(oldEmployee.skills, newEmployee.skills))
     diff.skills = oldEmployee.skills;
-  console.log(diff);
   return diff;
 }
