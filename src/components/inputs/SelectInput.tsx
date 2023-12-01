@@ -44,10 +44,9 @@ export default function SelectInput<T>({
     }
   }
 
-
   return (
     <div id={`${name}-field`} className="field">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{`${label}${props.required ? " *" : ""}`}</label>
       <Select
         {...props}
         {...field}
