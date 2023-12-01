@@ -97,7 +97,6 @@ export function searchEmployees(employees: Employee[], searchTerm: string) {
   }
 }
 
-
 /**
  * Function to get next employee ID
  * @param {Employee[]} employees - Array of employees
@@ -109,6 +108,16 @@ export function getNextEmployeeId(employees: Employee[]) {
   return (maxId + 1).toString();
 }
 
+function isSkillsEqual(skills1: Skill[], skills2: Skill[]) {
+  if (skills1.length !== skills2.length) return false;
+  const skillIds1 = skills1.map((skill) => skill.skillId);
+  const skillIds2 = skills2.map((skill) => skill.skillId);
+  skillIds1.forEach((skill1) => {
+    if (!skillIds2.includes(skill1)) return false;
+  });
+
+  return true;
+}
 
 /**
  * Checks if two employee objects are equal.
@@ -117,17 +126,6 @@ export function getNextEmployeeId(employees: Employee[]) {
  * @returns True if the employee objects are equal, false otherwise.
  */
 export function isEmployeeEqual(employee1: Employee, employee2: Employee) {
-  function isSkillsEqual(skills1: Skill[], skills2: Skill[]) {
-    if (skills1.length !== skills2.length) return false;
-    const skillIds1 = skills1.map((skill) => skill.skillId);
-    const skillIds2 = skills2.map((skill) => skill.skillId);
-    skillIds1.forEach((skill1) => {
-      if (!skillIds2.includes(skill1)) return false;
-    });
-
-    return true;
-  }
-
   return (
     employee1.employeeId === employee2.employeeId &&
     employee1.name === employee2.name &&
@@ -139,4 +137,25 @@ export function isEmployeeEqual(employee1: Employee, employee2: Employee) {
     employee1.dateOfBirth === employee2.dateOfBirth &&
     isSkillsEqual(employee1.skills, employee2.skills)
   );
+}
+
+export function getEmployeeDiff(oldEmployee: Employee, newEmployee: Employee) {
+  const diff: Partial<Employee> = {};
+  if (oldEmployee.name !== newEmployee.name) diff.name = oldEmployee.name;
+  if (oldEmployee.email !== newEmployee.email) diff.email = oldEmployee.email;
+  if (oldEmployee.designation !== newEmployee.designation)
+    diff.designation = oldEmployee.designation;
+  if (
+    oldEmployee.department?.departmentId !==
+    newEmployee.department?.departmentId
+  )
+    diff.department = oldEmployee.department;
+  if (oldEmployee.salary !== newEmployee.salary)
+    diff.salary = oldEmployee.salary;
+  if (oldEmployee.joiningDate !== newEmployee.joiningDate)
+    diff.joiningDate = oldEmployee.joiningDate;
+  if (oldEmployee.dateOfBirth !== newEmployee.dateOfBirth)
+    diff.dateOfBirth = oldEmployee.dateOfBirth;
+  if (!isSkillsEqual(oldEmployee.skills, newEmployee.skills))
+    diff.skills = oldEmployee.skills;
 }
