@@ -60,25 +60,11 @@ export default function useEmployeeForm({
     onEdit();
   }
 
-  function onAutofill(formik: FormikContextType<Employee>) {
-    if (process.env.NODE_ENV !== "development") {
-      return;
-    }
-    const nextId = getNextEmployeeId(appContext.state.employees);
-    if (formik.values.employeeId !== nextId) {
-      return;
-    }
-    const randomIndex = Math.floor(Math.random() * data.employees.length);
-    const employee = data.employees[randomIndex];
-    employee.employeeId = nextId;
-    formik.setValues(employee);
-  }
 
   return {
     initialValues,
     onSubmit,
     onClickEdit,
-    onAutofill,
     departmentOptions,
     skillsOptions,
     isInitialValid,

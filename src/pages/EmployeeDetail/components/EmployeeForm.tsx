@@ -25,7 +25,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
     departmentOptions,
     isInitialValid,
     onClickEdit,
-    onAutofill,
     isCreate,
   } = useEmployeeForm(props);
 
@@ -36,12 +35,6 @@ export default function EmployeeForm(props: EmployeeFormProps) {
       formik.current.setValues(initialValues);
     }
   }, [props.isView, initialValues]);
-
-  function onEmployeeIdDoubleClick() {
-    if (formik.current) {
-      onAutofill(formik.current);
-    }
-  }
 
   return (
     <StyledEmployeeForm className={props.className}>
