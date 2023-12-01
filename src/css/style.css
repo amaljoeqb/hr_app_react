@@ -18,6 +18,9 @@
   --hover-color: #f1f1f1;
   --grey-title-color: #666;
   --toast-bg-color: #2f2f2f;
+  --highlight-color: rgba(80, 151, 255, 0.4);
+  --modified-color: #BF360C;
+  --added-color: #388E3C;
 }
 
 html {

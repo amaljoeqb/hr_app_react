@@ -1,5 +1,5 @@
 import { Employee } from "../../../models";
-import HighlightedSpan from "../../../components/ui/HighlightedSpan";
+import HighlightSpan from "../../../components/ui/HighlightedSpan/HighlightedSpan";
 import { useNavigate } from "react-router-dom";
 import EmployeeActionMenu from "./EmployeeActionMenu";
 import SkillsCell from "./SkillsCell";
@@ -22,7 +22,7 @@ export default function EmployeeRow({
     <tr key={employee.employeeId} className="emp-row">
       {cells.has("employeeId") && (
         <td>
-          <HighlightedSpan text={employee.employeeId} searchTerm={searchTerm} />
+          <HighlightSpan text={employee.employeeId} searchTerm={searchTerm} />
         </td>
       )}
       {cells.has("name") && (
@@ -34,7 +34,7 @@ export default function EmployeeRow({
                 navigate(`/employee/${employee.employeeId}`);
               }}
             >
-              <HighlightedSpan text={employee.name} searchTerm={searchTerm} />
+              <HighlightSpan text={employee.name} searchTerm={searchTerm} />
               <span className="material-symbols-outlined"> visibility </span>
             </div>
             <p className="email">{employee.email}</p>
@@ -43,7 +43,7 @@ export default function EmployeeRow({
       )}
       {cells.has("designation") && (
         <td>
-          <HighlightedSpan
+          <HighlightSpan
             text={employee.designation ?? "N/A"}
             searchTerm={searchTerm}
           />
@@ -51,7 +51,7 @@ export default function EmployeeRow({
       )}
       {cells.has("department") && (
         <td>
-          <HighlightedSpan
+          <HighlightSpan
             text={employee.department?.department ?? ""}
             searchTerm={searchTerm}
           />

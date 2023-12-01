@@ -149,9 +149,7 @@ export const StyledTable = styled.div`
     outline-color: var(--primary-color);
   }
 
-  .highlight {
-    background-color: rgba(80, 151, 255, 0.4);
-  }
+  
 
   table .name:hover {
     color: var(--text-overlay);
