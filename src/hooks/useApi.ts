@@ -85,6 +85,7 @@ export default function useApi() {
       (e) => e.employeeId === employee.employeeId
     );
     try {
+      setPrevEmployee(employee.employeeId, currentEmployee ?? {});
       appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
       await API.updateEmployee(employee);
       appContext.showToast({

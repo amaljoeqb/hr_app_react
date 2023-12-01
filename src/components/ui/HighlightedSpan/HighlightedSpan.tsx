@@ -1,3 +1,4 @@
+import { createRef, useEffect } from "react";
 import { StyledHighlightSpan } from "./HighlightedSpan.style";
 
 export interface HighlightSpanProps
@@ -13,6 +14,7 @@ export default function HighlightSpan({
   modified,
   ...props
 }: HighlightSpanProps) {
+  const ref = createRef<HTMLSpanElement>();
   const textString = text.toString();
   const lowerCaseText = textString.toString().toLowerCase();
 
@@ -31,8 +33,22 @@ export default function HighlightSpan({
     );
   }
 
+  useEffect(() => {
+    const { current } = ref;
+    const onAnimationEnd = () => {
+      current?.classList.remove("modified");
+    };
+    if (modified) {
+      current?.classList.add("modified");
+      current?.addEventListener("animationend", onAnimationEnd);
+    }
+    return () => {
+      current?.removeEventListener("animationend", onAnimationEnd);
+    };
+  }, [modified, ref]);
+
   return (
-    <StyledHighlightSpan {...props}>
+    <StyledHighlightSpan ref={ref} {...props}>
       {!searchTerm || !lowerCaseText.includes(searchTerm)
         ? text
         : getHighlightedElement()}
