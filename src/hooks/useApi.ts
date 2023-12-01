@@ -3,9 +3,14 @@ import * as API from "../api";
 import { Employee } from "../models";
 import { errorMessages, getEmployeeDiff } from "../services/";
 import { successMessages } from "../services/successMessages";
+import { useEffect } from "react";
 
 export default function useApi() {
   const appContext = useAppContext();
+
+  useEffect(() => {
+    console.log(appContext);
+  }, [appContext]);
 
   function setPrevEmployee(id: string, employee: Partial<Employee>) {
     const payload = { id: id, employee: employee };
@@ -13,6 +18,7 @@ export default function useApi() {
       type: "SET_PREV_EMPLOYEE",
       payload: payload,
     });
+    // TODO: Remove this after testing
     // setTimeout(() => {
     //   appContext.dispatch({
     //     type: "DELETE_PREV_EMPLOYEE",
@@ -82,7 +88,10 @@ export default function useApi() {
       (e) => e.employeeId === employee.employeeId
     );
     try {
-      setPrevEmployee(employee.employeeId, getEmployeeDiff(currentEmployee, employee));
+      setPrevEmployee(
+        employee.employeeId,
+        getEmployeeDiff(currentEmployee, employee)
+      );
       appContext.dispatch({ type: "UPDATE_EMPLOYEE", payload: employee });
       await API.updateEmployee(employee);
       appContext.showToast({
