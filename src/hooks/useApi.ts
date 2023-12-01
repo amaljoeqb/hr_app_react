@@ -54,6 +54,7 @@ export default function useApi() {
   async function createEmployee(employee: Employee) {
     try {
       appContext.dispatch({ type: "ADD_EMPLOYEE", payload: employee });
+      setPrevEmployee(employee.employeeId, {});
       const response = await API.createEmployee(employee);
       const receivedId = response.id.toString();
       if (receivedId !== employee.employeeId) {

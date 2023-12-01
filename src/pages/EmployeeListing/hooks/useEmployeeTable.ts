@@ -1,12 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
 import { useAppContext } from "../../../store/app.context";
 
 export default function useEmployeeTable() {
-
   const appContext = useAppContext();
-  const { employees, skills } = appContext.state;
+  const { employees, skills, prevEmployees } = appContext.state;
 
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
@@ -24,8 +23,10 @@ export default function useEmployeeTable() {
     filterFunction,
     id: "employeeId",
   });
-  
 
+  useEffect(() => {
+    console.log("prevEmployees", prevEmployees);
+  }, [prevEmployees]);
 
   return {
     ...employeeTable,

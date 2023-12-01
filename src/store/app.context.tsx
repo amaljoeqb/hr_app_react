@@ -115,7 +115,7 @@ const appReducer = (
     }
     case "SET_PREV_EMPLOYEE": {
       const prevEmployees = new Map(state.prevEmployees);
-      prevEmployees.set(action.payload.id, action.payload.data);
+      prevEmployees.set(action.payload.id, action.payload.employee);
       return { ...state, prevEmployees };
     }
     case "DELETE_PREV_EMPLOYEE": {
