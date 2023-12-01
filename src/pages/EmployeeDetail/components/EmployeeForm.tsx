@@ -71,7 +71,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               type="number"
               label="Salary"
               name="salary"
-              placeholder=""
+              placeholder="N/A"
             />
           </div>
           <div className="row">
