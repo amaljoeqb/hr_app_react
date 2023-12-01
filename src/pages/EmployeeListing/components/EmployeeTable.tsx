@@ -67,16 +67,24 @@ export default function EmployeeTable({
         }
       }}
     >
-      {employees.map((employee) => (
-        <EmployeeRow
-          key={employee.employeeId}
-          employee={employee}
-          prevEmployee={prevEmployees.get(employee.employeeId)}
-          searchTerm={searchTerm}
-          cells={columns}
-          onShowModifiedField={onShowModifiedField}
-        />
-      ))}
+      {employees.length > 0 ? (
+        employees.map((employee) => (
+          <EmployeeRow
+            key={employee.employeeId}
+            employee={employee}
+            prevEmployee={prevEmployees.get(employee.employeeId)}
+            searchTerm={searchTerm}
+            cells={columns}
+            onShowModifiedField={onShowModifiedField}
+          />
+        ))
+      ) : (
+        <tr>
+          <td className="no-data" colSpan={columns.size}>
+            No employees found
+          </td>
+        </tr>
+      )}
     </Table>
   );
 }

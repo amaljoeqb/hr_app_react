@@ -149,8 +149,6 @@ export const StyledTable = styled.div`
     outline-color: var(--primary-color);
   }
 
-  
-
   table .name:hover {
     color: var(--text-overlay);
     cursor: pointer;
@@ -240,6 +238,7 @@ export const StyledTable = styled.div`
   }
 
   .no-data {
+    padding: 16px;
     text-align: center;
   }
 `;
