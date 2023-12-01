@@ -56,7 +56,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
             <TextInput
               label="Name"
               name="name"
-              placeholder="Employee Name"
+              placeholder={isCreate ? "" : "N/A"}
               required
             />
           </div>
@@ -65,19 +65,19 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               label="Email"
               name="email"
               required
-              placeholder="Employee Email ID"
+              placeholder={isCreate ? "" : "N/A"}
             />
             <TextInput
               type="number"
               label="Salary"
               name="salary"
-              placeholder="N/A"
+              placeholder={isCreate ? "" : "N/A"}
             />
           </div>
           <div className="row">
             <TextInput
               label="Designation"
-              placeholder="N/A"
+              placeholder={isCreate ? "" : "N/A"}
               name="designation"
               type="text"
             />
@@ -85,7 +85,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               label="Department"
               name="department"
               optionId="departmentId"
-              placeholder="N/A"
+              placeholder={isCreate ? "Select Department" : "N/A"}
               options={departmentOptions}
               isDisabled={props.isView}
             />
@@ -100,7 +100,7 @@ export default function EmployeeForm(props: EmployeeFormProps) {
               name="skills"
               optionId="skillId"
               isMulti
-              placeholder="N/A"
+              placeholder={isCreate ? "Select Skills" : "N/A"}
               options={skillsOptions}
               isDisabled={props.isView}
             />
