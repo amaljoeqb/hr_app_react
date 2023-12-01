@@ -2,14 +2,24 @@ import { useCallback, useEffect, useState } from "react";
 import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
 import { useAppContext } from "../../../store/app.context";
+import { columnIds } from "../../../config";
 
 export default function useEmployeeTable() {
   const appContext = useAppContext();
   const { employees, skills, prevEmployees } = appContext.state;
+  const [columns, setColumns] = useState(columnIds.large);
 
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
-  const searchFunction = searchEmployees;
+  const searchFunction = useCallback(
+    (data: Employee[], searchTerm: string) => {
+      let fields = Array.from(columns).filter(
+        (column) => column !== "actions"
+      ) as (keyof Employee)[];
+      return searchEmployees(data, searchTerm, fields);
+    },
+    [columns]
+  );
   const sortFunction = sortEmployees;
   const filterFunction = useCallback(
     (data: Employee[]) => filterEmployees(data, selectedSkills),
@@ -43,6 +53,8 @@ export default function useEmployeeTable() {
     employees,
     prevEmployees,
     onShowModifiedField,
+    columns,
+    setColumns,
   };
 }
 
@@ -66,16 +78,32 @@ function filterEmployees(employees: Employee[], selectedSkills: string[]) {
  * Fuction to search employees array based on a search term
  * @param {array} employees - Array of employees
  * @param {string} searchTerm - Term to search for
+ * @param {keyof Employee[]} fields - Fields to search in
  */
-function searchEmployees(employees: Employee[], searchTerm: string) {
+function searchEmployees(
+  employees: Employee[],
+  searchTerm: string,
+  fields: (keyof Employee)[]
+) {
   try {
     const lowerCaseValue = searchTerm.toLowerCase();
     return Object.values(employees).filter((employee) =>
-      Object.values(employee).some(
-        (value) =>
-          (typeof value === "string" || typeof value === "number") &&
-          value.toString().toLowerCase().includes(lowerCaseValue)
-      )
+      fields.some((field) => {
+        const value = employee[field];
+        if (typeof value === "string" || typeof value === "number") {
+          return value.toString().toLowerCase().includes(lowerCaseValue);
+        }
+        if (Array.isArray(value)) {
+          return false;
+        }
+        if (field === "department") {
+          return value?.department
+            .toString()
+            .toLowerCase()
+            .includes(lowerCaseValue);
+        }
+        return false;
+      })
     );
   } catch (e) {
     return [];

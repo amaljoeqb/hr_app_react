@@ -10,6 +10,7 @@ import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
 import { useQuery } from "../../hooks";
 import { Footer, Header } from "../../layout";
 import { StyledEmployeeListing } from "./EmployeeListing.style";
+import { columnIds } from "../../config";
 
 export function EmployeeListing() {
   const navigate = useNavigate();
@@ -29,11 +30,11 @@ export function EmployeeListing() {
     totalPages,
     prevEmployees,
     onShowModifiedField,
+    columns,
+    setColumns,
   } = useEmployeeTable();
   const urlParams = useQuery();
   const deleteEmployeeId = urlParams.get("delete");
-
-  
 
   return (
     <StyledEmployeeListing>
@@ -79,6 +80,8 @@ export function EmployeeListing() {
           onChangeSort={(sort) => {
             setSort(sort);
           }}
+          columns={columns}
+          setColumns={setColumns}
           onShowModifiedField={onShowModifiedField}
         />
         {totalPages > 1 && (

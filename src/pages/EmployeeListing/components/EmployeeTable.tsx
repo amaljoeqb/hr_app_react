@@ -3,6 +3,7 @@ import { Table } from "../../../components";
 import { Employee } from "../../../models";
 import EmployeeRow from "./EmployeeRow";
 import { columnIds, columns as tableColumns } from "../../../config";
+import { ColumnKey } from "../../../components/ui/Table/Table";
 
 export interface EmployeeTableProps {
   employees: Employee[];
@@ -12,6 +13,8 @@ export interface EmployeeTableProps {
     key: keyof Employee;
     order: "asc" | "desc";
   };
+  columns: Set<ColumnKey<Employee>>;
+  setColumns: React.Dispatch<React.SetStateAction<Set<ColumnKey<Employee>>>>;
   onShowModifiedField: (id: string, field: keyof Employee) => void;
   onChangeSort: (sort: { key: keyof Employee; order: "asc" | "desc" }) => void;
 }
@@ -23,9 +26,9 @@ export default function EmployeeTable({
   sort,
   onChangeSort,
   onShowModifiedField,
+  columns,
+  setColumns,
 }: EmployeeTableProps) {
-  const [columns, setColumns] = useState(columnIds.large);
-
   // remove skills column on mobile, resize observer
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
