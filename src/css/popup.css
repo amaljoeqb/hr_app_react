@@ -45,14 +45,15 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-width: 600px;
   box-shadow: var(--shadow);
   margin: 12px;
+
 }
 
 .emp-popup .popup-content {
   margin-bottom: 64px;
+  width: 100%;
 }
 
 
