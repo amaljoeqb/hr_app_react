@@ -1,5 +1,5 @@
 import { createRef, useEffect } from "react";
-import { StyledHighlightSpan } from "./HighlightedSpan.style";
+import { StyledHighlightSpan } from "./HighlightSpan.style";
 
 export interface HighlightSpanProps
   extends React.HTMLAttributes<HTMLSpanElement> {

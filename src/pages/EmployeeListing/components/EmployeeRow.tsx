@@ -1,5 +1,5 @@
 import { Employee } from "../../../models";
-import HighlightSpan from "../../../components/ui/HighlightedSpan/HighlightedSpan";
+import HighlightSpan from "../../../components/ui/HighlightSpan/HighlightSpan";
 import { useNavigate } from "react-router-dom";
 import EmployeeActionMenu from "./EmployeeActionMenu";
 import SkillsCell from "./SkillsCell";
