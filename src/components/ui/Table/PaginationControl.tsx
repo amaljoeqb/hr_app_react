@@ -1,3 +1,6 @@
+import { HoverButton } from "../..";
+import { StyledPaginationControl } from "./PaginationControl.style";
+
 export interface PaginationControlProps {
   current: number;
   total: number;
@@ -11,18 +14,20 @@ export default function PaginationControl({
 }: PaginationControlProps) {
   const pages = Array.from({ length: total }, (_, i) => i + 1);
   return (
-    <nav className="pagination-container">
+    <StyledPaginationControl>
       <div className="pagination">
-        <button
-          className="hover-btn page-first"
+        <HoverButton
+          disabled={current === 1}
+          className="regular page-first"
           onClick={() => {
             onChange(1);
           }}
         >
           <span className="material-symbols-outlined"> first_page </span>
-        </button>
-        <button
-          className="hover-btn page-previous"
+        </HoverButton>
+        <HoverButton
+          disabled={current === 1}
+          className="regular page-previous"
           onClick={() => {
             if (current > 1) {
               onChange(current - 1);
@@ -30,25 +35,26 @@ export default function PaginationControl({
           }}
         >
           <span className="material-symbols-outlined"> navigate_before </span>
-        </button>
+        </HoverButton>
         <ul className="page-numbers">
           {pages.map((page) => (
             <li key={page}>
-              <button
+              <HoverButton
                 id="page-1"
                 data-num="1"
-                className={`page-number hover-btn ${
+                className={`page-number regular ${
                   page === current ? "active" : ""
                 }`}
                 onClick={() => onChange(page)}
               >
                 {page}
-              </button>
+              </HoverButton>
             </li>
           ))}
         </ul>
-        <button
-          className="hover-btn page-next"
+        <HoverButton
+          disabled={current === total}
+          className="regular page-next"
           onClick={() => {
             if (current < total) {
               onChange(current + 1);
@@ -56,16 +62,17 @@ export default function PaginationControl({
           }}
         >
           <span className="material-symbols-outlined"> navigate_next </span>
-        </button>
-        <button
+        </HoverButton>
+        <HoverButton
+          disabled={current === total}
           className="hover-btn page-last"
           onClick={() => {
             onChange(total);
           }}
         >
           <span className="material-symbols-outlined"> last_page </span>
-        </button>
+        </HoverButton>
       </div>
-    </nav>
+    </StyledPaginationControl>
   );
 }

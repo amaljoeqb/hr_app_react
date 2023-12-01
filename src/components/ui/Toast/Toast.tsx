@@ -6,8 +6,25 @@ export interface ToastProps {
 }
 
 export default function Toast({ toast, onClose }: ToastProps) {
+  function getClassName() {
+    let className = "toast show";
+    switch (toast.type) {
+      case "success": {
+        className += " success";
+        break;
+      }
+      case "error": {
+        className += " error";
+        break;
+      }
+      default: {
+        className += " info";
+      }
+    }
+    return className;
+  }
   return (
-    <div className={`toast show ${toast.isError ? "error" : ""}`}>
+    <div className={getClassName()}>
       <p className="toast-message">{toast.message}</p>
       <span className="material-symbols-outlined close-toast" onClick={onClose}>
         close

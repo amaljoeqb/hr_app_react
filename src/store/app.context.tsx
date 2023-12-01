@@ -6,6 +6,7 @@ export interface AppState {
   employees: Employee[];
   skills: Skill[];
   departments: Department[];
+  prevEmployees: Map<string, Partial<Employee>>;
 }
 
 export interface AppContextType {
@@ -21,6 +22,7 @@ const initialState: AppState = {
   employees: [],
   skills: [],
   departments: [],
+  prevEmployees: new Map(),
 };
 
 // Reducer function to manage state changes
@@ -33,20 +35,16 @@ const appReducer = (
 ) => {
   switch (action.type) {
     case "SET_EMPLOYEES": {
-      localStorage.setItem("employees", JSON.stringify(action.payload));
       return { ...state, employees: action.payload };
     }
     case "SET_SKILLS": {
-      localStorage.setItem("skills", JSON.stringify(action.payload));
       return { ...state, skills: action.payload };
     }
     case "SET_DEPARTMENTS": {
-      localStorage.setItem("departments", JSON.stringify(action.payload));
       return { ...state, departments: action.payload };
     }
     case "ADD_EMPLOYEE": {
       const employees = [...state.employees, action.payload];
-      localStorage.setItem("employees", JSON.stringify(employees));
       return { ...state, employees };
     }
     case "UPDATE_EMPLOYEE": {
@@ -56,7 +54,18 @@ const appReducer = (
         }
         return employee;
       });
-      localStorage.setItem("employees", JSON.stringify(employees));
+      return {
+        ...state,
+        employees,
+      };
+    }
+    case "UPDATE_EMPLOYEE_ID": {
+      const employees = state.employees.map((employee) => {
+        if (employee.employeeId === action.payload.oldId) {
+          return { ...employee, employeeId: action.payload.newId };
+        }
+        return employee;
+      });
       return {
         ...state,
         employees,
@@ -94,6 +103,18 @@ const appReducer = (
       const skills = [...state.skills, action.payload];
       localStorage.setItem("skills", JSON.stringify(skills));
       return { ...state, skills };
+    }
+    case "SET_PREV_EMPLOYEE": {
+      const prevEmployees = new Map(state.prevEmployees);
+      prevEmployees.set(action.payload.id, action.payload.employee);
+      return { ...state, prevEmployees };
+    }
+    case "DELETE_PREV_EMPLOYEE": {
+      const prevEmployees = new Map(state.prevEmployees);
+      if (prevEmployees.get(action.payload.id) === action.payload.employee) {
+        prevEmployees.delete(action.payload.id);
+      }
+      return { ...state, prevEmployees };
     }
     default: {
       return state;

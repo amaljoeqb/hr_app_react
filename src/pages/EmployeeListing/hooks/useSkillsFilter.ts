@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Employee, Skill } from "../../../models";
+import { Skill } from "../../../models";
 import { SkillsFilterProps } from "../components/SkillsFilter";
 
 export interface SkillOption extends Skill {
@@ -26,6 +26,7 @@ export default function useSkillsFilter({
   }
 
   function onClickClearFilters() {
+    setIsActive(false);
     onChange?.([]);
   }
 

@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { Field, useField } from "formik";
 import { InputError } from "../";
 
 export interface TextInputProps
@@ -11,18 +11,15 @@ export interface TextInputProps
   type?: string;
 }
 
-export default function TextInput({
-  label,
-  ...props
-}: TextInputProps) {
-  const [field, meta] = useField(props.name);
+export default function TextInput({ label, ...props }: TextInputProps) {
+  const [, meta] = useField(props.name);
+
   return (
-    <div
-      id={`${props.name}-field`}
-      className="field"
-    >
-      <label htmlFor={props.name}>{label}</label>
-      <input type="text" {...field} {...props} />
+    <div id={`${props.name}-field`} className="field">
+      <label htmlFor={props.name}>{`${label}${
+        props.required ? " *" : ""
+      }`}</label>
+      <Field {...props} />
       <InputError
         message={meta.touched && meta.error ? meta.error : undefined}
       />

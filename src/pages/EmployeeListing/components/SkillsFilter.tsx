@@ -1,6 +1,7 @@
 import { Skill, Employee } from "../../../models";
 import ClickAwayListener from "../../../components/eventListeners/ClickAwayListener";
 import useSkillsFilter from "../hooks/useSkillsFilter";
+import { HoverButton } from "../../../components";
 
 export interface SkillsFilterProps {
   skills: Skill[];
@@ -30,8 +31,8 @@ export default function SkillsFilter({
         id="skills-filter"
         className={`filter-btn-container ${isActive ? "active" : ""}`}
       >
-        <button
-          className="filter-btn hover-btn"
+        <HoverButton
+          className="filter-btn dotted regular"
           onClick={() => {
             setIsActive(!isActive);
           }}
@@ -58,7 +59,7 @@ export default function SkillsFilter({
               );
             })}
           </ul>
-        </button>
+        </HoverButton>
         <div className="filter-dropdown">
           <form className="filter-form">
             <span className="material-symbols-outlined search-icon">

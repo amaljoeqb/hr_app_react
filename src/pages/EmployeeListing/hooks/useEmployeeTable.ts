@@ -1,11 +1,25 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTable } from "../../../hooks";
 import { Employee } from "../../../models";
+import { useAppContext } from "../../../store/app.context";
+import { columnIds } from "../../../config";
 
-export default function useEmployeeTable(employees: Employee[]) {
+export default function useEmployeeTable() {
+  const appContext = useAppContext();
+  const { employees, skills, prevEmployees } = appContext.state;
+  const [columns, setColumns] = useState(columnIds.large);
+
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
-  const searchFunction = searchEmployees;
+  const searchFunction = useCallback(
+    (data: Employee[], searchTerm: string) => {
+      let fields = Array.from(columns).filter(
+        (column) => column !== "actions"
+      ) as (keyof Employee)[];
+      return searchEmployees(data, searchTerm, fields);
+    },
+    [columns]
+  );
   const sortFunction = sortEmployees;
   const filterFunction = useCallback(
     (data: Employee[]) => filterEmployees(data, selectedSkills),
@@ -20,10 +34,27 @@ export default function useEmployeeTable(employees: Employee[]) {
     id: "employeeId",
   });
 
+  function onShowModifiedField(id: string, field: keyof Employee) {
+    let prevEmployee = prevEmployees.get(id);
+    if (prevEmployee) {
+      delete prevEmployee[field];
+      appContext.dispatch({
+        type: "SET_PREV_EMPLOYEE",
+        payload: { id, employee: prevEmployee },
+      });
+    }
+  }
+
   return {
     ...employeeTable,
     selectedSkills,
     setSelectedSkills,
+    skills,
+    employees,
+    prevEmployees,
+    onShowModifiedField,
+    columns,
+    setColumns,
   };
 }
 
@@ -47,16 +78,32 @@ function filterEmployees(employees: Employee[], selectedSkills: string[]) {
  * Fuction to search employees array based on a search term
  * @param {array} employees - Array of employees
  * @param {string} searchTerm - Term to search for
+ * @param {keyof Employee[]} fields - Fields to search in
  */
-function searchEmployees(employees: Employee[], searchTerm: string) {
+function searchEmployees(
+  employees: Employee[],
+  searchTerm: string,
+  fields: (keyof Employee)[]
+) {
   try {
     const lowerCaseValue = searchTerm.toLowerCase();
     return Object.values(employees).filter((employee) =>
-      Object.values(employee).some(
-        (value) =>
-          (typeof value === "string" || typeof value === "number") &&
-          value.toString().toLowerCase().includes(lowerCaseValue)
-      )
+      fields.some((field) => {
+        const value = employee[field];
+        if (typeof value === "string" || typeof value === "number") {
+          return value.toString().toLowerCase().includes(lowerCaseValue);
+        }
+        if (Array.isArray(value)) {
+          return false;
+        }
+        if (field === "department") {
+          return value?.department
+            .toString()
+            .toLowerCase()
+            .includes(lowerCaseValue);
+        }
+        return false;
+      })
     );
   } catch (e) {
     return [];
@@ -139,9 +186,9 @@ function sortEmployees(
     if (!a[key] && !b[key]) {
       return 0;
     } else if (!a[key]) {
-      return -1;
-    } else if (!b[key]) {
       return 1;
+    } else if (!b[key]) {
+      return -1;
     }
     const aString = a[key]!.toString().toLowerCase();
     const bString = b[key]!.toString().toLowerCase();
@@ -161,8 +208,17 @@ function sortEmployees(
    * @returns A negative number if `a` should be sorted before `b`, a positive number if `a` should be sorted after `b`, or 0 if they are equal.
    */
   const departmentSort = (a: Employee, b: Employee) => {
-    const aString = a.department?.department.toString().toLowerCase() ?? "";
-    const bString = b.department?.department.toString().toLowerCase() ?? "";
+    const aString = a.department?.department.toString().toLowerCase();
+    const bString = b.department?.department.toString().toLowerCase();
+    if (!aString && !bString) {
+      return 0;
+    }
+    if (!aString) {
+      return 1;
+    }
+    if (!bString) {
+      return -1;
+    }
     if (aString < bString) {
       return asc ? -1 : 1;
     }

@@ -46,7 +46,7 @@ export default function SelectInput<T>({
 
   return (
     <div id={`${name}-field`} className="field">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{`${label}${props.required ? " *" : ""}`}</label>
       <Select
         {...props}
         {...field}
@@ -56,6 +56,7 @@ export default function SelectInput<T>({
         menuPlacement={"auto"}
         value={getValue()}
         theme={selectTheme}
+        onBlur={() => field.onBlur({ target: { name: name } })}
         onChange={(option) => {
           fieldOnChange({
             target: {

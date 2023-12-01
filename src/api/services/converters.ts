@@ -41,7 +41,7 @@ export function getEmployeeFromEmployeeGlobal(
 }
 
 export function getEmployeeRequestFromEmployee(
-  employee: Employee
+  employee: Employee,
 ): EmployeeRequest {
   const firstName = employee.name.split(" ")[0];
   const lastName = employee.name.substring(firstName.length + 1);

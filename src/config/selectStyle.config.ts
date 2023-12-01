@@ -83,7 +83,7 @@ export function selectStyle<T>(
     }),
     singleValue: (base) => ({
       ...base,
-      color: "#000",
+      color: "var(--text-color)",
       margin: "0",
       transition: "all 0.3s ease-in-out",
     }),
@@ -95,8 +95,8 @@ export const selectTheme: ThemeConfig = (theme: Theme) => ({
   colors: {
     ...theme.colors,
     primary: "var(--primary-color)",
-    primary25: "#e8f0fe",
-    primary50: "#e8f0fe",
+    primary25: "var(--primary-25)",
+    primary50: "var(--primary-50)",
     danger: "var(--error-color)",
   },
 });

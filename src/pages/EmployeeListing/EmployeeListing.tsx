@@ -1,17 +1,18 @@
 import EmployeeTable from "./components/EmployeeTable";
 import { HoverButton } from "../../components";
-import PaginationControl from "./components/PaginationControl";
+import { PaginationControl } from "../../components/";
 import SearchInput from "./components/SearchInput";
 import { useAppContext } from "../../store/app.context";
 import { useNavigate } from "react-router-dom";
 import useEmployeeTable from "./hooks/useEmployeeTable";
 import SkillsFilter from "./components/SkillsFilter";
 import EmployeeDeletePopup from "./components/EmployeeDeletePopup";
-import { useApi, useQuery } from "../../hooks";
+import { useQuery } from "../../hooks";
+import { Footer, Header } from "../../layout";
+import { StyledEmployeeListing } from "./EmployeeListing.style";
+import { columnIds } from "../../config";
 
 export function EmployeeListing() {
-  const appContext = useAppContext();
-  const { employees, skills } = appContext.state;
   const navigate = useNavigate();
   const {
     displayData,
@@ -24,17 +25,20 @@ export function EmployeeListing() {
     page,
     setPage,
     filteredData,
-  } = useEmployeeTable(employees);
-  const PER_PAGE = 10;
-
+    employees,
+    skills,
+    totalPages,
+    prevEmployees,
+    onShowModifiedField,
+    columns,
+    setColumns,
+  } = useEmployeeTable();
   const urlParams = useQuery();
-  const api = useApi();
-
   const deleteEmployeeId = urlParams.get("delete");
-  const totalPages = Math.ceil(filteredData.length / PER_PAGE);
 
   return (
-    <>
+    <StyledEmployeeListing>
+      <Header />
       <main className="card">
         <h1>Employees</h1>
         <div className="emp-listing-header">
@@ -67,16 +71,19 @@ export function EmployeeListing() {
             </HoverButton>
           </div>
         </div>
-        <div className="table-container">
-          <EmployeeTable
-            employees={displayData}
-            searchTerm={searchTerm}
-            sort={sort}
-            onChangeSort={(sort) => {
-              setSort(sort);
-            }}
-          />
-        </div>
+
+        <EmployeeTable
+          employees={displayData}
+          prevEmployees={prevEmployees}
+          searchTerm={searchTerm}
+          sort={sort}
+          onChangeSort={(sort) => {
+            setSort(sort);
+          }}
+          columns={columns}
+          setColumns={setColumns}
+          onShowModifiedField={onShowModifiedField}
+        />
         {totalPages > 1 && (
           <PaginationControl
             current={page}
@@ -95,6 +102,7 @@ export function EmployeeListing() {
           }}
         />
       )}
-    </>
+      <Footer />
+    </StyledEmployeeListing>
   );
 }

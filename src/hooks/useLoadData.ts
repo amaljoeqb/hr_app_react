@@ -12,6 +12,7 @@ export default function useLoadData() {
     Promise.all([employees, skills, departments]).then(() => {
       setLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading;

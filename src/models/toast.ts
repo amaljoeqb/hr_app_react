@@ -1,6 +1,8 @@
-export default interface IToast {
+export interface IToast {
     message: string;
-    isError: boolean;
+    type: ToastType;
     id: number;
   }
+
+export type ToastType = "error" | "success" | "info";
   
