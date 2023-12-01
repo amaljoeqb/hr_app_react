@@ -24,6 +24,17 @@ export default function useEmployeeTable() {
     id: "employeeId",
   });
 
+  function onShowModifiedField(id: string, field: keyof Employee) {
+    let prevEmployee = prevEmployees.get(id);
+    if (prevEmployee) {
+      delete prevEmployee[field];
+      appContext.dispatch({
+        type: "SET_PREV_EMPLOYEE",
+        payload: { id, employee: prevEmployee },
+      });
+    }
+  }
+
   return {
     ...employeeTable,
     selectedSkills,
@@ -31,6 +42,7 @@ export default function useEmployeeTable() {
     skills,
     employees,
     prevEmployees,
+    onShowModifiedField,
   };
 }
 

@@ -10,6 +10,7 @@ export interface EmployeeRowProps {
   prevEmployee?: Partial<Employee>;
   searchTerm: string;
   cells: Set<ColumnKey<Employee>>;
+  onShowModifiedField: (id: string, field: keyof Employee) => void;
 }
 
 export default function EmployeeRow({
@@ -17,6 +18,7 @@ export default function EmployeeRow({
   prevEmployee,
   searchTerm,
   cells,
+  onShowModifiedField,
 }: EmployeeRowProps) {
   const navigate = useNavigate();
 
@@ -24,7 +26,17 @@ export default function EmployeeRow({
     <tr key={employee.employeeId} className="emp-row">
       {cells.has("employeeId") && (
         <td>
-          <HighlightSpan text={employee.employeeId} searchTerm={searchTerm} />
+          <HighlightSpan
+            text={employee.employeeId}
+            searchTerm={searchTerm}
+            modified={
+              prevEmployee !== undefined &&
+              prevEmployee.employeeId !== undefined
+            }
+            onModifiedAnimationEnd={() => {
+              onShowModifiedField(employee.employeeId, "employeeId");
+            }}
+          />
         </td>
       )}
       {cells.has("name") && (
@@ -39,15 +51,25 @@ export default function EmployeeRow({
               <HighlightSpan
                 text={employee.name}
                 searchTerm={searchTerm}
-                modified={prevEmployee && prevEmployee.name !== undefined}
+                modified={
+                  prevEmployee !== undefined && prevEmployee.name !== undefined
+                }
+                onModifiedAnimationEnd={() => {
+                  onShowModifiedField(employee.employeeId, "name");
+                }}
               />
               <span className="material-symbols-outlined"> visibility </span>
             </div>
             <HighlightSpan
               text={employee.email}
               searchTerm={searchTerm}
-              modified={prevEmployee && prevEmployee.email !== undefined}
+              modified={
+                prevEmployee !== undefined && prevEmployee.email !== undefined
+              }
               className="email"
+              onModifiedAnimationEnd={() => {
+                onShowModifiedField(employee.employeeId, "email");
+              }}
             />
           </div>
         </td>
@@ -57,7 +79,13 @@ export default function EmployeeRow({
           <HighlightSpan
             text={employee.designation ?? "N/A"}
             searchTerm={searchTerm}
-            modified={prevEmployee && prevEmployee.designation !== undefined}
+            modified={
+              prevEmployee !== undefined &&
+              prevEmployee.designation !== undefined
+            }
+            onModifiedAnimationEnd={() => {
+              onShowModifiedField(employee.employeeId, "designation");
+            }}
           />
         </td>
       )}
@@ -67,8 +95,12 @@ export default function EmployeeRow({
             text={employee.department?.department ?? ""}
             searchTerm={searchTerm}
             modified={
-              prevEmployee && prevEmployee.department?.department !== undefined
+              prevEmployee !== undefined &&
+              prevEmployee.department?.department !== undefined
             }
+            onModifiedAnimationEnd={() => {
+              onShowModifiedField(employee.employeeId, "department");
+            }}
           />
         </td>
       )}

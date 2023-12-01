@@ -12,6 +12,7 @@ export interface EmployeeTableProps {
     key: keyof Employee;
     order: "asc" | "desc";
   };
+  onShowModifiedField: (id: string, field: keyof Employee) => void;
   onChangeSort: (sort: { key: keyof Employee; order: "asc" | "desc" }) => void;
 }
 
@@ -21,8 +22,8 @@ export default function EmployeeTable({
   searchTerm,
   sort,
   onChangeSort,
+  onShowModifiedField,
 }: EmployeeTableProps) {
-
   const [columns, setColumns] = useState(columnIds.large);
 
   // remove skills column on mobile, resize observer
@@ -70,6 +71,7 @@ export default function EmployeeTable({
           prevEmployee={prevEmployees.get(employee.employeeId)}
           searchTerm={searchTerm}
           cells={columns}
+          onShowModifiedField={onShowModifiedField}
         />
       ))}
     </Table>

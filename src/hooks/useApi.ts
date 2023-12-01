@@ -8,23 +8,18 @@ import { useEffect } from "react";
 export default function useApi() {
   const appContext = useAppContext();
 
-  useEffect(() => {
-    console.log(appContext);
-  }, [appContext]);
-
   function setPrevEmployee(id: string, employee: Partial<Employee>) {
     const payload = { id: id, employee: employee };
     appContext.dispatch({
       type: "SET_PREV_EMPLOYEE",
       payload: payload,
     });
-    // TODO: Remove this after testing
-    // setTimeout(() => {
-    //   appContext.dispatch({
-    //     type: "DELETE_PREV_EMPLOYEE",
-    //     payload: payload,
-    //   });
-    // }, 10000);
+    setTimeout(() => {
+      appContext.dispatch({
+        type: "DELETE_PREV_EMPLOYEE",
+        payload: payload,
+      });
+    }, 3000);
   }
 
   async function getEmployees() {

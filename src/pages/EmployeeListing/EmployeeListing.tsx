@@ -28,6 +28,7 @@ export function EmployeeListing() {
     skills,
     totalPages,
     prevEmployees,
+    onShowModifiedField,
   } = useEmployeeTable();
   const urlParams = useQuery();
   const deleteEmployeeId = urlParams.get("delete");
@@ -78,6 +79,7 @@ export function EmployeeListing() {
           onChangeSort={(sort) => {
             setSort(sort);
           }}
+          onShowModifiedField={onShowModifiedField}
         />
         {totalPages > 1 && (
           <PaginationControl

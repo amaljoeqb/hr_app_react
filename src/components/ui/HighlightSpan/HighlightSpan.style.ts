@@ -7,18 +7,21 @@ export const StyledHighlightSpan = styled.span`
     @keyframes modified-anim {
       0% {
         color: var(--text-color);
+        background-color: transparent;
       }
       50% {
         color: var(--modified-color);
+        background-color: var(--modified-bg-color);
       }
       100% {
         color: var(--text-color);
+        background-color: transparent;
       }
     }
   }
 
   &.added {
-    animation: added-anim 1s ease-in-out;
+    animation: added-anim 2s ease-in-out;
 
     @keyframes added-anim {
       0% {

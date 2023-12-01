@@ -5,13 +5,15 @@ export interface HighlightSpanProps
   extends React.HTMLAttributes<HTMLSpanElement> {
   text: string | number;
   searchTerm: string;
-  modified?: boolean;
+  modified: boolean;
+  onModifiedAnimationEnd: () => void;
 }
 
 export default function HighlightSpan({
   text,
   searchTerm,
   modified,
+  onModifiedAnimationEnd,
   ...props
 }: HighlightSpanProps) {
   const ref = createRef<HTMLSpanElement>();
@@ -33,23 +35,21 @@ export default function HighlightSpan({
     );
   }
 
-  useEffect(() => {
-    const { current } = ref;
-    const onAnimationEnd = () => {
-      current?.classList.remove("modified");
-    };
+  function getClassName() {
+    let className = props.className ?? "";
     if (modified) {
-      console.log("modified", text);
-      current?.classList.add("modified");
-      current?.addEventListener("animationend", onAnimationEnd);
+      className += " modified";
     }
-    return () => {
-      current?.removeEventListener("animationend", onAnimationEnd);
-    };
-  }, [modified, ref, text]);
+    return className;
+  }
 
   return (
-    <StyledHighlightSpan ref={ref} {...props}>
+    <StyledHighlightSpan
+      ref={ref}
+      {...props}
+      className={getClassName()}
+      onAnimationEnd={onModifiedAnimationEnd}
+    >
       {!searchTerm || !lowerCaseText.includes(searchTerm)
         ? text
         : getHighlightedElement()}
