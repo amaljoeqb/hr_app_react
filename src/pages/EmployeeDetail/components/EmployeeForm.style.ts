@@ -275,7 +275,7 @@ export const StyledEmployeeForm = styled.div`
     transform: translateX(50px);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     .row {
       flex-direction: column;
     }
