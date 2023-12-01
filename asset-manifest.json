@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hr_app_react/static/css/main.2bc8dc7a.css",
-    "main.js": "/hr_app_react/static/js/main.909e7f53.js",
+    "main.js": "/hr_app_react/static/js/main.b3c3c9f3.js",
     "static/media/spinner.svg": "/hr_app_react/static/media/spinner.3fe5910d426b00f5f1538c859d05ff47.svg",
     "index.html": "/hr_app_react/index.html",
     "static/media/logo_black.svg": "/hr_app_react/static/media/logo_black.9910a64bb9693920b3474387f20ef6d3.svg",
     "main.2bc8dc7a.css.map": "/hr_app_react/static/css/main.2bc8dc7a.css.map",
-    "main.909e7f53.js.map": "/hr_app_react/static/js/main.909e7f53.js.map"
+    "main.b3c3c9f3.js.map": "/hr_app_react/static/js/main.b3c3c9f3.js.map"
   },
   "entrypoints": [
     "static/css/main.2bc8dc7a.css",
-    "static/js/main.909e7f53.js"
+    "static/js/main.b3c3c9f3.js"
   ]
 }
